@@ -8,3 +8,4 @@
 /public/_graphql/
 /.idea/
 docker-compose.yml
+silverstripe.log
