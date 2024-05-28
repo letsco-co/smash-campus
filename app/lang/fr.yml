@@ -1,0 +1,29 @@
+fr:
+  LetsCo\Model\Training:
+    SINGULARNAME: 'formation'
+    PLURALNAME: 'formations'
+    PLURALS:
+      one: 'Une formation'
+      other: '{count} formations'
+    Title: 'Nom de la formation'
+    Goals: 'Objectifs'
+    Modalities: "Modalités et délai d'accès"
+    Accessibility: 'Accessibilité'
+    Financing: 'Financements'
+    Address: 'Adresse'
+    DurationID: 'Durée'
+    CategoryID: 'Domaine'
+    QualificationID: 'Niveau'
+    ModeID: 'Mode'
+  LetsCo\Model\TrainingCategory:
+    SINGULARNAME: 'domaine'
+    PLURALNAME: 'domaines'
+    PLURALS:
+      one: 'Un domaine'
+      other: '{count} domaines'
+  LetsCo\Model\TrainingDuration:
+    SINGULARNAME: 'durée'
+    PLURALNAME: 'durées'
+    PLURALS:
+      one: 'Une durée'
+      other: '{count} durées'

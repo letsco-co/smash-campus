@@ -30,4 +30,15 @@ class Training extends DataObject
         'EvaluationMethod' => TrainingEvaluationMethod::class,
         'ExecutionMonitoring' => TrainingExecutionMonitoring::class,
     ];
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        $mainTab = $fields->findOrMakeTab("Root");
+        foreach ($mainTab->fieldByName("Main")->Fields() as $CMSField) {
+            $CMSField->setTitle(_t(self::class.".".$CMSField->Name, $CMSField->Name));
+        }
+        return $fields;
+    }
 }
