@@ -2,10 +2,12 @@
 
 namespace LetsCo\Model;
 
+use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\ORM\DataObject;
 
 class TrainingEvaluationMethod extends DataObject
 {
+    use LocalizationDataObject;
     private static $table_name = 'Letsco-TrainingEvaluationMethod';
     private static $db = [
         'Title' => 'Varchar(255)',

@@ -1,4 +1,9 @@
 fr:
+  SilverStripe\Forms\GridField\GridField:
+    Add: 'Créer {name}'
+    LinkExisting: 'Ajouter'
+  LetsCo\Admin\TrainingAdmin:
+    MENUTITLE: 'Formations'
   LetsCo\Model\Training:
     SINGULARNAME: 'formation'
     PLURALNAME: 'formations'
@@ -15,15 +20,57 @@ fr:
     CategoryID: 'Domaine'
     QualificationID: 'Niveau'
     ModeID: 'Mode'
+    Prerequisites: 'Pré-requis'
+    Publics: 'Publics concernés'
+    Educational means: 'Moyens pédagogiques'
+    Evaluation method: "Modalités d'évaluation"
+    Execution monitoring: "Suivis de l'execution"
   LetsCo\Model\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'
     PLURALS:
       one: 'Un domaine'
       other: '{count} domaines'
+    Title: 'Nom du domaine'
   LetsCo\Model\TrainingDuration:
     SINGULARNAME: 'durée'
     PLURALNAME: 'durées'
     PLURALS:
       one: 'Une durée'
       other: '{count} durées'
+    Title: 'Nom de la durée'
+  LetsCo\Model\TrainingPrerequisite:
+    SINGULARNAME: 'pré-requis'
+    PLURALNAME: 'pré-requis'
+    PLURALS:
+      one: 'Un pré-requis'
+      other: '{count} pré-requis'
+    Title: 'Nom du pré-requis'
+  LetsCo\Model\TrainingPublic:
+    SINGULARNAME: 'public concerné'
+    PLURALNAME: 'publics concernés'
+    PLURALS:
+      one: 'Un public concerné'
+      other: '{count} publics concernés'
+    Title: 'Nom du public concerné'
+  LetsCo\Model\TrainingEducationalMeans:
+    SINGULARNAME: 'moyen pédagogique'
+    PLURALNAME: 'moyens pédagogiques'
+    PLURALS:
+      one: 'Un moyen pédagogique'
+      other: '{count} moyens pédagogiques'
+    Title: 'Nom du moyen pédagogique'
+  LetsCo\Model\TrainingEvaluationMethod:
+    SINGULARNAME: "modalité d'évaluation"
+    PLURALNAME: "modalités d'évaluation"
+    PLURALS:
+      one: "Une modalité d'évaluation"
+      other: "{count} modalités d'évaluation"
+    Title: "Nom de la modalité d'évaluation"
+  LetsCo\Model\TrainingExecutionMonitoring:
+    SINGULARNAME: "suivi de l'execution"
+    PLURALNAME: "suivis de l'execution"
+    PLURALS:
+      one: "Un suivi de l'execution"
+      other: "{count} suivis de l'execution"
+    Title: "Nom du suivi de l'execution"

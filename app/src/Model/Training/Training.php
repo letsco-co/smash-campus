@@ -2,10 +2,12 @@
 
 namespace LetsCo\Model;
 
+use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\ORM\DataObject;
 
 class Training extends DataObject
 {
+    use LocalizationDataObject;
     private static $table_name = 'Letsco-Training';
     private static $db = [
         'Title' => 'Varchar(255)',
@@ -30,15 +32,4 @@ class Training extends DataObject
         'EvaluationMethod' => TrainingEvaluationMethod::class,
         'ExecutionMonitoring' => TrainingExecutionMonitoring::class,
     ];
-
-    public function getCMSFields()
-    {
-        $fields = parent::getCMSFields();
-
-        $mainTab = $fields->findOrMakeTab("Root");
-        foreach ($mainTab->fieldByName("Main")->Fields() as $CMSField) {
-            $CMSField->setTitle(_t(self::class.".".$CMSField->Name, $CMSField->Name));
-        }
-        return $fields;
-    }
 }
