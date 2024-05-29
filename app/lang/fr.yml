@@ -6,6 +6,11 @@ fr:
     SELECT_OR_TYPE_TO_SEARCH: 'Séléctionnez ou tapez pour rechercher...'
   SilverStripe\Forms\GridField\GridFieldFilterHeader:
     Search: 'Rechercher "{name}"'
+  SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest:
+    EditPermissionsFailure: 'Il semblerait que vous n''avez pas les droits nécessaires pour modifier "{ObjectTitle}"'
+    NEW: 'Ajouter un nouvel enregistrement'
+    NEXT: 'Enregistrement suivant'
+    PREVIOUS: 'Enregistrement précédent'
   LetsCo\Admin\TrainingAdmin:
     MENUTITLE: 'Formations'
   LetsCo\Model\Training:
