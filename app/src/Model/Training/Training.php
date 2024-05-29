@@ -2,13 +2,16 @@
 
 namespace LetsCo\Model;
 
+use LetsCo\Admin\TrainingAdmin;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\TagField\TagField;
 
 class Training extends DataObject
 {
     use LocalizationDataObject;
     private static $table_name = 'Letsco_Training';
+    private static string $cms_edit_owner = TrainingAdmin::class;
     private static $db = [
         'Title' => 'Varchar(255)',
         'Goals' => 'HTMLText',
@@ -32,4 +35,21 @@ class Training extends DataObject
         'EvaluationMethod' => TrainingEvaluationMethod::class,
         'ExecutionMonitoring' => TrainingExecutionMonitoring::class,
     ];
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        $hasOneRelations = $this->hasOne();
+        foreach ($hasOneRelations as $hasOneRelationKey => $hasOneRelationClassName) {
+            $newRelationField = TagField::create(
+                $hasOneRelationKey.'ID',
+                $this->fieldLabel($hasOneRelationKey),
+                $hasOneRelationClassName::get())
+            ->setIsMultiple(false)
+            ->setCanCreate(true);
+            $fields->replaceField($hasOneRelationKey.'ID', $newRelationField);
+        }
+        return $fields;
+    }
 }
