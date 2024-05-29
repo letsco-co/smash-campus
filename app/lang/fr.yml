@@ -2,6 +2,10 @@ fr:
   SilverStripe\Forms\GridField\GridField:
     Add: 'Créer {name}'
     LinkExisting: 'Ajouter'
+  SilverStripe\Forms\SearchableDropdownTrait:
+    SELECT_OR_TYPE_TO_SEARCH: 'Séléctionnez ou tapez pour rechercher...'
+  SilverStripe\Forms\GridField\GridFieldFilterHeader:
+    Search: 'Rechercher "{name}"'
   LetsCo\Admin\TrainingAdmin:
     MENUTITLE: 'Formations'
   LetsCo\Model\Training:
