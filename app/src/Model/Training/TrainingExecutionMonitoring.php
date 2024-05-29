@@ -8,7 +8,7 @@ use SilverStripe\ORM\DataObject;
 class TrainingExecutionMonitoring extends DataObject
 {
     use LocalizationDataObject;
-    private static $table_name = 'Letsco-TrainingExecutionMonitoring';
+    private static $table_name = 'Letsco_TrainingExecutionMonitoring';
     private static $db = [
         'Title' => 'Varchar(255)',
     ];
