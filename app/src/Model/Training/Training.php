@@ -14,6 +14,9 @@ use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\SearchableDropdownField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataObject;
@@ -48,48 +51,102 @@ class Training extends DataObject
         'ExecutionMonitoring' => TrainingExecutionMonitoring::class,
     ];
 
+    private static $has_many = [
+        'Registrations' => TrainingRegistration::class,
+    ];
+
     public function getCMSFields()
     {
-        $fields = FieldList::create(
-            TextField::create('Title', _t(self::class.'.Title', 'Title')),
-            SearchableDropdownField::create('CategoryID', _t(self::class.'.Category', 'Category'), TrainingCategory::get()),
-            SearchableDropdownField::create('DurationID', _t(self::class.'.Duration', 'Duration'), TrainingDuration::get()),
-            SearchableDropdownField::create('QualificationID', _t(self::class.'.Qualification', 'Qualification'), TrainingQualification::get()),
-            SearchableDropdownField::create('ModeID', _t(self::class.'.Mode', 'Mode'), TrainingMode::get()),
-            TextField::create('Address', _t(self::class.'.Address', 'Address')),
-            HTMLEditorField::create('Goals', _t(self::class.'.Goals', 'Goals')),
-            HTMLEditorField::create('Modalities', _t(self::class.'.Modalities', 'Modalities')),
-            HTMLEditorField::create('Accessibility', _t(self::class.'.Accessibility', 'Accessibility')),
-            HTMLEditorField::create('Financing', _t(self::class.'.Financing', 'Financing')),
+        $TabSet = TabSet::create('Root');
+        $this->setMainTab($TabSet);
+
+        $this->setHasManyRelationsTabs($TabSet);
+
+        return FieldList::create(
+            $TabSet
+        );
+    }
+
+    /**
+     * @param TabSet $TabSet
+     * @return void
+     */
+    public function setMainTab(TabSet $TabSet): void
+    {
+        $MainFields = Tab::create('Main',
+            TextField::create('Title', _t(self::class . '.Title', 'Title')),
+            SearchableDropdownField::create('CategoryID', _t(self::class . '.Category', 'Category'), TrainingCategory::get()),
+            SearchableDropdownField::create('DurationID', _t(self::class . '.Duration', 'Duration'), TrainingDuration::get()),
+            SearchableDropdownField::create('QualificationID', _t(self::class . '.Qualification', 'Qualification'), TrainingQualification::get()),
+            SearchableDropdownField::create('ModeID', _t(self::class . '.Mode', 'Mode'), TrainingMode::get()),
+            TextField::create('Address', _t(self::class . '.Address', 'Address')),
+            HTMLEditorField::create('Goals', _t(self::class . '.Goals', 'Goals')),
+            HTMLEditorField::create('Modalities', _t(self::class . '.Modalities', 'Modalities')),
+            HTMLEditorField::create('Accessibility', _t(self::class . '.Accessibility', 'Accessibility')),
+            HTMLEditorField::create('Financing', _t(self::class . '.Financing', 'Financing')),
         );
 
-        $manyManyRelations = $this->manyMany();
-        unset($manyManyRelations['LinkTracking']);
-        unset($manyManyRelations['FileTracking']);
-        foreach ($manyManyRelations as $manyManyRelationKey => $manyManyRelationClassName) {
-            $fields->push(LiteralField::create($manyManyRelationKey.'Title', '<label >'._t(self::class.'.'.$manyManyRelationKey, $manyManyRelationKey).'</label>'));
-            $config = GridFieldConfig_RelationEditor::create();
-            $fields->push(CompositeField::create(new FieldList([
-                GridField::create($manyManyRelationKey, false, $manyManyRelationClassName::get(), $config),
-            ])));
-        }
+        $this->setManyManyFields($MainFields);
 
-        $hasOne = $this->hasOne();
-        unset($hasOne['Category']);
-        foreach ($hasOne as $hasOneRelationKey => $hasOneRelationData) {
-            $config = GridFieldConfig_RecordEditor::create();
-            $config->removeComponentsByType(GridFieldFilterHeader::class);
-            $config->removeComponentsByType(GridField_ActionMenu::class);
-            $gridField = GridField::create($hasOneRelationKey, false, $hasOneRelationData::get(), $config);
-            $toggleField = ToggleCompositeField::create('Manage'.$hasOneRelationKey, _t(self::class . '.MANAGE_'.strtoupper($hasOneRelationKey), 'Manage '.$hasOneRelationKey), new FieldList($gridField));
-            $fields->insertAfter($hasOneRelationKey.'ID', $toggleField);
-        }
+        $this->setHasOneFields($MainFields);
 
         Requirements::customCSS("
             .ss-toggle .ui-accordion-content {
                 padding : 1em 2.2em !important;
             }
         ");
-        return $fields;
+
+        $TabSet->push($MainFields);
+    }
+
+    /**
+     * @param TabSet $TabSet
+     * @return void
+     */
+    public function setHasManyRelationsTabs(TabSet $TabSet): void
+    {
+        $hasManyRelations = $this->hasMany();
+        foreach ($hasManyRelations as $hasManyRelationName => $hasManyRelationClassName) {
+            $relationConfig = GridFieldConfig_RelationEditor::create();
+            $relationGridField = GridField::create($hasManyRelationName, false, $hasManyRelationClassName::get(), $relationConfig);
+            $relationTab = Tab::create($hasManyRelationName, $relationGridField);
+            $TabSet->push($relationTab);
+        }
+    }
+
+    /**
+     * @param Tab $MainFields
+     * @return void
+     */
+    public function setManyManyFields(Tab $MainFields): void
+    {
+        $manyManyRelations = $this->manyMany();
+        unset($manyManyRelations['LinkTracking']);
+        unset($manyManyRelations['FileTracking']);
+        foreach ($manyManyRelations as $manyManyRelationKey => $manyManyRelationClassName) {
+            $MainFields->push(LiteralField::create($manyManyRelationKey . 'Title', '<label >' . _t(self::class . '.' . $manyManyRelationKey, $manyManyRelationKey) . '</label>'));
+            $manyManyConfig = GridFieldConfig_RelationEditor::create();
+            $MainFields->push(CompositeField::create(new FieldList([
+                GridField::create($manyManyRelationKey, false, $manyManyRelationClassName::get(), $manyManyConfig),
+            ])));
+        }
+    }
+
+    /**
+     * @param Tab $MainFields
+     * @return void
+     */
+    public function setHasOneFields(Tab $MainFields): void
+    {
+        $hasOne = $this->hasOne();
+        unset($hasOne['Category']);
+        foreach ($hasOne as $hasOneRelationKey => $hasOneRelationData) {
+            $hasOneConfig = GridFieldConfig_RecordEditor::create();
+            $hasOneConfig->removeComponentsByType(GridFieldFilterHeader::class);
+            $hasOneConfig->removeComponentsByType(GridField_ActionMenu::class);
+            $gridField = GridField::create($hasOneRelationKey, false, $hasOneRelationData::get(), $hasOneConfig);
+            $toggleField = ToggleCompositeField::create('Manage' . $hasOneRelationKey, _t(self::class . '.MANAGE_' . strtoupper($hasOneRelationKey), 'Manage ' . $hasOneRelationKey), new FieldList($gridField));
+            $MainFields->insertAfter($hasOneRelationKey . 'ID', $toggleField);
+        }
     }
 }
