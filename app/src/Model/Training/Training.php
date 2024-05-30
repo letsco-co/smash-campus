@@ -4,12 +4,15 @@ namespace LetsCo\Model;
 
 use LetsCo\Admin\TrainingAdmin;
 use LetsCo\Trait\LocalizationDataObject;
+use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionMenu;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\SearchableDropdownField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
@@ -47,8 +50,7 @@ class Training extends DataObject
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-        $fields2 = FieldList::create(
+        $fields = FieldList::create(
             TextField::create('Title', _t(self::class.'.Title', 'Title')),
             SearchableDropdownField::create('CategoryID', _t(self::class.'.Category', 'Category'), TrainingCategory::get()),
             SearchableDropdownField::create('DurationID', _t(self::class.'.Duration', 'Duration'), TrainingDuration::get()),
@@ -61,7 +63,16 @@ class Training extends DataObject
             HTMLEditorField::create('Financing', _t(self::class.'.Financing', 'Financing')),
         );
 
-        $fields->findOrMakeTab('Root.Main')->fields()->merge($fields2);
+        $manyManyRelations = $this->manyMany();
+        unset($manyManyRelations['LinkTracking']);
+        unset($manyManyRelations['FileTracking']);
+        foreach ($manyManyRelations as $manyManyRelationKey => $manyManyRelationClassName) {
+            $fields->push(LiteralField::create($manyManyRelationKey.'Title', '<label >'._t(self::class.'.'.$manyManyRelationKey, $manyManyRelationKey).'</label>'));
+            $config = GridFieldConfig_RelationEditor::create();
+            $fields->push(CompositeField::create(new FieldList([
+                GridField::create($manyManyRelationKey, false, $manyManyRelationClassName::get(), $config),
+            ])));
+        }
 
         $hasOne = $this->hasOne();
         unset($hasOne['Category']);

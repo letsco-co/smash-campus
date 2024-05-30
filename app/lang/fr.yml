@@ -33,9 +33,9 @@ fr:
     Mode: 'Mode'
     Prerequisites: 'Pré-requis'
     Publics: 'Publics concernés'
-    Educational means: 'Moyens pédagogiques'
-    Evaluation method: "Modalités d'évaluation"
-    Execution monitoring: "Suivis de l'execution"
+    EducationalMeans: 'Moyens pédagogiques'
+    EvaluationMethod: "Modalités d'évaluation"
+    ExecutionMonitoring: "Suivis de l'execution"
     MANAGE_DURATION: 'Gérer les durées'
     MANAGE_CATEGORY: 'Gérer les domaines'
     MANAGE_QUALIFICATION: 'Gérer les niveaux'
