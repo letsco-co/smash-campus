@@ -3,7 +3,9 @@ fr:
     Add: 'Créer {name}'
     LinkExisting: 'Ajouter'
   SilverStripe\Forms\SearchableDropdownTrait:
+    SELECT: 'Sélectionner...'
     SELECT_OR_TYPE_TO_SEARCH: 'Séléctionnez ou tapez pour rechercher...'
+    TYPE_TO_SEARCH: 'Taper pour rechercher...'
   SilverStripe\Forms\GridField\GridFieldFilterHeader:
     Search: 'Rechercher "{name}"'
   SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest:
@@ -34,6 +36,10 @@ fr:
     Educational means: 'Moyens pédagogiques'
     Evaluation method: "Modalités d'évaluation"
     Execution monitoring: "Suivis de l'execution"
+    MANAGE_DURATION: 'Gérer les durées'
+    MANAGE_CATEGORY: 'Gérer les domaines'
+    MANAGE_QUALIFICATION: 'Gérer les niveaux'
+    MANAGE_MODE: 'Gérer les modes'
   LetsCo\Model\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'

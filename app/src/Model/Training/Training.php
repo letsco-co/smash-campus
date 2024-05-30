@@ -4,8 +4,17 @@ namespace LetsCo\Model;
 
 use LetsCo\Admin\TrainingAdmin;
 use LetsCo\Trait\LocalizationDataObject;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridField_ActionMenu;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldFilterHeader;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\SearchableDropdownField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\TagField\TagField;
+use SilverStripe\View\Requirements;
 
 class Training extends DataObject
 {
@@ -39,17 +48,37 @@ class Training extends DataObject
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+        $fields2 = FieldList::create(
+            TextField::create('Title', _t(self::class.'.Title', 'Title')),
+            SearchableDropdownField::create('CategoryID', _t(self::class.'.Category', 'Category'), TrainingCategory::get()),
+            SearchableDropdownField::create('DurationID', _t(self::class.'.Duration', 'Duration'), TrainingDuration::get()),
+            SearchableDropdownField::create('QualificationID', _t(self::class.'.Qualification', 'Qualification'), TrainingQualification::get()),
+            SearchableDropdownField::create('ModeID', _t(self::class.'.Mode', 'Mode'), TrainingMode::get()),
+            TextField::create('Address', _t(self::class.'.Address', 'Address')),
+            HTMLEditorField::create('Goals', _t(self::class.'.Goals', 'Goals')),
+            HTMLEditorField::create('Modalities', _t(self::class.'.Modalities', 'Modalities')),
+            HTMLEditorField::create('Accessibility', _t(self::class.'.Accessibility', 'Accessibility')),
+            HTMLEditorField::create('Financing', _t(self::class.'.Financing', 'Financing')),
+        );
 
-        $hasOneRelations = $this->hasOne();
-        foreach ($hasOneRelations as $hasOneRelationKey => $hasOneRelationClassName) {
-            $newRelationField = TagField::create(
-                $hasOneRelationKey.'ID',
-                $this->fieldLabel($hasOneRelationKey),
-                $hasOneRelationClassName::get())
-            ->setIsMultiple(false)
-            ->setCanCreate(true);
-            $fields->replaceField($hasOneRelationKey.'ID', $newRelationField);
+        $fields->findOrMakeTab('Root.Main')->fields()->merge($fields2);
+
+        $hasOne = $this->hasOne();
+        unset($hasOne['Category']);
+        foreach ($hasOne as $hasOneRelationKey => $hasOneRelationData) {
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->removeComponentsByType(GridFieldFilterHeader::class);
+            $config->removeComponentsByType(GridField_ActionMenu::class);
+            $gridField = GridField::create($hasOneRelationKey, false, $hasOneRelationData::get(), $config);
+            $toggleField = ToggleCompositeField::create('Manage'.$hasOneRelationKey, _t(self::class . '.MANAGE_'.strtoupper($hasOneRelationKey), 'Manage '.$hasOneRelationKey), new FieldList($gridField));
+            $fields->insertAfter($hasOneRelationKey.'ID', $toggleField);
         }
+
+        Requirements::customCSS("
+            .ss-toggle .ui-accordion-content {
+                padding : 1em 2.2em !important;
+            }
+        ");
         return $fields;
     }
 }
