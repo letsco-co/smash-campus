@@ -96,7 +96,7 @@ fr:
     PLURALS:
       one: "Une pré-inscription"
       other: "{count} pré-inscriptions"
-    Title: "Civilité"
+    PersonTitle: "Civilité"
     LastName: "Nom"
     FirstName: 'Prénom'
     Fonction: 'Fonction - Service'
