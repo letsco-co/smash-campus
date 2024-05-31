@@ -89,3 +89,50 @@ fr:
       one: "Un suivi de l'execution"
       other: "{count} suivis de l'execution"
     Title: "Nom du suivi de l'execution"
+  LetsCo\Model\TrainingRegistration:
+    SINGULARNAME: "pré-inscription"
+    PLURALNAME: "pré-inscriptions"
+    PLURALS:
+      one: "Une pré-inscription"
+      other: "{count} pré-inscriptions"
+    Title: "Civilité"
+    LastName: "Nom"
+    FirstName: 'Prénom'
+    Fonction: 'Fonction - Service'
+    ProAddress: 'Adresse professionnelle'
+    PhoneNumber: 'Téléphone'
+    Email: 'Email'
+    StructureName: 'Nom de l''entreprise/organisme'
+    StructureActivity: 'Activité'
+    StructureAddress: 'Adresse'
+    StructurePostalCode: 'Code Postal'
+    StructureCity: 'Ville'
+    ManagerLastName: 'Nom'
+    ManagerFirstName: 'Prénom'
+    ManagerEmail: 'Email'
+    ManagerFonction: 'Fonction'
+    ManagerPhoneNumber: 'Téléphone'
+    DesiredTrainingDate: 'Date/période souhaitée'
+    Reasons: 'Pourquoi souhaitez-vous suivre cette formation ?'
+    Financing: 'Mode de financement envisagé de la formation'
+    IsDisabled: 'Seriez-vous en situation de handicap ?'
+    HeardOfTrainingSource: 'Comment avez-vous connu cette formation ?'
+    AcceptRGPD: "J'accepte que les données saisies dans ce formulaire soient utilisées dans le cadre du traitement de ma demande"
+    AcceptOtherInfos: "J’accepte de recevoir les informations sur les formations et conférences à venir organisées par SMASH Campus"
+    Mr: 'Monsieur'
+    Ms: 'Madame'
+    Structure: 'Entreprise'
+    OPCO: 'OPCO'
+    PublicFinancing: 'Financement public'
+    Individual: 'Particulier'
+    Yes: 'Oui'
+    No: 'Non'
+    Web: 'Internet'
+    SocialMedia: 'Réseaux sociaux'
+    WordOfMout: 'Bouche à oreille'
+    Training: 'Formation'
+    PersonalInfos: "coordonnées du (de la) participant(e)"
+    StructureInfos: "Entreprise / organisme"
+    Manager: "Responsable / personne à contacter"
+    TrainingInfos: "Formation"
+    RGPD: "Traitement des données"
