@@ -6,6 +6,7 @@ use LetsCo\Admin\TrainingAdmin;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormScaffolder;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionMenu;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
@@ -84,7 +85,7 @@ class Training extends DataObject
             HTMLEditorField::create('Modalities', _t(self::class . '.Modalities', 'Modalities')),
             HTMLEditorField::create('Accessibility', _t(self::class . '.Accessibility', 'Accessibility')),
             HTMLEditorField::create('Financing', _t(self::class . '.Financing', 'Financing')),
-        );
+        )->setTitle(_t(FormScaffolder::class.'.TABMAIN', 'Main'));
 
         $this->setManyManyFields($MainFields);
 
@@ -109,7 +110,7 @@ class Training extends DataObject
         foreach ($hasManyRelations as $hasManyRelationName => $hasManyRelationClassName) {
             $relationConfig = GridFieldConfig_RelationEditor::create();
             $relationGridField = GridField::create($hasManyRelationName, false, $this->$hasManyRelationName(), $relationConfig);
-            $relationTab = Tab::create($hasManyRelationName, $relationGridField);
+            $relationTab = Tab::create($hasManyRelationName, $relationGridField)->setTitle(_t(self::class.'.'.$hasManyRelationName, $hasManyRelationName));
             $TabSet->push($relationTab);
         }
     }

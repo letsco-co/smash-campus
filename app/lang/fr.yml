@@ -40,6 +40,7 @@ fr:
     MANAGE_CATEGORY: 'Gérer les domaines'
     MANAGE_QUALIFICATION: 'Gérer les niveaux'
     MANAGE_MODE: 'Gérer les modes'
+    Registrations: 'Pré-inscriptions'
   LetsCo\Model\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'
