@@ -7,7 +7,7 @@ trait LocalizationDataObject
     public function fieldLabels($includerelations = true) {
         $labels = parent::fieldLabels(true);
         foreach ($labels as $index => $label) {
-            $labels[$index] = _t(self::class.'.'.$label, $label);
+            $labels[$index] = _t(self::class.'.'.$index, $label);
         }
 
         return $labels;
