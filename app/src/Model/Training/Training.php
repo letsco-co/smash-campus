@@ -108,7 +108,7 @@ class Training extends DataObject
         $hasManyRelations = $this->hasMany();
         foreach ($hasManyRelations as $hasManyRelationName => $hasManyRelationClassName) {
             $relationConfig = GridFieldConfig_RelationEditor::create();
-            $relationGridField = GridField::create($hasManyRelationName, false, $hasManyRelationClassName::get(), $relationConfig);
+            $relationGridField = GridField::create($hasManyRelationName, false, $this->$hasManyRelationName(), $relationConfig);
             $relationTab = Tab::create($hasManyRelationName, $relationGridField);
             $TabSet->push($relationTab);
         }
