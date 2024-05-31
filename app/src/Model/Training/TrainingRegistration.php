@@ -52,6 +52,17 @@ class TrainingRegistration extends DataObject
         'Training' => Training::class,
     ];
 
+    private static $summary_fields = [
+        'LastName',
+        'FirstName',
+        'Email'
+    ];
+
+    public function getTitle()
+    {
+        return $this->LastName . " ". $this->FirstName;
+    }
+
     public function getCMSFields()
     {
         $fields = FieldList::create([
