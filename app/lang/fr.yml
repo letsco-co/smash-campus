@@ -105,7 +105,7 @@ fr:
     StructureName: 'Nom de l''entreprise/organisme'
     StructureActivity: 'Activité'
     StructureAddress: 'Adresse'
-    StructurePostalCode: 'Code Postal'
+    StructurePostCode: 'Code Postal'
     StructureCity: 'Ville'
     ManagerLastName: 'Nom'
     ManagerFirstName: 'Prénom'

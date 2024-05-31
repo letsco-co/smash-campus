@@ -29,7 +29,7 @@ class TrainingRegistration extends DataObject
         'StructureName' => 'Varchar(255)',
         'StructureActivity' => 'Varchar(255)',
         'StructureAddress' => 'Varchar(255)',
-        'StructurePostalCode' => 'Int',
+        'StructurePostCode' => 'Int',
         'StructureCity' => 'Varchar(255)',
         'ManagerLastName' => 'Varchar(255)',
         'ManagerFirstName' => 'Varchar(255)',
@@ -65,7 +65,7 @@ class TrainingRegistration extends DataObject
                 TextField::create('StructureName', _t(self::class.'.StructureName', 'StructureName')),
                 TextField::create('StructureActivity', _t(self::class.'.StructureActivity', 'StructureActivity')),
                 TextField::create('StructureAddress', _t(self::class.'.StructureAddress', 'StructureAddress')),
-                NumericField::create('StructurePostalCode', _t(self::class.'.StructurePostalCode', 'StructurePostalCode')),
+                NumericField::create('StructurePostCode', _t(self::class.'.StructurePostCode', 'StructurePostCode')),
                 TextField::create('StructureCity', _t(self::class.'.StructureCity', 'StructureCity')),
             )),
             ToggleCompositeField::create('Manager', _t(self::class.'.Manager', 'Manager'), new FieldList(
