@@ -5,10 +5,12 @@ namespace LetsCo\Model;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CheckboxSetField;
+use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
@@ -92,5 +94,22 @@ class TrainingRegistration extends DataObject
         $trainingField = $defaultFields->dataFieldByName('TrainingID');
         $fields->insertBefore('PersonalInfos',$trainingField);
         return $fields;
+    }
+    public function getCMSCompositeValidator(): CompositeValidator
+    {
+        $validator = parent::getCMSCompositeValidator();
+        $validator->addValidator(RequiredFields::create([
+            'Title',
+            'LastName',
+            'FirstName',
+            'Fonction',
+            'Email',
+            'DesiredTrainingDate',
+            'Financing',
+            'IsDisabled',
+            'AcceptRGPD',
+            'AcceptOtherInfos',
+        ]));
+        return $validator;
     }
 }
