@@ -3,6 +3,7 @@
 namespace LetsCo\Model;
 
 use LetsCo\FormField\FrenchPhoneNumberField;
+use LetsCo\FormField\FrenchPostCodeField;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CheckboxSetField;
@@ -10,7 +11,6 @@ use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
@@ -68,7 +68,7 @@ class TrainingRegistration extends DataObject
                 TextField::create('StructureName', _t(self::class.'.StructureName', 'StructureName')),
                 TextField::create('StructureActivity', _t(self::class.'.StructureActivity', 'StructureActivity')),
                 TextField::create('StructureAddress', _t(self::class.'.StructureAddress', 'StructureAddress')),
-                NumericField::create('StructurePostCode', _t(self::class.'.StructurePostCode', 'StructurePostCode')),
+                FrenchPostCodeField::create('StructurePostCode', _t(self::class.'.StructurePostCode', 'StructurePostCode')),
                 TextField::create('StructureCity', _t(self::class.'.StructureCity', 'StructureCity')),
             )),
             ToggleCompositeField::create('Manager', _t(self::class.'.Manager', 'Manager'), new FieldList(
