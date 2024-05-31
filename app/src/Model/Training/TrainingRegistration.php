@@ -2,6 +2,7 @@
 
 namespace LetsCo\Model;
 
+use LetsCo\FormField\FrenchPhoneNumberField;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CheckboxSetField;
@@ -60,7 +61,7 @@ class TrainingRegistration extends DataObject
                 TextField::create('FirstName', _t(self::class.'.FirstName', 'FirstName')),
                 TextField::create('Fonction', _t(self::class.'.Fonction', 'Fonction')),
                 TextField::create('ProAddress', _t(self::class.'.ProAddress', 'Pro address')),
-                NumericField::create('PhoneNumber', _t(self::class.'.PhoneNumber', 'Phone number')),
+                FrenchPhoneNumberField::create('PhoneNumber', _t(self::class.'.PhoneNumber', 'Phone number')),
                 EmailField::create('Email', _t(self::class.'.Email', 'Email')),)
             )->setStartClosed(false),
             ToggleCompositeField::create('Structure', _t(self::class.'.StructureInfos', 'Structure'), new FieldList(
@@ -75,7 +76,7 @@ class TrainingRegistration extends DataObject
                 TextField::create('ManagerFirstName', _t(self::class.'.ManagerFirstName', 'ManagerFirstName')),
                 EmailField::create('ManagerEmail', _t(self::class.'.ManagerEmail', 'ManagerEmail')),
                 TextField::create('ManagerFonction', _t(self::class.'.ManagerFonction', 'ManagerFonction')),
-                TextField::create('ManagerPhoneNumber', _t(self::class.'.ManagerPhoneNumber', 'ManagerPhoneNumber')),
+                FrenchPhoneNumberField::create('ManagerPhoneNumber', _t(self::class.'.ManagerPhoneNumber', 'ManagerPhoneNumber')),
             )),
             ToggleCompositeField::create('Training', _t(self::class.'.TrainingInfos', 'Training Infos'), new FieldList(
                 TextField::create('DesiredTrainingDate', _t(self::class.'.DesiredTrainingDate', 'DesiredTrainingDate')),

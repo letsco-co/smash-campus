@@ -136,3 +136,5 @@ fr:
     Manager: "Responsable / personne à contacter"
     TrainingInfos: "Formation"
     RGPD: "Traitement des données"
+  LetsCo\FormField\FrenchPhoneNumberField:
+    INVALID: 'Merci de renseigner un numéro de téléphone valide'
