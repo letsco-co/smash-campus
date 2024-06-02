@@ -31,6 +31,6 @@ class FrenchPhoneNumberField extends TextField
 
     public function getInputType()
     {
-        return 'tel';
+        return 'text';
     }
 }

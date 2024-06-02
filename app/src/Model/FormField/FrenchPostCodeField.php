@@ -27,6 +27,6 @@ class FrenchPostCodeField extends TextField
 
     public function getInputType()
     {
-        return 'number';
+        return 'text';
     }
 }
