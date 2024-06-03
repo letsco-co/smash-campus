@@ -1,9 +1,10 @@
 <?php
 
-namespace LetsCo\Admin;
+namespace LetsCo\Admin\Training;
 
-use LetsCo\Model\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training;
-use LetsCo\Model\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\TrainingCategory;
+
+use LetsCo\Model\Training\Training;
+use LetsCo\Model\Training\TrainingCategory;
 use SilverStripe\Admin\ModelAdmin;
 
 class TrainingAdmin extends ModelAdmin

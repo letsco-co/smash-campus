@@ -2,7 +2,7 @@
 
 namespace LetsCo\Model\Training;
 
-use LetsCo\Admin\TrainingAdmin;
+use LetsCo\Admin\Training\TrainingAdmin;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormScaffolder;
