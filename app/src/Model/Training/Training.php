@@ -23,6 +23,7 @@ use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\View\Parsers\URLSegmentFilter;
 use SilverStripe\View\Requirements;
 
 class Training extends DataObject
@@ -37,6 +38,7 @@ class Training extends DataObject
         'Accessibility' => 'HTMLText',
         'Financing' => 'HTMLText',
         'Address' => 'Varchar(255)',
+        'URLSegment' => 'Varchar(255)',
     ];
 
     private static $has_one = [
@@ -69,6 +71,18 @@ class Training extends DataObject
         return FieldList::create(
             $TabSet
         );
+    }
+
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        if ($this->isChanged('Title', 2)) {
+            $filter = URLSegmentFilter::create();
+            $this->URLSegment = $filter->filter($this->Title);
+        } elseif (!$this->URLSegment) {
+            $filter = URLSegmentFilter::create();
+            $this->URLSegment = $filter->filter($this->Title);
+        }
     }
 
     /**
