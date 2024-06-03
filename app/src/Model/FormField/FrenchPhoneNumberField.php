@@ -10,6 +10,9 @@ class FrenchPhoneNumberField extends TextField
 
     public function validate($validator)
     {
+        if (!$this->Required() && empty($this->Value)) {
+            return true;
+        }
         // Regular expression for French phone numbers
         $pattern = '/^0[1-9](\d{2}){4}$/';
 

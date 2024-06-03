@@ -8,6 +8,10 @@ class FrenchPostCodeField extends TextField
 {
     public function validate($validator)
     {
+        if (!$this->Required() && empty($this->Value)) {
+            return true;
+        }
+
         $pattern = '/^\d{5}$/';
         if (!preg_match($pattern, $this->value)) {
             $validator->validationError(
