@@ -48,8 +48,8 @@ class Training extends DataObject
         'Prerequisites' => TrainingPrerequisite::class,
         'Publics' => TrainingPublic::class,
         'EducationalMeans' => TrainingEducationalMeans::class,
-        'EvaluationMethod' => TrainingEvaluationMethod::class,
-        'ExecutionMonitoring' => TrainingExecutionMonitoring::class,
+        'EvaluationMethods' => TrainingEvaluationMethod::class,
+        'ExecutionMonitorings' => TrainingExecutionMonitoring::class,
     ];
 
     private static $has_many = [
