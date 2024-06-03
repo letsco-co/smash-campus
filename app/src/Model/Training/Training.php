@@ -170,27 +170,27 @@ class Training extends DataObject
         $requiredFields = [
             'Title' => [
                 'title' => 'Title',
-                'relation' => '',
+                'relation' => 'none',
             ],
             'Modalities' => [
                 'title' => 'Modalities',
-                'relation' => '',
+                'relation' => 'none',
             ],
             'Accessibility' => [
                 'title' => 'Accessibility',
-                'relation' => '',
+                'relation' => 'none',
             ],
             'Financing' => [
                 'title' => 'Financing',
-                'relation' => '',
+                'relation' => 'none',
             ],
             'Address' => [
                 'title' => 'Address',
-                'relation' => '',
+                'relation' => 'none',
             ],
             'Goals' => [
                 'title' => 'Goals',
-                'relation' => '',
+                'relation' => 'none',
             ],
             'CategoryID' => [
                 'title' => 'Category',
@@ -208,11 +208,33 @@ class Training extends DataObject
                 'title' => 'Mode',
                 'relation' => 'hasOne',
             ],
+            'Prerequisites' => [
+                'title' => 'Prerequisites',
+                'relation' => 'manyMany',
+            ],
+            'Publics' => [
+                'title' => 'Publics',
+                'relation' => 'manyMany',
+            ],
+            'EducationalMeans' => [
+                'title' => 'EducationalMeans',
+                'relation' => 'manyMany',
+            ],
+            'EvaluationMethods' => [
+                'title' => 'EvaluationMethods',
+                'relation' => 'manyMany',
+            ],
+            'ExecutionMonitorings' => [
+                'title' => 'ExecutionMonitorings',
+                'relation' => 'manyMany',
+            ],
         ];
         foreach ($requiredFields as $requiredFieldName => $requiredFieldInfos) {
             $condition = empty($this->$requiredFieldName);
             if ($requiredFieldInfos['relation'] == 'hasOne') {
                 $condition = $this->$requiredFieldName == 0;
+            } else if ($requiredFieldInfos['relation'] == 'manyMany') {
+                $condition = !$this->$requiredFieldName()->exists();
             }
             if ($condition) {
                 $result->addFieldError($requiredFieldName,
