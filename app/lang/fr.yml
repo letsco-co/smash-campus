@@ -36,8 +36,8 @@ fr:
     Prerequisites: 'Pré-requis'
     Publics: 'Publics concernés'
     EducationalMeans: 'Moyens pédagogiques'
-    EvaluationMethod: "Modalités d'évaluation"
-    ExecutionMonitoring: "Suivis de l'execution"
+    EvaluationMethods: "Modalités d'évaluation"
+    ExecutionMonitorings: "Suivis de l'execution"
     MANAGE_DURATION: 'Gérer les durées'
     MANAGE_CATEGORY: 'Gérer les domaines'
     MANAGE_QUALIFICATION: 'Gérer les niveaux'
