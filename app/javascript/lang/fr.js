@@ -7,5 +7,8 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
         "Admin.NO_MATCHING_OPTIONS": "Aucune option correspondante",
         "AssetAdmin.UPLOADFIELD_UPLOAD_NEW": "Télécharger un nouveau fichier",
         "AssetAdmin.UPLOADFIELD_CHOOSE_EXISTING": "Choisir un fichier existant",
+        "Admin.SEARCH_OPTIONS": "Options de recherche",
+        "Admin.ENTER": "Entrer",
+        "Admin.SEARCH": "Rechercher",
     });
 }

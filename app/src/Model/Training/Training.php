@@ -3,15 +3,19 @@
 namespace LetsCo\Model\Training;
 
 use LetsCo\Admin\Training\TrainingAdmin;
+use LetsCo\Model\Program;
 use LetsCo\Trait\LocalizationDataObject;
+use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormScaffolder;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionMenu;
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\SearchableDropdownField;
 use SilverStripe\Forms\SearchableMultiDropdownField;
 use SilverStripe\Forms\Tab;
@@ -52,6 +56,7 @@ class Training extends DataObject
 
     private static $has_many = [
         'Registrations' => TrainingRegistration::class,
+        'Programs' => Program::class,
     ];
 
     public function getCMSFields()
@@ -89,12 +94,19 @@ class Training extends DataObject
 
         $this->setHasOneFields($MainFields);
 
+
+        $MainFields->push(LiteralField::create('Programs_Title' . 'Title', '<label >' . _t(self::class . '.' . 'Programs', 'Programs') . '</label>'));
+        $manyManyConfig = GridFieldConfig_RelationEditor::create();
+        $manyManyConfig->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
+        $MainFields->push(CompositeField::create(new FieldList([
+            GridField::create('Programs', false, $this->Programs(), $manyManyConfig),
+        ])));
+
         Requirements::customCSS("
             .ss-toggle .ui-accordion-content {
                 padding : 2.2em !important;
             }
         ");
-
         $TabSet->push($MainFields);
     }
 
@@ -105,6 +117,7 @@ class Training extends DataObject
     public function setHasManyRelationsTabs(TabSet $TabSet): void
     {
         $hasManyRelations = $this->hasMany();
+        unset($hasManyRelations['Programs']);
         foreach ($hasManyRelations as $hasManyRelationName => $hasManyRelationClassName) {
             $relationConfig = GridFieldConfig_RelationEditor::create();
             $relationGridField = GridField::create($hasManyRelationName, false, $this->$hasManyRelationName(), $relationConfig);

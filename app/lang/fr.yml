@@ -149,3 +149,14 @@ fr:
     RGPD: "Traitement des données"
   LetsCo\FormField\FrenchPhoneNumberField:
     INVALID: 'Merci de renseigner un numéro de téléphone valide'
+  LetsCo\Model\Program:
+    SINGULARNAME: "programme"
+    PLURALNAME: "programmes"
+    PLURALS:
+      one: "Un programme"
+      other: "{count} programmes"
+    Title: 'Nom du programme'
+    Training: 'Formation'
+    Parent: 'Programme parent'
+    Parent_Title: 'Programme parent'
+    Parent_title: 'Programme parent'
