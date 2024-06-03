@@ -55,6 +55,8 @@ fr:
       one: 'Un domaine'
       other: '{count} domaines'
     Title: 'Nom du domaine'
+    Image: 'Image de fond'
+    Training: 'formations'
   LetsCo\Model\Training\TrainingDuration:
     SINGULARNAME: 'durée'
     PLURALNAME: 'durées'

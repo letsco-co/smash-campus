@@ -5,5 +5,7 @@ if (typeof(ss) === 'undefined' || typeof(ss.i18n) === 'undefined') {
 } else {
     ss.i18n.addDictionary('fr', {
         "Admin.NO_MATCHING_OPTIONS": "Aucune option correspondante",
+        "AssetAdmin.UPLOADFIELD_UPLOAD_NEW": "Télécharger un nouveau fichier",
+        "AssetAdmin.UPLOADFIELD_CHOOSE_EXISTING": "Choisir un fichier existant",
     });
 }
