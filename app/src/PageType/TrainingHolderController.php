@@ -10,7 +10,8 @@ use SilverStripe\Control\HTTPRequest;
 class TrainingHolderController extends PageController
 {
     private static $allowed_actions = [
-        'domain'
+        'domain',
+        'search',
     ];
     public function index(HTTPRequest $request) {
         $categories = TrainingCategory::get();
@@ -40,6 +41,23 @@ class TrainingHolderController extends PageController
                 'Domain' => $domain
             ])
             ->renderWith(['TrainingHolder_domain']),
+        ])->renderWith(['Page']);
+    }
+
+    public function search(HTTPRequest $request) {
+        $keyword = $request->getVar('keyword');
+        $trainings = Training::get()->filterAny([
+            'Title:PartialMatch' => $keyword,
+            'Category.Title:PartialMatch' => $keyword
+        ]);
+
+        return $this->customise([
+            'Layout' => $this
+                ->customise([
+                    'Trainings' => $trainings,
+                    'Keyword' => $keyword
+                ])
+                ->renderWith(['TrainingHolder_search']),
         ])->renderWith(['Page']);
     }
 }
