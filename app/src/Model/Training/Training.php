@@ -10,7 +10,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionMenu;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
-use SilverStripe\Forms\GridField\GridFieldFilterHeader;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\SearchableDropdownField;
 use SilverStripe\Forms\SearchableMultiDropdownField;
@@ -91,7 +91,7 @@ class Training extends DataObject
 
         Requirements::customCSS("
             .ss-toggle .ui-accordion-content {
-                padding : 1em 2.2em !important;
+                padding : 2.2em !important;
             }
         ");
 
@@ -127,6 +127,7 @@ class Training extends DataObject
                 SearchableMultiDropdownField::create($manyManyRelationKey,  _t(self::class . '.' . $manyManyRelationKey, $manyManyRelationKey), $manyManyRelationClassName::get())
             );
         }
+        $this->setManageRelationDataObject($manyManyRelations, $MainFields, '_Manage', '');
     }
 
     /**
@@ -137,13 +138,29 @@ class Training extends DataObject
     {
         $hasOne = $this->hasOne();
         unset($hasOne['Category']);
-        foreach ($hasOne as $hasOneRelationKey => $hasOneRelationData) {
-            $hasOneConfig = GridFieldConfig_RecordEditor::create();
-            $hasOneConfig->removeComponentsByType(GridFieldFilterHeader::class);
-            $hasOneConfig->removeComponentsByType(GridField_ActionMenu::class);
-            $gridField = GridField::create($hasOneRelationKey, false, $hasOneRelationData::get(), $hasOneConfig);
-            $toggleField = ToggleCompositeField::create('Manage' . $hasOneRelationKey, _t(self::class . '.MANAGE_' . strtoupper($hasOneRelationKey), 'Manage ' . $hasOneRelationKey), new FieldList($gridField));
-            $MainFields->insertAfter($hasOneRelationKey . 'ID', $toggleField);
+        $this->setManageRelationDataObject($hasOne, $MainFields);
+    }
+
+    /**
+     * @param array $relations
+     * @param Tab $MainFields
+     * @param string $GridFieldName
+     * @param string $insertAfter
+     * @return void
+     */
+    public function setManageRelationDataObject(array $relations, Tab $MainFields, string $GridFieldName = '', string $insertAfter = 'ID'): void
+    {
+        foreach ($relations as $relationKey => $relationClassName) {
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->removeComponentsByType(GridField_ActionMenu::class);
+            $paginator = $config->getComponentByType(GridFieldPaginator::class);
+            $paginator->setItemsPerPage(5);
+            $gridField = GridField::create($relationKey.$GridFieldName, false, $relationClassName::get(), $config);
+            $toggleField = ToggleCompositeField::create(
+                'Manage' . $relationKey,
+                _t(self::class . '.MANAGE_' . strtoupper($relationKey), 'Manage ' . $relationKey),
+                new FieldList($gridField));
+            $MainFields->insertAfter($relationKey . $insertAfter, $toggleField);
         }
     }
 }

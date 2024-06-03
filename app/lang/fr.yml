@@ -42,6 +42,11 @@ fr:
     MANAGE_CATEGORY: 'Gérer les domaines'
     MANAGE_QUALIFICATION: 'Gérer les niveaux'
     MANAGE_MODE: 'Gérer les modes'
+    MANAGE_PREREQUISITES: 'Gérer les pré-requis'
+    MANAGE_PUBLICS: 'Gérer les publics concernés'
+    MANAGE_EDUCATIONALMEANS: 'Gérer les moyens pédagogiques'
+    MANAGE_EVALUATIONMETHODS: 'Gérer les modalités d''évaluations'
+    MANAGE_EXECUTIONMONITORINGS: 'Gérer les suivis d''executions'
     Registrations: 'Pré-inscriptions'
   LetsCo\Model\TrainingCategory:
     SINGULARNAME: 'domaine'
