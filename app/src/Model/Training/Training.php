@@ -163,4 +163,62 @@ class Training extends DataObject
             $MainFields->insertAfter($relationKey . $insertAfter, $toggleField);
         }
     }
+
+    public function validate()
+    {
+        $result =  parent::validate();
+        $requiredFields = [
+            'Title' => [
+                'title' => 'Title',
+                'relation' => '',
+            ],
+            'Modalities' => [
+                'title' => 'Modalities',
+                'relation' => '',
+            ],
+            'Accessibility' => [
+                'title' => 'Accessibility',
+                'relation' => '',
+            ],
+            'Financing' => [
+                'title' => 'Financing',
+                'relation' => '',
+            ],
+            'Address' => [
+                'title' => 'Address',
+                'relation' => '',
+            ],
+            'Goals' => [
+                'title' => 'Goals',
+                'relation' => '',
+            ],
+            'CategoryID' => [
+                'title' => 'Category',
+                'relation' => 'hasOne',
+            ],
+            'DurationID' => [
+                'title' => 'Duration',
+                'relation' => 'hasOne',
+            ],
+            'QualificationID' => [
+                'title' => 'Qualification',
+                'relation' => 'hasOne',
+            ],
+            'ModeID' => [
+                'title' => 'Mode',
+                'relation' => 'hasOne',
+            ],
+        ];
+        foreach ($requiredFields as $requiredFieldName => $requiredFieldInfos) {
+            $condition = empty($this->$requiredFieldName);
+            if ($requiredFieldInfos['relation'] == 'hasOne') {
+                $condition = $this->$requiredFieldName == 0;
+            }
+            if ($condition) {
+                $result->addFieldError($requiredFieldName,
+                    _t(self::class.'.VALIDATOR_MESSAGE_REQUIRED', '"{field} is required"', ['field' => _t(self::class.'.'. $requiredFieldInfos['title'], $requiredFieldInfos['title'])]));
+            }
+        }
+        return $result;
+    }
 }

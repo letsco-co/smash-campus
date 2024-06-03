@@ -48,6 +48,7 @@ fr:
     MANAGE_EVALUATIONMETHODS: 'Gérer les modalités d''évaluations'
     MANAGE_EXECUTIONMONITORINGS: 'Gérer les suivis d''executions'
     Registrations: 'Pré-inscriptions'
+    VALIDATOR_MESSAGE_REQUIRED: '"{field}" requis'
   LetsCo\Model\Training\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'
