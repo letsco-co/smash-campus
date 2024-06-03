@@ -3,6 +3,8 @@
 namespace LetsCo\Model;
 
 use LetsCo\Trait\LocalizationDataObject;
+use SilverStripe\Forms\CompositeValidator;
+use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
 
 class TrainingCategory extends DataObject
@@ -15,4 +17,13 @@ class TrainingCategory extends DataObject
     private static $has_many = [
         'Training' => Training::class,
     ];
+
+    public function getCMSCompositeValidator(): CompositeValidator
+    {
+        $validator = parent::getCMSCompositeValidator();
+        $validator->addValidator(RequiredFields::create([
+            'Title',
+        ]));
+        return $validator;
+    }
 }
