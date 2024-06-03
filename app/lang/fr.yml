@@ -15,9 +15,9 @@ fr:
     PREVIOUS: 'Enregistrement précédent'
   SilverStripe\Versioned\VersionedGridFieldItemRequest:
     PUBLISHEDTOASTMESSAGE: '{type} "{title}" publié'
-  LetsCo\Admin\TrainingAdmin:
+  LetsCo\Admin\Training\TrainingAdmin:
     MENUTITLE: 'Formations'
-  LetsCo\Model\Training:
+  LetsCo\Model\Training\Training:
     SINGULARNAME: 'formation'
     PLURALNAME: 'formations'
     PLURALS:
@@ -48,56 +48,56 @@ fr:
     MANAGE_EVALUATIONMETHODS: 'Gérer les modalités d''évaluations'
     MANAGE_EXECUTIONMONITORINGS: 'Gérer les suivis d''executions'
     Registrations: 'Pré-inscriptions'
-  LetsCo\Model\TrainingCategory:
+  LetsCo\Model\Training\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'
     PLURALS:
       one: 'Un domaine'
       other: '{count} domaines'
     Title: 'Nom du domaine'
-  LetsCo\Model\TrainingDuration:
+  LetsCo\Model\Training\TrainingDuration:
     SINGULARNAME: 'durée'
     PLURALNAME: 'durées'
     PLURALS:
       one: 'Une durée'
       other: '{count} durées'
     Title: 'Nom de la durée'
-  LetsCo\Model\TrainingPrerequisite:
+  LetsCo\Model\Training\TrainingPrerequisite:
     SINGULARNAME: 'pré-requis'
     PLURALNAME: 'pré-requis'
     PLURALS:
       one: 'Un pré-requis'
       other: '{count} pré-requis'
     Title: 'Nom du pré-requis'
-  LetsCo\Model\TrainingPublic:
+  LetsCo\Model\Training\TrainingPublic:
     SINGULARNAME: 'public concerné'
     PLURALNAME: 'publics concernés'
     PLURALS:
       one: 'Un public concerné'
       other: '{count} publics concernés'
     Title: 'Nom du public concerné'
-  LetsCo\Model\TrainingEducationalMeans:
+  LetsCo\Model\Training\TrainingEducationalMeans:
     SINGULARNAME: 'moyen pédagogique'
     PLURALNAME: 'moyens pédagogiques'
     PLURALS:
       one: 'Un moyen pédagogique'
       other: '{count} moyens pédagogiques'
     Title: 'Nom du moyen pédagogique'
-  LetsCo\Model\TrainingEvaluationMethod:
+  LetsCo\Model\Training\TrainingEvaluationMethod:
     SINGULARNAME: "modalité d'évaluation"
     PLURALNAME: "modalités d'évaluation"
     PLURALS:
       one: "Une modalité d'évaluation"
       other: "{count} modalités d'évaluation"
     Title: "Nom de la modalité d'évaluation"
-  LetsCo\Model\TrainingExecutionMonitoring:
+  LetsCo\Model\Training\TrainingExecutionMonitoring:
     SINGULARNAME: "suivi de l'execution"
     PLURALNAME: "suivis de l'execution"
     PLURALS:
       one: "Un suivi de l'execution"
       other: "{count} suivis de l'execution"
     Title: "Nom du suivi de l'execution"
-  LetsCo\Model\TrainingRegistration:
+  LetsCo\Model\Training\TrainingRegistration:
     SINGULARNAME: "pré-inscription"
     PLURALNAME: "pré-inscriptions"
     PLURALS:
