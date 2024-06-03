@@ -4,7 +4,6 @@ namespace LetsCo\Model;
 
 use LetsCo\Admin\TrainingAdmin;
 use LetsCo\Trait\LocalizationDataObject;
-use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormScaffolder;
 use SilverStripe\Forms\GridField\GridField;
@@ -13,11 +12,10 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\SearchableDropdownField;
+use SilverStripe\Forms\SearchableMultiDropdownField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
-use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataObject;
@@ -125,11 +123,9 @@ class Training extends DataObject
         unset($manyManyRelations['LinkTracking']);
         unset($manyManyRelations['FileTracking']);
         foreach ($manyManyRelations as $manyManyRelationKey => $manyManyRelationClassName) {
-            $MainFields->push(LiteralField::create($manyManyRelationKey . 'Title', '<label >' . _t(self::class . '.' . $manyManyRelationKey, $manyManyRelationKey) . '</label>'));
-            $manyManyConfig = GridFieldConfig_RelationEditor::create();
-            $MainFields->push(CompositeField::create(new FieldList([
-                GridField::create($manyManyRelationKey, false, $manyManyRelationClassName::get(), $manyManyConfig),
-            ])));
+            $MainFields->push(
+                SearchableMultiDropdownField::create($manyManyRelationKey,  _t(self::class . '.' . $manyManyRelationKey, $manyManyRelationKey), $manyManyRelationClassName::get())
+            );
         }
     }
 
