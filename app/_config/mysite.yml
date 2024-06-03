@@ -6,6 +6,9 @@ SilverStripe\Core\Manifest\ModuleManifest:
 LetsCo\Model\Training:
   extensions:
     - SilverStripe\Versioned\Versioned
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - app/javascript/lang/fr.js
 # UTF8MB4 has limited support in older MySQL versions.
 # Remove this configuration if you experience issues.
 ---
