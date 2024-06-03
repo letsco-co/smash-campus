@@ -13,6 +13,8 @@ fr:
     NEW: 'Ajouter un nouvel enregistrement'
     NEXT: 'Enregistrement suivant'
     PREVIOUS: 'Enregistrement précédent'
+  SilverStripe\Versioned\VersionedGridFieldItemRequest:
+    PUBLISHEDTOASTMESSAGE: '{type} "{title}" publié'
   LetsCo\Admin\TrainingAdmin:
     MENUTITLE: 'Formations'
   LetsCo\Model\Training:
