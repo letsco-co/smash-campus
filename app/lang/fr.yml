@@ -160,3 +160,10 @@ fr:
     Parent: 'Programme parent'
     Parent_Title: 'Programme parent'
     Parent_title: 'Programme parent'
+  LetsCo\PageType\TrainingHolder:
+    SINGULARNAME: "Page formations"
+    PLURALNAME: "Pages formations"
+    PLURALS:
+      one: "Une page formations"
+      other: "{count} pages formations"
+    DESCRIPTION: "Affiche les formations"
