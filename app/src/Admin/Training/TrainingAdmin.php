@@ -2,8 +2,8 @@
 
 namespace LetsCo\Admin;
 
-use LetsCo\Model\Training;
-use LetsCo\Model\TrainingCategory;
+use LetsCo\Model\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training;
+use LetsCo\Model\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\Training\TrainingCategory;
 use SilverStripe\Admin\ModelAdmin;
 
 class TrainingAdmin extends ModelAdmin

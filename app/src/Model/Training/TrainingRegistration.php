@@ -1,6 +1,6 @@
 <?php
 
-namespace LetsCo\Model;
+namespace LetsCo\Model\Training;
 
 use LetsCo\FormField\FrenchPhoneNumberField;
 use LetsCo\FormField\FrenchPostCodeField;

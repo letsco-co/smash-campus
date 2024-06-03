@@ -1,6 +1,6 @@
 <?php
 
-namespace LetsCo\Model;
+namespace LetsCo\Model\Training;
 
 use LetsCo\Admin\TrainingAdmin;
 use LetsCo\Trait\LocalizationDataObject;
