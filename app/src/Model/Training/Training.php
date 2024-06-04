@@ -76,12 +76,18 @@ class Training extends DataObject
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
-        if ($this->isChanged('Title', 2)) {
+        if ($this->isChanged('Title', 2) || !$this->URLSegment) {
             $filter = URLSegmentFilter::create();
-            $this->URLSegment = $filter->filter($this->Title);
-        } elseif (!$this->URLSegment) {
-            $filter = URLSegmentFilter::create();
-            $this->URLSegment = $filter->filter($this->Title);
+            $baseSegment = $filter->filter($this->Title);
+            $segment = $baseSegment;
+            $count = 1;
+
+            while (self::get()->filter('URLSegment', $segment)->exists()) {
+                $segment = $baseSegment . '-' . $count;
+                $count++;
+            }
+
+            $this->URLSegment = $segment;
         }
     }
 
