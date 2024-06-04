@@ -12,6 +12,7 @@ class TrainingHolderController extends PageController
     private static $allowed_actions = [
         'domain',
         'search',
+        'show',
     ];
     public function index(HTTPRequest $request) {
         $categories = TrainingCategory::get();
@@ -58,6 +59,21 @@ class TrainingHolderController extends PageController
                     'Keyword' => $keyword
                 ])
                 ->renderWith(['TrainingHolder_search']),
+        ])->renderWith(['Page']);
+    }
+
+    public function show(HTTPRequest $request) {
+        $trainingID = $request->param('ID');
+        $training = Training::get()->filter('URLSegment', $trainingID)->first();
+        if (!$training) {
+            return $this->httpError(404, 'Training not found');
+        }
+        return $this->customise([
+            'Layout' => $this
+                ->customise([
+                    'Training' => $training,
+                ])
+                ->renderWith(['TrainingHolder_show']),
         ])->renderWith(['Page']);
     }
 }
