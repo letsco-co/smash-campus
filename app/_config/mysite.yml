@@ -3,7 +3,7 @@ Name: smash-campus
 ---
 SilverStripe\Core\Manifest\ModuleManifest:
   project: app
-LetsCo\Model\Training:
+LetsCo\Model\Training\Training:
   extensions:
     - SilverStripe\Versioned\Versioned
 SilverStripe\Admin\LeftAndMain:
