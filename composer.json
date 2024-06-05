@@ -29,7 +29,10 @@
             "web.config"
         ],
         "expose": [
-            "app/javascript"
+            "app/javascript",
+            "themes/smash-campus/css",
+            "themes/smash-campus/javascript",
+            "themes/smash-campus/images"
         ]
     },
     "config": {
