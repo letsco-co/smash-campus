@@ -49,6 +49,7 @@ fr:
     MANAGE_EXECUTIONMONITORINGS: 'Gérer les suivis d''executions'
     Registrations: 'Pré-inscriptions'
     VALIDATOR_MESSAGE_REQUIRED: '"{field}" requis'
+    Link: "Voir la formation"
   LetsCo\Model\Training\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'

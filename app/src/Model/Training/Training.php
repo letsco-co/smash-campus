@@ -5,6 +5,8 @@ namespace LetsCo\Model\Training;
 use LetsCo\Admin\Training\TrainingAdmin;
 use LetsCo\Model\Program;
 use LetsCo\Trait\LocalizationDataObject;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormScaffolder;
@@ -60,6 +62,30 @@ class Training extends DataObject
         'Registrations' => TrainingRegistration::class,
         'Programs' => Program::class,
     ];
+
+    public function Link($action = null)
+    {
+        $relativeLink = $this->RelativeLink($action);
+        $link =  Controller::join_links(Director::baseURL(), $relativeLink);
+        $this->extend('updateLink', $link, $action, $relativeLink);
+        return $link;
+    }
+
+    public function RelativeLink($action = null)
+    {
+        $controller = Controller::curr();
+        // Legacy support: If $action === true, retain URLSegment for homepages,
+        // but don't append any action
+        if ($action === true) {
+            $action = null;
+        }
+
+        $link = Controller::join_links($controller->Link().'/show/'.$this->URLSegment, $action);
+
+        $this->extend('updateRelativeLink', $link, $base, $action);
+
+        return $link;
+    }
 
     public function getCMSFields()
     {

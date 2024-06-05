@@ -19,9 +19,13 @@ class TrainingHolderController extends PageController
         if (!$categories->exists()) {
             return $this->httpError(404, 'Domain not found');
         }
+        $trainings = Training::get()->sort('Category.Title');
         return $this->customise([
             'Layout' => $this
-                ->customise(['categories' => $categories])
+                ->customise([
+                    'Categories' => $categories,
+                    'Trainings' => $trainings,
+                ])
                 ->renderWith(['TrainingHolder']),
         ])->renderWith(['Page']);
     }

@@ -4,6 +4,8 @@ namespace LetsCo\Model\Training;
 
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Assets\Image;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
@@ -47,5 +49,29 @@ class TrainingCategory extends DataObject
             'Title',
         ]));
         return $validator;
+    }
+
+    public function Link($action = null)
+    {
+        $relativeLink = $this->RelativeLink($action);
+        $link =  Controller::join_links(Director::baseURL(), $relativeLink);
+        $this->extend('updateLink', $link, $action, $relativeLink);
+        return $link;
+    }
+
+    public function RelativeLink($action = null)
+    {
+        $controller = Controller::curr();
+        // Legacy support: If $action === true, retain URLSegment for homepages,
+        // but don't append any action
+        if ($action === true) {
+            $action = null;
+        }
+
+        $link = Controller::join_links($controller->Link().'/domain/'.$this->URLSegment, $action);
+
+        $this->extend('updateRelativeLink', $link, $base, $action);
+
+        return $link;
     }
 }
