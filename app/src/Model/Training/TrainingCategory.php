@@ -18,6 +18,7 @@ class TrainingCategory extends DataObject
     private static $db = [
         'Title' => 'Varchar(255)',
         'URLSegment' => 'Varchar(255)',
+        'Description' => 'Text',
     ];
     private static $has_one = [
         'Image' => Image::class,

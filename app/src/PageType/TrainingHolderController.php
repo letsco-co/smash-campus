@@ -38,12 +38,16 @@ class TrainingHolderController extends PageController
             return $this->httpError(404, 'Domain not found');
         }
         $trainings = Training::get()->filter('CategoryID', $domain->ID);
+        $domains = TrainingCategory::get()->exclude('ID', $domain->ID);
+        $this->Page($this->Link())->Title = $domain->Title .' | '.$this->Page($this->Link())->Title . ' - ' . $this->SiteConfig()->Title;
 
         return $this->customise([
             'Layout' => $this
             ->customise([
+                'Title' => $domain->Title,
                 'Trainings' => $trainings,
-                'Domain' => $domain
+                'Category' => $domain,
+                'Categories' => $domains,
             ])
             ->renderWith(['TrainingHolder_domain']),
         ])->renderWith(['Page']);
