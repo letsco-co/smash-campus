@@ -76,6 +76,7 @@ class TrainingHolderController extends PageController
         if (!$training) {
             return $this->httpError(404, 'Training not found');
         }
+        $this->Page($this->Link())->Title = $training->Title .' | '.$this->Page($this->Link())->Title . ' - ' . $this->SiteConfig()->Title;
         return $this->customise([
             'Layout' => $this
                 ->customise([
