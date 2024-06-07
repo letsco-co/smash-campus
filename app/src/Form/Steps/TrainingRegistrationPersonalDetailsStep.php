@@ -16,7 +16,7 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
 {
-    private static $next_steps = TrainingRegistrationTrainingStep::class;
+    private static $next_steps = TrainingRegistrationStructureStep::class;
     public function getFields()
     {
         $trainingRegistration = singleton(TrainingRegistration::class);
@@ -38,7 +38,12 @@ class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
         $training = Training::get()->filter("URLSegment", $trainingURLSegment)->first();
         $trainingID = $training->ID ?? 0;
         $fields->push(
-            HiddenField::create('TrainingID', null, $trainingID)
+            HiddenField::create('TrainingID', null, $trainingID),
+        );
+        $formType = $this->getForm()->getRequestHandler()->getRequest()->param("OtherID");
+        $isIndividualFinancing = $formType == 'individualform';
+        $fields->push(
+            HiddenField::create('isIndividualFinancing', null, $isIndividualFinancing),
         );
         return $fields;
     }
@@ -52,5 +57,15 @@ class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
             'Fonction',
             'Email',
         ));
+    }
+
+    public function getNextStep()
+    {
+        $data = $this->loadData();
+        if(isset($data['isIndividualFinancing']) && $data['isIndividualFinancing']) {
+            return TrainingRegistrationTrainingStep::class;
+        } else {
+            return $this->config()->get('next_steps');
+        }
     }
 }

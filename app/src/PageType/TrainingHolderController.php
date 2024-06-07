@@ -18,6 +18,7 @@ class TrainingHolderController extends PageController
     ];
     private static $url_handlers = [
         'show/$ID/individualform' => 'show',
+        'show/$ID/structureform' => 'show',
     ];
     public function index(HTTPRequest $request) {
         $categories = TrainingCategory::get();
@@ -84,7 +85,7 @@ class TrainingHolderController extends PageController
         $templateVariables = [
             'Training' => $training,
         ];
-        if ($request->param('OtherID') == "individualform" || $request->getVar("MultiFormSessionID")) {
+        if ($request->param('OtherID') || $request->getVar("MultiFormSessionID")) {
             $form = TrainingRegistrationIndividualForm::create($this, 'IndividualForm');
             $templateVariables['Form'] = $form;
         }
