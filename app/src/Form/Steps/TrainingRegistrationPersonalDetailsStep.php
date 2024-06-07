@@ -16,7 +16,7 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
 {
-    private static $next_steps = TrainingRegistrationStructureDetailsStep::class;
+    private static $next_steps = TrainingRegistrationTrainingStep::class;
     public function getFields()
     {
         $trainingRegistration = singleton(TrainingRegistration::class);
