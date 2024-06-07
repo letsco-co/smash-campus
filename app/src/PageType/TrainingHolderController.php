@@ -2,6 +2,7 @@
 
 namespace LetsCo\PageType;
 
+use LetsCo\Form\TrainingRegistrationIndividualForm;
 use LetsCo\Model\Training\Training;
 use LetsCo\Model\Training\TrainingCategory;
 use PageController;
@@ -13,6 +14,10 @@ class TrainingHolderController extends PageController
         'domain',
         'search',
         'show',
+        'IndividualForm',
+    ];
+    private static $url_handlers = [
+        'show/$ID/individualform' => 'show',
     ];
     public function index(HTTPRequest $request) {
         $categories = TrainingCategory::get();
@@ -69,7 +74,6 @@ class TrainingHolderController extends PageController
                 ->renderWith(['TrainingHolder_search']),
         ])->renderWith(['Page']);
     }
-
     public function show(HTTPRequest $request) {
         $trainingID = $request->param('ID');
         $training = Training::get()->filter('URLSegment', $trainingID)->first();
@@ -77,12 +81,23 @@ class TrainingHolderController extends PageController
             return $this->httpError(404, 'Training not found');
         }
         $this->Page($this->Link())->Title = $training->Title .' | '.$this->Page($this->Link())->Title . ' - ' . $this->SiteConfig()->Title;
+        $templateVariables = [
+            'Training' => $training,
+        ];
+        $form = TrainingRegistrationIndividualForm::create($this, 'IndividualForm');
+        $templateVariables['Form'] = $form;
         return $this->customise([
             'Layout' => $this
-                ->customise([
-                    'Training' => $training,
-                ])
+                ->customise($templateVariables)
                 ->renderWith(['TrainingHolder_show']),
         ])->renderWith(['Page']);
+    }
+
+    public function IndividualForm()
+    {
+        $form = TrainingRegistrationIndividualForm::create($this, 'IndividualForm');
+        $training = Training::get()->byID($this->getRequest()->postVar("TrainingID"));
+        $form->setDisplayLink($training->Link());
+        return $form;
     }
 }

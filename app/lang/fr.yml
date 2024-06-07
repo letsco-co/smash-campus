@@ -168,3 +168,7 @@ fr:
       one: "Une page formations"
       other: "{count} pages formations"
     DESCRIPTION: "Affiche les formations"
+  SilverStripe\MultiForm\Models\MultiFormStep:
+    NEXT: 'Prochaine étape'
+    BACK: 'Précédent'
+    SUBMIT: 'Valider'

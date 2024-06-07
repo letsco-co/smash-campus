@@ -3,8 +3,6 @@
 namespace LetsCo\Form;
 
 use LetsCo\Form\Steps\TrainingRegistrationPersonalDetailsStep;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\FormAction;
 use SilverStripe\MultiForm\Forms\MultiForm;
 
 class TrainingRegistrationIndividualForm extends MultiForm
@@ -20,7 +18,7 @@ class TrainingRegistrationIndividualForm extends MultiForm
                 $action->setUseButtonTag(true);
                 continue;
             }
-            $action->addExtraClass("btn btn-primary bg-secondary-hover border-0");
+            $action->addExtraClass("btn btn-primary bg-secondary-hover border-0 flex-grow-1");
             $action->setUseButtonTag(true);
         }
 
