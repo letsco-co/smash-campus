@@ -84,8 +84,10 @@ class TrainingHolderController extends PageController
         $templateVariables = [
             'Training' => $training,
         ];
-        $form = TrainingRegistrationIndividualForm::create($this, 'IndividualForm');
-        $templateVariables['Form'] = $form;
+        if ($request->param('OtherID') == "individualform") {
+            $form = TrainingRegistrationIndividualForm::create($this, 'IndividualForm');
+            $templateVariables['Form'] = $form;
+        }
         return $this->customise([
             'Layout' => $this
                 ->customise($templateVariables)
