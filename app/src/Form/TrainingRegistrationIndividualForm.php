@@ -3,7 +3,10 @@
 namespace LetsCo\Form;
 
 use LetsCo\Form\Steps\TrainingRegistrationPersonalDetailsStep;
+use LetsCo\Model\Training\Training;
+use LetsCo\Model\Training\TrainingRegistration;
 use SilverStripe\MultiForm\Forms\MultiForm;
+use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class TrainingRegistrationIndividualForm extends MultiForm
 {
@@ -23,5 +26,32 @@ class TrainingRegistrationIndividualForm extends MultiForm
         }
 
         return $actions;
+    }
+
+    public function finish($data, $form)
+    {
+        parent::finish($data, $form);
+        $steps = MultiFormStep::get()->filter([
+            "SessionID" => $this->session->ID
+        ]);
+        $trainingID = null;
+        if ($steps) {
+            $registration = TrainingRegistration::create();
+            foreach ($steps as $step) {
+                $data = $step->loadData();
+                if (isset($data['Financing'])) {
+                    $data['Financing'] = implode(',', $data['Financing']);
+                }
+                if (isset($data['HeardOfTrainingSource'])) {
+                    $data['HeardOfTrainingSource'] = implode(',', $data['HeardOfTrainingSource']);
+                }
+                $registration->update($data);
+                $trainingID = $data["TrainingID"];
+            }
+            $registration->write();
+        }
+        $link = $trainingID ? Training::get()->byID($trainingID)->Link() : $this->controller->Link();
+        $this->session->delete();
+        $this->controller->redirect($link);
     }
 }
