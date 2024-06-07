@@ -84,7 +84,7 @@ class TrainingHolderController extends PageController
         $templateVariables = [
             'Training' => $training,
         ];
-        if ($request->param('OtherID') == "individualform") {
+        if ($request->param('OtherID') == "individualform" || $request->getVar("MultiFormSessionID")) {
             $form = TrainingRegistrationIndividualForm::create($this, 'IndividualForm');
             $templateVariables['Form'] = $form;
         }
