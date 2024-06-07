@@ -16,7 +16,7 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class TrainingRegistrationTrainingStep extends MultiFormStep
 {
-    private static $is_final_step = true;
+    private static $next_steps = TrainingRegistrationRGPDStep::class;
 
     public function getFields()
     {
