@@ -67,7 +67,7 @@ class TrainingRegistration extends DataObject
     {
         $fields = FieldList::create([
             ToggleCompositeField::create('PersonalInfos',_t(self::class.'.PersonalInfos', 'Personal infos'), new FieldList(
-                DropdownField::create('PersonTitle', _t(self::class.'.PersonTitle', 'PersonTitle'), $this->getTranslatableEnumValues($this->dbObject('PersonTitle')->enumValues())),
+                DropdownField::create('PersonTitle', _t(self::class.'.PersonTitle', 'PersonTitle'), self::getTranslatableEnumValues($this->dbObject('PersonTitle')->enumValues())),
                 TextField::create('LastName', _t(self::class.'.LastName', 'LastName')),
                 TextField::create('FirstName', _t(self::class.'.FirstName', 'FirstName')),
                 TextField::create('Fonction', _t(self::class.'.Fonction', 'Fonction')),
@@ -92,9 +92,9 @@ class TrainingRegistration extends DataObject
             ToggleCompositeField::create('Training', _t(self::class.'.TrainingInfos', 'Training Infos'), new FieldList(
                 TextField::create('DesiredTrainingDate', _t(self::class.'.DesiredTrainingDate', 'DesiredTrainingDate')),
                 TextareaField::create('Reasons', _t(self::class.'.Reasons', 'Reasons')),
-                CheckboxSetField::create('Financing', _t(self::class.'.Financing', 'Financing'), $this->getTranslatableEnumValues($this->dbObject('Financing')->enumValues())),
-                DropdownField::create('IsDisabled', _t(self::class.'.IsDisabled', 'IsDisabled'), $this->getTranslatableEnumValues($this->dbObject('IsDisabled')->enumValues())),
-                CheckboxSetField::create('HeardOfTrainingSource', _t(self::class.'.HeardOfTrainingSource', 'HeardOfTrainingSource'), $this->getTranslatableEnumValues($this->dbObject('HeardOfTrainingSource')->enumValues())),
+                CheckboxSetField::create('Financing', _t(self::class.'.Financing', 'Financing'), self::getTranslatableEnumValues($this->dbObject('Financing')->enumValues())),
+                DropdownField::create('IsDisabled', _t(self::class.'.IsDisabled', 'IsDisabled'), self::getTranslatableEnumValues($this->dbObject('IsDisabled')->enumValues())),
+                CheckboxSetField::create('HeardOfTrainingSource', _t(self::class.'.HeardOfTrainingSource', 'HeardOfTrainingSource'), self::getTranslatableEnumValues($this->dbObject('HeardOfTrainingSource')->enumValues())),
             )),
             ToggleCompositeField::create('RGPD', _t(self::class.'.RGPD', 'RGPD'), new FieldList(
                 CheckboxField::create('AcceptRGPD', _t(self::class.'.AcceptRGPD', 'AcceptRGPD')),

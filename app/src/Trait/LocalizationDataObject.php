@@ -13,7 +13,7 @@ trait LocalizationDataObject
         return $labels;
     }
 
-    public function getTranslatableEnumValues(array $enumValues)
+    public static function getTranslatableEnumValues(array $enumValues)
     {
         $translatableTitle = [];
         foreach ($enumValues as $enumKey => $enumValue) {
