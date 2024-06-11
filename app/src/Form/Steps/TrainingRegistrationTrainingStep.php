@@ -2,8 +2,8 @@
 
 namespace LetsCo\Form\Steps;
 
-use LetsCo\Model\Training\Training;
 use LetsCo\Model\Training\TrainingRegistration;
+use LetsCo\Trait\TrainingIDFromURL;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
@@ -16,6 +16,7 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class TrainingRegistrationTrainingStep extends MultiFormStep
 {
+    use TrainingIDFromURL;
     private static $next_steps = TrainingRegistrationRGPDStep::class;
 
     public function getFields()
@@ -29,9 +30,7 @@ class TrainingRegistrationTrainingStep extends MultiFormStep
             OptionsetField::create('IsDisabled', _t(TrainingRegistration::class.'.IsDisabled', 'IsDisabled'), TrainingRegistration::getTranslatableEnumValues($trainingRegistration->dbObject('IsDisabled')->enumValues())),
             CheckboxSetField::create('HeardOfTrainingSource', _t(TrainingRegistration::class.'.HeardOfTrainingSource', 'HeardOfTrainingSource'), TrainingRegistration::getTranslatableEnumValues($trainingRegistration->dbObject('HeardOfTrainingSource')->enumValues())),
         );
-        $trainingURLSegment = $this->getForm()->getRequestHandler()->getRequest()->param("ID");
-        $training = Training::get()->filter("URLSegment", $trainingURLSegment)->first();
-        $trainingID = $training->ID ?? 0;
+        $trainingID = $this->getTrainingID();
         $fields->push(
             HiddenField::create('TrainingID', null, $trainingID)
         );

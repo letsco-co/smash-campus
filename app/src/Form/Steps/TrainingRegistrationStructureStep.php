@@ -3,8 +3,8 @@
 namespace LetsCo\Form\Steps;
 
 use LetsCo\FormField\FrenchPostCodeField;
-use LetsCo\Model\Training\Training;
 use LetsCo\Model\Training\TrainingRegistration;
+use LetsCo\Trait\TrainingIDFromURL;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HiddenField;
@@ -14,6 +14,7 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class TrainingRegistrationStructureStep extends MultiFormStep
 {
+    use TrainingIDFromURL;
     private static $next_steps = TrainingRegistrationManagerDetailsStep::class;
     public function getFields()
     {
@@ -25,9 +26,7 @@ class TrainingRegistrationStructureStep extends MultiFormStep
             FrenchPostCodeField::create('StructurePostCode', _t(TrainingRegistration::class.'.StructurePostCode', 'StructurePostCode'))->addExtraClass("form-control"),
             TextField::create('StructureCity', _t(TrainingRegistration::class.'.StructureCity', 'StructureCity'))->addExtraClass("form-control"),
         );
-        $trainingURLSegment = $this->getForm()->getRequestHandler()->getRequest()->param("ID");
-        $training = Training::get()->filter("URLSegment", $trainingURLSegment)->first();
-        $trainingID = $training->ID ?? 0;
+        $trainingID = $this->getTrainingID();
         $fields->push(
             HiddenField::create('TrainingID', null, $trainingID),
         );

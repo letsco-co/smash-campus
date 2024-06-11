@@ -2,8 +2,8 @@
 
 namespace LetsCo\Form\Steps;
 
-use LetsCo\Model\Training\Training;
 use LetsCo\Model\Training\TrainingRegistration;
+use LetsCo\Trait\TrainingIDFromURL;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
@@ -14,6 +14,7 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class TrainingRegistrationRGPDStep extends MultiFormStep
 {
+    use TrainingIDFromURL;
     private static $is_final_step = true;
     public function getFields()
     {
@@ -29,9 +30,7 @@ class TrainingRegistrationRGPDStep extends MultiFormStep
                                                     </a>'),
             CheckboxField::create('AcceptOtherInfos', _t(TrainingRegistration::class.'.AcceptOtherInfos', 'AcceptOtherInfos')),
         );
-        $trainingURLSegment = $this->getForm()->getRequestHandler()->getRequest()->param("ID");
-        $training = Training::get()->filter("URLSegment", $trainingURLSegment)->first();
-        $trainingID = $training->ID ?? 0;
+        $trainingID = $this->getTrainingID();
         $fields->push(
             HiddenField::create('TrainingID', null, $trainingID)
         );
