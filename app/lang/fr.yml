@@ -184,3 +184,5 @@ fr:
     Time: 'Heure'
     Address: 'Adresse'
     Limit: 'Places disponibles'
+  LetsCo\Admin\Meeting\MeetingAdmin:
+    MENUTITLE: 'Conférences'
