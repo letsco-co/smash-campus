@@ -3,9 +3,6 @@
 namespace LetsCo\PageType;
 
 use LetsCo\Controller\TrainingController;
-use LetsCo\Form\TrainingRegistrationIndividualForm;
-use LetsCo\Model\Training\Training;
-use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 
 class DomainPageController extends \PageController
