@@ -16,7 +16,7 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 class TrainingRegistrationManagerDetailsStep extends MultiFormStep
 {
     use TrainingIDFromURL;
-    private static $next_steps = TrainingRegistrationRGPDStep::class;
+    private static $next_steps = TrainingRegistrationTrainingStep::class;
 
     public function getFields()
     {
