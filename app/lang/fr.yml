@@ -172,3 +172,15 @@ fr:
     NEXT: 'Prochaine étape'
     BACK: 'Précédent'
     SUBMIT: 'Valider'
+  LetsCo\Model\Meeting\Meeting:
+    SINGULARNAME: 'conférence'
+    PLURALNAME: 'conférences'
+    PLURALS:
+      one: 'Une conférence'
+      other: '{count} conférences'
+    Title: 'Nom de la conférence'
+    Description: 'Description'
+    Date: 'Date'
+    Time: 'Heure'
+    Address: 'Adresse'
+    Limit: 'Places disponibles'
