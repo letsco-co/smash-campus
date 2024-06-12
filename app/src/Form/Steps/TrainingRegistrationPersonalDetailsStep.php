@@ -39,7 +39,7 @@ class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
         $fields->push(
             HiddenField::create('TrainingID', null, $trainingID),
         );
-        $formType = $this->getForm()->getRequestHandler()->getRequest()->param("OtherID");
+        $formType = $this->getForm()->getRequestHandler()->getRequest()->param("ID");
         $isIndividualFinancing = $formType == 'individualform';
         $fields->push(
             HiddenField::create('isIndividualFinancing', null, $isIndividualFinancing),

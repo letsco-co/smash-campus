@@ -4,7 +4,6 @@ namespace LetsCo\Admin\Training;
 
 
 use LetsCo\Model\Training\Training;
-use LetsCo\Model\Training\TrainingCategory;
 use SilverStripe\Admin\ModelAdmin;
 
 class TrainingAdmin extends ModelAdmin
@@ -13,10 +12,6 @@ class TrainingAdmin extends ModelAdmin
         'training' => [
             'dataClass' => Training::class,
             'title' => Training::class,
-        ],
-        'category' => [
-            'dataClass' => TrainingCategory::class,
-            'title' => TrainingCategory::class,
         ],
     ];
     private static $url_segment = 'trainings';

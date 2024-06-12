@@ -50,7 +50,7 @@ class TrainingRegistrationIndividualForm extends MultiForm
             }
             $registration->write();
         }
-        $link = $trainingID ? Training::get()->byID($trainingID)->Link() : $this->controller->Link();
+        $link = $trainingID ? Training::get()->byID($trainingID)->Link().'?completed=1' : $this->controller->Link();
         $this->session->delete();
         $this->controller->redirect($link);
     }

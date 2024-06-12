@@ -4,9 +4,8 @@ namespace LetsCo\Model\Training;
 
 use LetsCo\Admin\Training\TrainingAdmin;
 use LetsCo\Model\Program;
+use LetsCo\PageType\DomainPage;
 use LetsCo\Trait\LocalizationDataObject;
-use SilverStripe\Control\Controller;
-use SilverStripe\Control\Director;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormScaffolder;
@@ -45,7 +44,7 @@ class Training extends DataObject
 
     private static $has_one = [
         'Duration' => TrainingDuration::class,
-        'Category' => TrainingCategory::class,
+        'Category' => DomainPage::class,
         'Qualification' => TrainingQualification::class,
         'Mode' => TrainingMode::class,
     ];
@@ -65,25 +64,8 @@ class Training extends DataObject
 
     public function Link($action = null)
     {
-        $relativeLink = $this->RelativeLink($action);
-        $link =  Controller::join_links(Director::baseURL(), $relativeLink);
-        $this->extend('updateLink', $link, $action, $relativeLink);
-        return $link;
-    }
-
-    public function RelativeLink($action = null)
-    {
-        $controller = Controller::curr();
-        // Legacy support: If $action === true, retain URLSegment for homepages,
-        // but don't append any action
-        if ($action === true) {
-            $action = null;
-        }
-
-        $link = Controller::join_links($controller->Link().'/show/'.$this->URLSegment, $action);
-
-        $this->extend('updateRelativeLink', $link, $base, $action);
-
+        $link = $this->Category()->Link($this->URLSegment.'/'.$action);
+        $this->extend('updateLink', $link);
         return $link;
     }
 
@@ -125,7 +107,7 @@ class Training extends DataObject
     {
         $MainFields = Tab::create('Main',
             TextField::create('Title', _t(self::class . '.Title', 'Title')),
-            SearchableDropdownField::create('CategoryID', _t(self::class . '.Category', 'Category'), TrainingCategory::get()),
+            SearchableDropdownField::create('CategoryID', _t(self::class . '.Category', 'Category'), DomainPage::get()),
             SearchableDropdownField::create('DurationID', _t(self::class . '.Duration', 'Duration'), TrainingDuration::get()),
             SearchableDropdownField::create('QualificationID', _t(self::class . '.Qualification', 'Qualification'), TrainingQualification::get()),
             SearchableDropdownField::create('ModeID', _t(self::class . '.Mode', 'Mode'), TrainingMode::get()),
