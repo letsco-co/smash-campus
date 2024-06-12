@@ -54,4 +54,15 @@ class TrainingRegistrationIndividualForm extends MultiForm
         $this->session->delete();
         $this->controller->redirect($link);
     }
+
+    public function getAllStepsLinear()
+    {
+        $steps = parent::getAllStepsLinear();
+        foreach ($steps as $step) {
+            if (str_contains($step->getExtraClasses(), 'completed')) {
+                $step->Completed = true;
+            }
+        }
+        return $steps;
+    }
 }

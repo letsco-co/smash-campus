@@ -41,6 +41,9 @@ class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
         );
         $formType = $this->getForm()->getRequestHandler()->getRequest()->param("ID");
         $isIndividualFinancing = $formType == 'individualform';
+        if ($isIndividualFinancing) {
+            $this->config()->set('next_steps',TrainingRegistrationTrainingStep::class);
+        }
         $fields->push(
             HiddenField::create('isIndividualFinancing', null, $isIndividualFinancing),
         );
@@ -62,6 +65,7 @@ class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
     {
         $data = $this->loadData();
         if(isset($data['isIndividualFinancing']) && $data['isIndividualFinancing']) {
+            $this->config()->set('next_steps',TrainingRegistrationTrainingStep::class);
             return TrainingRegistrationTrainingStep::class;
         } else {
             return $this->config()->get('next_steps');
