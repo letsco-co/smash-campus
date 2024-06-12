@@ -204,4 +204,12 @@ class Training extends DataObject
             $MainFields->insertAfter($relationKey . $insertAfter, $toggleField);
         }
     }
+
+    public function otherTrainings($limit = 2, $categoryID =null)
+    {
+        $trainings = Training::get()->exclude('ID', $this->ID);
+        if ($categoryID) $trainings = $trainings->filter('CategoryID', $categoryID);
+        if ($limit) $trainings = $trainings->limit($limit);
+        return $trainings;
+    }
 }
