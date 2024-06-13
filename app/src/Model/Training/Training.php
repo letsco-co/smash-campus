@@ -55,7 +55,6 @@ class Training extends Event
 
     private static $has_many = [
         'Registrations' => TrainingRegistration::class,
-        'Programs' => Program::class,
     ];
 
     private static $summary_fields = [
