@@ -12,18 +12,6 @@ use SilverStripe\View\Requirements;
 
 class MeetingController extends ContentController
 {
-//    private static $allowed_actions = [
-//        'getMeeting',
-////        'RegistrationForm',
-//    ];
-
-//    private static $url_handlers = [
-//        'RegistrationForm' => 'RegistrationForm',
-//    ];
-//    private $parentUrl;
-//    public function setUrlSegment(string $urlSegment) {
-//        $this->parentUrl = $urlSegment;
-//    }
 
     public function index(HTTPRequest $request)
     {
@@ -44,27 +32,11 @@ class MeetingController extends ContentController
             'Meeting' => $meeting,
             'Title' => $meeting->Title,
         ];
-
-//        if ($request->param('ID') || $request->getVar("MultiFormSessionID")) {
-//            $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
-//            $form->setDisplayLink($meeting->Link());
-//            $form->setFormAction($meeting->Link().'/'.$form->getName());
-//            $data['Form'] = $form;
-//        }
         if ($request->getVar('completed')) {
             $data['Completed'] = true;
         }
         return $this->customise($data)->renderWith(['MeetingPage', 'Page']);
     }
-
-//    public function RegistrationForm()
-//    {
-//        $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
-//        $meeting = Meeting::get()->byID($this->getRequest()->postVar("MeetingID"));
-//        $form->setDisplayLink($meeting->Link());
-//        $form->setFormAction($meeting->Link().'/'.$form->getName());
-//        return $form;
-//    }
 
     public function Link($action = null)
     {
