@@ -3,6 +3,7 @@
 namespace LetsCo\Model\Meeting;
 
 use LetsCo\Admin\Meeting\MeetingAdmin;
+use LetsCo\PageType\MeetingHolder;
 use LetsCo\Trait\LocalizationDataObject;
 use LetsCo\Model\Event;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -27,6 +28,7 @@ class Meeting extends Event
     ];
     private static $has_one = [
         'Image' => Image::class,
+        'Page' => MeetingHolder::class,
     ];
     private static $many_many = [
         'Images' => Image::class,
@@ -63,5 +65,12 @@ class Meeting extends Event
         $fields->push($fileField = UploadField::create('Documents', _t(self::class.'.Documents', 'Documents')));
         $fileField->setFolderName('Meeting');
         return $fields;
+    }
+
+    public function Link($action = null)
+    {
+        $link = $this->Page()->Link($this->URLSegment.'/'.$action);
+        $this->extend('updateLink', $link);
+        return $link;
     }
 }
