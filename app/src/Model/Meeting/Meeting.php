@@ -100,9 +100,6 @@ class Meeting extends Event
         $mainTab->push($fileField = UploadField::create('Documents', _t(self::class.'.Documents', 'Documents')));
         $fileField->setFolderName('Meeting');
 
-
-
-
         return $fields;
     }
 
@@ -118,5 +115,10 @@ class Meeting extends Event
         $meetings = Meeting::get()->exclude('ID', $this->ID);
         if ($limit) $meetings = $meetings->limit($limit);
         return $meetings;
+    }
+
+    public function remainingSeats()
+    {
+        return $this->Limit - $this->Registrations()->filter('Status', MeetingRegistration::STATUS_ACCEPTED)->count();
     }
 }

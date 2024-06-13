@@ -68,11 +68,14 @@ class MeetingRegistrationForm extends Form
     }
 
     public function doSave($data) {
+        $meetingID = $data['MeetingID'];
+        $meeting = Meeting::get()->byID($meetingID);
         $registration = new MeetingRegistration();
         $registration->update($data);
-        $registration->Status = MeetingRegistration::STATUS_ACCEPTED;
+        if ($meeting->remainingSeats()) {
+            $registration->Status = MeetingRegistration::STATUS_ACCEPTED;
+        }
         $registration->write();
-        $meetingID = $data['MeetingID'];
         $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().'?completed=1' : $this->getController()->Link();
         return $this->getController()->redirect($link);
     }

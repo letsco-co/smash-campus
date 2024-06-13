@@ -31,7 +31,8 @@ class MeetingRegistration extends DataObject
     private static $summary_fields = [
         'LastName',
         'FirstName',
-        'Email'
+        'Email',
+        'Status',
     ];
     public function getTitle()
     {
