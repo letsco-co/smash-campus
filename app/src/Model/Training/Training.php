@@ -56,6 +56,10 @@ class Training extends Event
         'Programs' => Program::class,
     ];
 
+    private static $summary_fields = [
+        'Title'
+    ];
+
     public function Link($action = null)
     {
         $link = $this->Category()->Link($this->URLSegment.'/'.$action);
