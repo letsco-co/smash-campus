@@ -109,4 +109,11 @@ class Meeting extends Event
         $this->extend('updateLink', $link);
         return $link;
     }
+
+    public function otherMeetings($limit = 2)
+    {
+        $meetings = Meeting::get()->exclude('ID', $this->ID);
+        if ($limit) $meetings = $meetings->limit($limit);
+        return $meetings;
+    }
 }
