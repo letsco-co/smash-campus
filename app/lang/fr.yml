@@ -184,5 +184,9 @@ fr:
     Time: 'Heure'
     Address: 'Adresse'
     Limit: 'Places disponibles'
+    Image: 'Image de fond'
+    Images: 'Images'
+    Documents: 'Documents'
+    Programs: 'Programme'
   LetsCo\Admin\Meeting\MeetingAdmin:
     MENUTITLE: 'Conférences'
