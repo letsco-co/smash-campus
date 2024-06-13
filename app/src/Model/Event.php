@@ -39,4 +39,9 @@ class Event extends DataObject
             $this->URLSegment = $segment;
         }
     }
+
+    public function ProgramNice()
+    {
+        return $this->Programs()->filter('ParentID', 0);
+    }
 }

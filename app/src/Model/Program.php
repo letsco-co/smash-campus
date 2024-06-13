@@ -7,6 +7,7 @@ use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\Hierarchy\Hierarchy;
+use SilverStripe\View\Parsers\URLSegmentFilter;
 
 class Program extends DataObject
 {
@@ -50,5 +51,21 @@ class Program extends DataObject
             'Title',
         ]));
         return $validator;
+    }
+    public function generateURLSegment()
+    {
+        $title = $this->Title;
+        $filter = URLSegmentFilter::create();
+        $filteredTitle = $filter->filter($title);
+
+        // Fallback to generic page name if path is empty (= no valid, convertable characters)
+        if (!$filteredTitle || $filteredTitle == '-' || $filteredTitle == '-1') {
+            $filteredTitle = "$this->ID";
+        }
+
+        // Hook for extensions
+        $this->extend('updateURLSegment', $filteredTitle, $title);
+
+        return $filteredTitle;
     }
 }
