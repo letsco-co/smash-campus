@@ -57,6 +57,7 @@ class Meeting extends Event
         $fields->removeByName('URLSegment');
         $fields->removeByName('Images');
         $fields->removeByName('Documents');
+        $fields->removeByName('Speakers');
         $imageField = $fields->dataFieldByName('Image');
         $imageField->setFolderName('Meeting');
         $imageField->setTitle(_t(self::class.'.Image', 'Image'));
