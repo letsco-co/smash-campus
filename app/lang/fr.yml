@@ -190,3 +190,20 @@ fr:
     Programs: 'Programme'
   LetsCo\Admin\Meeting\MeetingAdmin:
     MENUTITLE: 'Conférences'
+  LetsCo\Model\Meeting\MeetingRegistration:
+    SINGULARNAME: "inscription"
+    PLURALNAME: "inscriptions"
+    PLURALS:
+      one: "Une inscription"
+      other: "{count} inscriptions"
+    LastName: "Nom"
+    FirstName: 'Prénom'
+    Status: 'Etat'
+    Fonction: 'Fonction - Service'
+    Email: 'Email'
+    StructureName: 'Nom de l''entreprise/organisme'
+    AcceptRGPD: "J'accepte que les données saisies dans ce formulaire soient utilisées dans le cadre du traitement de ma demande"
+    AcceptOtherInfos: "J’accepte de recevoir les informations sur les formations et conférences à venir organisées par SMASH Campus"
+    Waiting: 'En attente'
+    Accepted: 'Accepté'
+    Cancelled: 'Annulé'

@@ -3,7 +3,6 @@
 namespace LetsCo\Model\Meeting;
 
 use LetsCo\Admin\Meeting\MeetingAdmin;
-use LetsCo\Meeting\MeetingRegistration;
 use LetsCo\Meeting\MeetingSpeaker;
 use LetsCo\PageType\MeetingHolder;
 use LetsCo\Trait\LocalizationDataObject;

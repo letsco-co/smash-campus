@@ -1,8 +1,7 @@
 <?php
 
-namespace LetsCo\Meeting;
+namespace LetsCo\Model\Meeting;
 
-use LetsCo\Model\Meeting\Meeting;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\RequiredFields;
@@ -35,6 +34,14 @@ class MeetingRegistration extends DataObject
     {
         return $this->LastName . " ". $this->FirstName;
     }
+    public function getCMSFields()
+    {
+        $fields =  parent::getCMSFields();
+        $statusField = $fields->dataFieldByName('Status');
+        $statusField->setSource(self::getTranslatableEnumValues($this->dbObject('Status')->enumValues()));
+        return $fields;
+    }
+
     public function getCMSCompositeValidator(): CompositeValidator
     {
         $validator = parent::getCMSCompositeValidator();
