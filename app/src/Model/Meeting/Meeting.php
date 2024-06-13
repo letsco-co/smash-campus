@@ -53,16 +53,17 @@ class Meeting extends Event
         $imageField->setFolderName('Meeting');
         $imageField->setTitle(_t(self::class.'.Image', 'Image'));
         $fields->removeByName('Programs');
-        $fields->push(LiteralField::create('Programs_Title' . 'Title', '<label >' . _t(self::class . '.' . 'Programs', 'Programs') . '</label>'));
+        $mainTab = $fields->findTab('Root.Main');
+        $mainTab->push(LiteralField::create('Programs_Title' . 'Title', '<label >' . _t(self::class . '.' . 'Programs', 'Programs') . '</label>'));
         $manyManyConfig = GridFieldConfig_RelationEditor::create();
         $manyManyConfig->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
-        $fields->push(CompositeField::create(new FieldList([
+        $mainTab->push(CompositeField::create(new FieldList([
             GridField::create('Programs', false, $this->Programs(), $manyManyConfig),
         ])));
-        $fields->push($imagesField = UploadField::create('Images', _t(self::class.'.Images', 'Images')));
+        $mainTab->push($imagesField = UploadField::create('Images', _t(self::class.'.Images', 'Images')));
         $imagesField->setAllowedExtensions(['png', 'jpg', 'jpeg', 'webp']);
         $imagesField->setFolderName('Meeting');
-        $fields->push($fileField = UploadField::create('Documents', _t(self::class.'.Documents', 'Documents')));
+        $mainTab->push($fileField = UploadField::create('Documents', _t(self::class.'.Documents', 'Documents')));
         $fileField->setFolderName('Meeting');
         return $fields;
     }
