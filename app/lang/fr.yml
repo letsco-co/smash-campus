@@ -207,3 +207,5 @@ fr:
     Waiting: 'En attente'
     Accepted: 'Accepté'
     Cancelled: 'Annulé'
+  LetsCo\Form\MeetingRegistrationForm:
+    doSave: 'S’inscrire à la conférence'
