@@ -6,6 +6,7 @@ use LetsCo\Form\Steps\MeetingGuestNumberStep;
 use LetsCo\Model\Meeting\Meeting;
 use SilverStripe\MultiForm\Forms\MultiForm;
 use SilverStripe\MultiForm\Models\MultiFormStep;
+use SilverStripe\ORM\ArrayList;
 
 class MeetingInvitationForm extends MultiForm
 {
@@ -52,5 +53,18 @@ class MeetingInvitationForm extends MultiForm
         $link = $meetingLink.'?invitationCompleted=1';
         $this->session->delete();
         $this->controller->redirect($link);
+    }
+    public function getAllStepsLinear()
+    {
+        $allSteps = parent::getAllStepsLinear();
+        $steps = ArrayList::create();
+        foreach ($allSteps as $step) {
+            if ($step->ClassName == MeetingGuestNumberStep::class) continue;
+            if (str_contains($step->getExtraClasses(), 'completed')) {
+                $step->Completed = true;
+            }
+            $steps->push($step);
+        }
+        return $steps;
     }
 }
