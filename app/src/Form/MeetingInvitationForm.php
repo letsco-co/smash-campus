@@ -46,7 +46,7 @@ class MeetingInvitationForm extends MultiForm
                 foreach ($data as $key => $datum) {
                     $invitationLink .= $key.'='.$datum.'&';
                 }
-                $invitationLink = rtrim($invitationLink, '&');
+                $invitationLink .= 'IsGuest=true';
             }
         }
         $link = $meetingLink.'?completed=1';

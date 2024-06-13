@@ -50,10 +50,16 @@ class MeetingController extends ContentController
         if ($request->getVar('completed')) {
             $data['Completed'] = true;
         }
+        if ($request->getVar('isGuest')) {
+            $data['IsGuest'] = true;
+        }
         if ($request->getVar('completed') || $request->param('ID')) {
             $guestForm = MeetingInvitationForm::create($this, 'GuestInvitationForm');
             $guestForm->setFormAction($meeting->Link().'/'.$guestForm->getName());
             $data['Form'] = $guestForm;
+        }
+        if ($request->param('ID')) {
+
             $data['HideAsideHeader'] = true;
         }
 
