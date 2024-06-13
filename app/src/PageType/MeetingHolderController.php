@@ -17,7 +17,7 @@ class MeetingHolderController extends \PageController
     public function getMeeting(HTTPRequest $request)
     {
         $controller = MeetingController::create();
-//        $controller->setUrlSegment($this->Link());
+        $controller->setUrlSegment($this->Link());
         return $controller;
     }
 }

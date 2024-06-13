@@ -2,9 +2,8 @@
 
 namespace LetsCo\Controller;
 
-use LetsCo\Form\TrainingRegistrationIndividualForm;
+use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Model\Meeting\Meeting;
-use LetsCo\Model\Training\Training;
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
@@ -12,6 +11,13 @@ use SilverStripe\View\Requirements;
 
 class MeetingController extends ContentController
 {
+    private static $allowed_actions = [
+        'RegistrationForm',
+    ];
+    private $parentUrl;
+    public function setUrlSegment(string $urlSegment) {
+        $this->parentUrl = $urlSegment;
+    }
 
     public function index(HTTPRequest $request)
     {
@@ -27,10 +33,12 @@ class MeetingController extends ContentController
         if(!$meeting) {
             return $this->httpError(404,'That meeting could not be found');
         }
-
+        $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
+        $form->setFormAction($meeting->Link().'/'.$form->getName());
         $data = [
             'Meeting' => $meeting,
             'Title' => $meeting->Title,
+            'Form' => $form,
         ];
         if ($request->getVar('completed')) {
             $data['Completed'] = true;
@@ -48,5 +56,12 @@ class MeetingController extends ContentController
         } else {
             return parent::Link($action);
         }
+    }
+    public function RegistrationForm()
+    {
+        $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
+        $meeting = Meeting::get()->byID($this->getRequest()->postVar("MeetingID"));
+        $form->setFormAction($meeting->Link().'/'.$form->getName());
+        return $form;
     }
 }

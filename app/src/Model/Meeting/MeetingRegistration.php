@@ -9,6 +9,9 @@ use SilverStripe\ORM\DataObject;
 
 class MeetingRegistration extends DataObject
 {
+    const STATUS_ACCEPTED = 'Accepted';
+    const STATUS_WAITING = 'Waiting';
+    const STATUS_CANCELLED = 'Cancelled';
     use LocalizationDataObject;
     private static $table_name = 'Letsco_MeetingRegistration';
     private static $db = [
