@@ -40,12 +40,9 @@ class MeetingController extends ContentController
             return $this->httpError(404,'That meeting could not be found');
         }
 
-//        $otherDomains = $meeting->Page()->otherDomains();
-
         $data = [
             'Meeting' => $meeting,
             'Title' => $meeting->Title,
-//            'otherDomains' => $otherDomains,
         ];
 
 //        if ($request->param('ID') || $request->getVar("MultiFormSessionID")) {
