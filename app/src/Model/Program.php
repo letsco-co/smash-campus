@@ -2,7 +2,6 @@
 
 namespace LetsCo\Model;
 
-use LetsCo\Model\Training\Training;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\RequiredFields;
@@ -17,7 +16,7 @@ class Program extends DataObject
         'Title' => 'Varchar(255)',
     ];
     private static $has_one = [
-        'Training' => Training::class,
+        'Event' => Event::class,
     ];
     private static $summary_fields = [
         'Title',

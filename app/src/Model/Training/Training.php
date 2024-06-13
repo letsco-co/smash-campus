@@ -3,9 +3,9 @@
 namespace LetsCo\Model\Training;
 
 use LetsCo\Admin\Training\TrainingAdmin;
+use LetsCo\Model\Event;
 use LetsCo\Model\Program;
 use LetsCo\PageType\DomainPage;
-use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormScaffolder;
@@ -23,23 +23,17 @@ use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
-use SilverStripe\ORM\DataObject;
-use SilverStripe\View\Parsers\URLSegmentFilter;
 use SilverStripe\View\Requirements;
 
-class Training extends DataObject
+class Training extends Event
 {
-    use LocalizationDataObject;
     private static $table_name = 'Letsco_Training';
     private static string $cms_edit_owner = TrainingAdmin::class;
     private static $db = [
-        'Title' => 'Varchar(255)',
-        'Goals' => 'HTMLText',
         'Modalities' => 'HTMLText',
         'Accessibility' => 'HTMLText',
         'Financing' => 'HTMLText',
         'Address' => 'Varchar(255)',
-        'URLSegment' => 'Varchar(255)',
     ];
 
     private static $has_one = [
@@ -81,24 +75,6 @@ class Training extends DataObject
         );
     }
 
-    protected function onBeforeWrite()
-    {
-        parent::onBeforeWrite();
-        if ($this->isChanged('Title', 2) || !$this->URLSegment) {
-            $filter = URLSegmentFilter::create();
-            $baseSegment = $filter->filter($this->Title);
-            $segment = $baseSegment;
-            $count = 1;
-
-            while (self::get()->filter('URLSegment', $segment)->exists()) {
-                $segment = $baseSegment . '-' . $count;
-                $count++;
-            }
-
-            $this->URLSegment = $segment;
-        }
-    }
-
     /**
      * @param TabSet $TabSet
      * @return void
@@ -112,7 +88,7 @@ class Training extends DataObject
             SearchableDropdownField::create('QualificationID', _t(self::class . '.Qualification', 'Qualification'), TrainingQualification::get()),
             SearchableDropdownField::create('ModeID', _t(self::class . '.Mode', 'Mode'), TrainingMode::get()),
             TextField::create('Address', _t(self::class . '.Address', 'Address')),
-            HTMLEditorField::create('Goals', _t(self::class . '.Goals', 'Goals')),
+            HTMLEditorField::create('Description', _t(self::class . '.Description', 'Description')),
             HTMLEditorField::create('Modalities', _t(self::class . '.Modalities', 'Modalities')),
             HTMLEditorField::create('Accessibility', _t(self::class . '.Accessibility', 'Accessibility')),
             HTMLEditorField::create('Financing', _t(self::class . '.Financing', 'Financing')),

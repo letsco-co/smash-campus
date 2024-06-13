@@ -3,9 +3,6 @@ Name: smash-campus
 ---
 SilverStripe\Core\Manifest\ModuleManifest:
   project: app
-LetsCo\Model\Training\Training:
-  extensions:
-    - SilverStripe\Versioned\Versioned
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_javascript:
     - app/javascript/lang/fr.js

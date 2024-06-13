@@ -24,7 +24,7 @@ fr:
       one: 'Une formation'
       other: '{count} formations'
     Title: 'Nom de la formation'
-    Goals: 'Objectifs'
+    Description: 'Objectifs'
     Modalities: "Modalités et délai d'accès"
     Accessibility: 'Accessibilité'
     Financing: 'Financements'
@@ -157,7 +157,7 @@ fr:
       one: "Un programme"
       other: "{count} programmes"
     Title: 'Nom du programme'
-    Training: 'Formation'
+    Event: 'Évènement'
     Parent: 'Programme parent'
     Parent_Title: 'Programme parent'
     Parent_title: 'Programme parent'
