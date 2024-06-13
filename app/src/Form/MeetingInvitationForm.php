@@ -49,7 +49,7 @@ class MeetingInvitationForm extends MultiForm
                 $invitationLink .= 'IsGuest=true';
             }
         }
-        $link = $meetingLink.'?completed=1';
+        $link = $meetingLink.'?invitationCompleted=1';
         $this->session->delete();
         $this->controller->redirect($link);
     }
