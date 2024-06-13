@@ -2,6 +2,7 @@
 
 namespace LetsCo\Controller;
 
+use LetsCo\Form\MeetingInvitationForm;
 use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Model\Meeting\Meeting;
 use SilverStripe\CMS\Controllers\ContentController;
@@ -13,6 +14,11 @@ class MeetingController extends ContentController
 {
     private static $allowed_actions = [
         'RegistrationForm',
+        'GuestInvitationForm',
+    ];
+
+    private static $url_handlers = [
+        'guests' => 'index',
     ];
     private $parentUrl;
     public function setUrlSegment(string $urlSegment) {
@@ -35,6 +41,7 @@ class MeetingController extends ContentController
         }
         $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
         $form->setFormAction($meeting->Link().'/'.$form->getName());
+        $form->loadDataFrom($request->getVars());
         $data = [
             'Meeting' => $meeting,
             'Title' => $meeting->Title,
@@ -43,6 +50,13 @@ class MeetingController extends ContentController
         if ($request->getVar('completed')) {
             $data['Completed'] = true;
         }
+        if ($request->getVar('completed') || $request->param('ID')) {
+            $guestForm = MeetingInvitationForm::create($this, 'GuestInvitationForm');
+            $guestForm->setFormAction($meeting->Link().'/'.$guestForm->getName());
+            $data['Form'] = $guestForm;
+            $data['HideAsideHeader'] = true;
+        }
+
         return $this->customise($data)->renderWith(['MeetingPage', 'Page']);
     }
 
@@ -61,6 +75,15 @@ class MeetingController extends ContentController
     {
         $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
         $meeting = Meeting::get()->byID($this->getRequest()->postVar("MeetingID"));
+        $form->setFormAction($meeting->Link().'/'.$form->getName());
+        return $form;
+    }
+
+    public function GuestInvitationForm()
+    {
+        $form = MeetingInvitationForm::create($this, 'GuestInvitationForm');
+        $meeting = Meeting::get()->byID($this->getRequest()->postVar("MeetingID"));
+        $form->setDisplayLink($meeting->Link().'/guests');
         $form->setFormAction($meeting->Link().'/'.$form->getName());
         return $form;
     }
