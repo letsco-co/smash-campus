@@ -3,6 +3,7 @@
 namespace LetsCo\Model\Meeting;
 
 use LetsCo\Admin\Meeting\MeetingAdmin;
+use LetsCo\Meeting\MeetingRegistration;
 use LetsCo\Meeting\MeetingSpeaker;
 use LetsCo\PageType\MeetingHolder;
 use LetsCo\Trait\LocalizationDataObject;
@@ -41,6 +42,9 @@ class Meeting extends Event
         'Images' => Image::class,
         'Documents' => File::class,
         'Speakers' => MeetingSpeaker::class,
+    ];
+    private static $has_many = [
+        'Registrations' => MeetingRegistration::class,
     ];
     private static $summary_fields = [
         'Title'
