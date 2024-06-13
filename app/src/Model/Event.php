@@ -2,14 +2,12 @@
 
 namespace LetsCo\Model;
 
-use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 
 class Event extends DataObject
 {
-    use LocalizationDataObject;
     private static $table_name = 'Letsco_Event';
     private static $db = [
         'Title' => 'Varchar(255)',

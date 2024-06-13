@@ -3,6 +3,7 @@
 namespace LetsCo\Model\Meeting;
 
 use LetsCo\Admin\Meeting\MeetingAdmin;
+use LetsCo\Trait\LocalizationDataObject;
 use LetsCo\Model\Event;
 use LetsCo\Model\Program;
 use SilverStripe\Assets\File;
@@ -10,6 +11,7 @@ use SilverStripe\Assets\Image;
 
 class Meeting extends Event
 {
+    use LocalizationDataObject;
     private static $table_name = 'Letsco_Meeting';
     private static string $cms_edit_owner = MeetingAdmin::class;
     private static $db = [

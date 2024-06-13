@@ -6,6 +6,7 @@ use LetsCo\Admin\Training\TrainingAdmin;
 use LetsCo\Model\Event;
 use LetsCo\Model\Program;
 use LetsCo\PageType\DomainPage;
+use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormScaffolder;
@@ -27,6 +28,7 @@ use SilverStripe\View\Requirements;
 
 class Training extends Event
 {
+    use LocalizationDataObject;
     private static $table_name = 'Letsco_Training';
     private static string $cms_edit_owner = TrainingAdmin::class;
     private static $db = [
