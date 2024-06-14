@@ -2,6 +2,12 @@
     "name": "silverstripe/installer",
     "type": "silverstripe-recipe",
     "description": "The SilverStripe Framework Installer",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:letsco-co/smash-campus.git"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "silverstripe/recipe-plugin": "~2.0.0@stable",
@@ -11,7 +17,8 @@
         "silverstripe/login-forms": "~5.2.0@stable",
         "silverstripe/multiform": "^3.0@dev",
         "dnadesign/silverstripe-elemental": "^5.2",
-        "silverstripe/linkfield": "^4.0"
+        "silverstripe/linkfield": "^4.0",
+        "letsco-themes/smash-campus": "dev-main"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6"
