@@ -3,6 +3,7 @@
 namespace LetsCo\Elements;
 
 use DNADesign\Elemental\Models\BaseElement;
+use LetsCo\Controller\SearchController;
 use LetsCo\PageType\DomainPage;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\FieldList;
@@ -57,7 +58,7 @@ class HomeHeroSection extends BaseElement
 </svg>')
                 ->addExtraClass('btn btn-primary bg-secondary-hover border-0')
         );
-        $form = new Form($this->controller, 'TrainingSeach', $fields, $action);
+        $form = new Form(SearchController::create(), 'TrainingSearch', $fields, $action);
         $form->setFormMethod('GET');
         $form->disableSecurityToken();
         $form->setTemplate('SearchForm');
