@@ -121,4 +121,9 @@ class Meeting extends Event
     {
         return $this->Limit - $this->Registrations()->filter('Status', MeetingRegistration::STATUS_ACCEPTED)->count();
     }
+
+    public function isTodayOrFuture()
+    {
+        return strtotime($this->Date) > mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+    }
 }

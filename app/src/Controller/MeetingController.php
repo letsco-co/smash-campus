@@ -8,6 +8,11 @@ use LetsCo\Model\Meeting\Meeting;
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Forms\EmailField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\RequiredFields;
 use SilverStripe\View\Requirements;
 
 class MeetingController extends ContentController
@@ -15,6 +20,8 @@ class MeetingController extends ContentController
     private static $allowed_actions = [
         'RegistrationForm',
         'GuestInvitationForm',
+        'Newsletter',
+        'DoSave',
     ];
 
     private static $url_handlers = [
@@ -65,7 +72,9 @@ class MeetingController extends ContentController
 
             $data['HideAsideHeader'] = true;
         }
-
+        if (!$request->getVar('completed') && !$request->getVar('invitationCompleted') &&  get_class($data['Form']) != MeetingRegistrationForm::class) {
+            $data['ShowFormIndicators'] = true;
+        }
         return $this->customise($data)->renderWith(['MeetingPage', 'Page']);
     }
 
@@ -95,5 +104,23 @@ class MeetingController extends ContentController
         $form->setDisplayLink($meeting->Link().'/guests');
         $form->setFormAction($meeting->Link().'/'.$form->getName());
         return $form;
+    }
+    public function Newsletter()
+    {
+        $fields = FieldList::create(
+            EmailField::create('Email', 'Email')->addExtraClass("form-control"),
+        );
+        $actions = FieldList::create(
+            FormAction::create('doSave', 'Valider')->addExtraClass('btn btn-primary bg-secondary-hover border-0 flex-grow-1')
+        );
+        $validator = RequiredFields::create([
+            'Email',
+        ]);
+        $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
+        return $form;
+    }
+
+    public function doSave() {
+
     }
 }
