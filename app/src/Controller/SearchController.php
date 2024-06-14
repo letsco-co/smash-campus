@@ -5,6 +5,7 @@ namespace LetsCo\Controller;
 use LetsCo\Model\OfferTrainingIdea;
 use LetsCo\Model\Training\Training;
 use LetsCo\PageType\DomainPage;
+use LetsCo\Trait\ControllerMethods;
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
@@ -19,10 +20,13 @@ use SilverStripe\Forms\TextField;
 
 class SearchController extends ContentController
 {
+    use ControllerMethods;
     private static $url_segment = 'search';
     private static $allowed_actions = [
         'TrainingSearch',
         'doSave',
+        'doSaveOffer',
+        'NewsletterForm',
         'TrainingOfferForm',
     ];
 
@@ -78,7 +82,7 @@ class SearchController extends ContentController
             CheckboxField::create('RGPD', 'En soumettant ce formulaire vous acceptez qu’on utilise les données recueillis afin d’améliorer notre offre de formation et de vous recontacter sur votre demande.'),
         );
         $actions = FieldList::create(
-            FormAction::create('doSave', 'Soumettre votre proposition')->addExtraClass('btn btn-primary bg-secondary-hover border-0 flex-grow-1')
+            FormAction::create('doSaveOffer', 'Soumettre votre proposition')->addExtraClass('btn btn-primary bg-secondary-hover border-0 flex-grow-1')
         );
         $validator = RequiredFields::create([
             'LastName',
@@ -92,7 +96,7 @@ class SearchController extends ContentController
         return $form;
     }
 
-    public function doSave($data) {
+    public function doSaveOffer($data) {
         $offer = new OfferTrainingIdea();
         $offer->update($data);
         $offer->write();

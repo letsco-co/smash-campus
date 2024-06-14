@@ -5,6 +5,7 @@ namespace LetsCo\Controller;
 use LetsCo\Form\MeetingInvitationForm;
 use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Model\Meeting\Meeting;
+use LetsCo\Trait\ControllerMethods;
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
@@ -17,10 +18,12 @@ use SilverStripe\View\Requirements;
 
 class MeetingController extends ContentController
 {
+    use ControllerMethods;
     private static $allowed_actions = [
         'RegistrationForm',
         'GuestInvitationForm',
         'Newsletter',
+        'NewsletterForm',
         'DoSave',
     ];
 
