@@ -5,7 +5,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:letsco-co/smash-campus.git"
+            "url":  "git@github.com:letsco-co/smash-campus-theme.git"
         }
     ],
     "require": {
