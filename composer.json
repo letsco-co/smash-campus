@@ -21,7 +21,8 @@
         "letsco-themes/smash-campus": "dev-main"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.6"
+        "phpunit/phpunit": "^9.6",
+        "lekoala/silverstripe-debugbar": "^3.0"
     },
     "extra": {
         "project-files-installed": [
