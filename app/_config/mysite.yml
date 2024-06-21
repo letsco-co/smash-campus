@@ -6,6 +6,10 @@ SilverStripe\Core\Manifest\ModuleManifest:
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_javascript:
     - app/javascript/lang/fr.js
+LeKoala\DebugBar\DebugBar:
+  enabled_in_admin: true
+  query_limit: 500
+  check_local_ip: false
 # UTF8MB4 has limited support in older MySQL versions.
 # Remove this configuration if you experience issues.
 ---
