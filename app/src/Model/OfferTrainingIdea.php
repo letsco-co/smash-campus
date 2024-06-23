@@ -17,4 +17,14 @@ class OfferTrainingIdea extends DataObject
         'Description' => 'Text',
         'AcceptRGPD' => 'Boolean',
     ];
+
+    private static $summary_fields = [
+        'Title',
+        'Description.Summary',
+    ];
+
+    public function getTitle()
+    {
+        return $this->LastName . " ". $this->FirstName;
+    }
 }

@@ -214,6 +214,8 @@ fr:
     PLURALS:
       one: "Une demande de formation"
       other: "{count} demandes de formation"
+    Title: 'Nom prénom'
+    Description_Summary: 'Description résumée de la formation souhaitée'
     LastName: 'Nom'
     FirstName: 'Prénom'
     Email: 'Email'
