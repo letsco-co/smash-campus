@@ -190,6 +190,7 @@ fr:
     Programs: 'Programme'
     MANAGE_SPEAKERS: 'Gérer les intervenants'
     Speakers: 'Intervenants'
+    Registrations: 'Inscriptions'
   LetsCo\Admin\Meeting\MeetingAdmin:
     MENUTITLE: 'Conférences'
   LetsCo\Model\Meeting\MeetingRegistration:

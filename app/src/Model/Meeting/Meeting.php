@@ -61,6 +61,10 @@ class Meeting extends Event
         $fields->removeByName('Images');
         $fields->removeByName('Documents');
         $fields->removeByName('Speakers');
+        $regiqtrationTab = $fields->findTab('Registrations');
+        if ($regiqtrationTab) {
+            $regiqtrationTab->setTitle(_t(self::class.'.Registrations', 'Registrations'));
+        }
         $imageField = $fields->dataFieldByName('Image');
         $imageField->setFolderName('Meeting');
         $imageField->setTitle(_t(self::class.'.Image', 'Image'));
