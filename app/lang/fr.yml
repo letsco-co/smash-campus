@@ -280,6 +280,6 @@ fr:
     PLURALNAME: 'Pages des conférences'
     PLURALS:
       one: 'Une page des conférences'
-      other: '{count} ages des conférences'
+      other: '{count} pages des conférences'
     Title: 'Page des conférences'
     DESCRIPTION: 'Page affichant les conférences'
