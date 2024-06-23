@@ -25,15 +25,6 @@ trait MeetingGuestFields
         if (self::class == MeetingGuest1PersonalDetailsStep::class && $this->getValueFromOtherStep(MeetingGuestNumberStep::class, 'NumberGuests') == 2) {
             $this->config()->set('next_steps',MeetingGuest3PersonalDetailsStep::class);
         }
-        if (self::class == MeetingGuest1PersonalDetailsStep::class) {
-            $number = 1;
-        }
-        if (self::class == MeetingGuest2PersonalDetailsStep::class) {
-            $number = 2;
-        }
-        if (self::class == MeetingGuest3PersonalDetailsStep::class) {
-            $number = $this->getValueFromOtherStep(MeetingGuestNumberStep::class, 'NumberGuests');
-        }
 
         return FieldList::create(
             HiddenField::create('MeetingID', null, $trainingID),
