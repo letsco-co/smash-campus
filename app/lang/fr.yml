@@ -226,3 +226,4 @@ fr:
     MENUTITLE: 'Demandes de nouvelles formations'
   LetsCo\Controller\SearchController:
     doSaveOffer: 'Soumettre votre proposition'
+    Form_Validate: 'Votre demande de formation a bien été prise en compte'

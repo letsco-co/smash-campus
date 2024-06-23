@@ -96,10 +96,11 @@ class SearchController extends ContentController
         return $form;
     }
 
-    public function doSaveOffer($data) {
+    public function doSaveOffer($data, $form) {
         $offer = new OfferTrainingIdea();
         $offer->update($data);
         $offer->write();
+        $form->sessionMessage(_t(self::class.'.Form_Validate', 'Your request has been sent to us'), 'good');
         return $this->redirectBack();
     }
 }
