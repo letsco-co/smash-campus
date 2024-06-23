@@ -283,3 +283,11 @@ fr:
       other: '{count} pages des conférences'
     Title: 'Page des conférences'
     DESCRIPTION: 'Page affichant les conférences'
+  LetsCo\PageType\StaticPage:
+    SINGULARNAME: 'Page de contenu statique'
+    PLURALNAME: 'Pages de contenu statique'
+    PLURALS:
+      one: 'Une page de contenu statique'
+      other: '{count} pages de contenu statique'
+    Title: 'Page de contenu statique'
+    DESCRIPTION: 'Page de contenu statique'
