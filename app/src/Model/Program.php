@@ -27,23 +27,6 @@ class Program extends DataObject
         Hierarchy::class,
     ];
 
-    public function summaryFields()
-    {
-        $defaultSummaryFields = parent::summaryFields();
-        $summaryFields = [];
-        foreach ($defaultSummaryFields as $summaryFieldKey => $summaryFieldData) {
-            if (str_contains($summaryFieldKey, '.')) {
-                $summaryFields[$summaryFieldKey] = _t(
-                    self::class.'.'. str_replace('.', '_', $summaryFieldKey),
-                    str_replace('.', ' ', $summaryFieldKey)
-                );
-                continue;
-            }
-            $summaryFields[$summaryFieldKey] = $summaryFieldData;
-        }
-        return $summaryFields;
-    }
-
     public function getCMSCompositeValidator(): CompositeValidator
     {
         $validator = parent::getCMSCompositeValidator();

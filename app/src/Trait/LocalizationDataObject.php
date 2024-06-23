@@ -21,4 +21,23 @@ trait LocalizationDataObject
         }
         return $translatableTitle;
     }
+    public function summaryFields()
+    {
+        $defaultSummaryFields = parent::summaryFields();
+        $summaryFields = [];
+        foreach ($defaultSummaryFields as $summaryFieldKey => $summaryFieldData) {
+            if (str_contains($summaryFieldKey, '.')) {
+                $summaryFields[$summaryFieldKey] = _t(
+                    self::class.'.'. str_replace('.', '_', $summaryFieldKey),
+                    str_replace('.', ' ', $summaryFieldKey)
+                );
+                continue;
+            }
+            $summaryFields[$summaryFieldKey] = _t(
+                self::class.'.'. $summaryFieldKey,
+                $summaryFieldKey
+            );
+        }
+        return $summaryFields;
+    }
 }
