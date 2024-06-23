@@ -39,7 +39,7 @@ class SearchController extends ContentController
         if ($search = $request->getVar('search')) {
             $trainings = $trainings->filterAny([
                 'Title:PartialMatch' => $search,
-                'Goals:PartialMatch' => $search,
+                'Description:PartialMatch' => $search,
             ]);
         }
         $data = [
