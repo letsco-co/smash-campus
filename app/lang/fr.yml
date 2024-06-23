@@ -41,7 +41,7 @@ fr:
     MANAGE_DURATION: 'Gérer les durées'
     MANAGE_CATEGORY: 'Gérer les domaines'
     MANAGE_QUALIFICATION: 'Gérer les niveaux'
-    MANAGE_MODE: 'Gérer les modes'
+    MANAGE_MODE: 'Gérer les modalités'
     MANAGE_PREREQUISITES: 'Gérer les pré-requis'
     MANAGE_PUBLICS: 'Gérer les publics concernés'
     MANAGE_EDUCATIONALMEANS: 'Gérer les moyens pédagogiques'
@@ -50,6 +50,7 @@ fr:
     Registrations: 'Pré-inscriptions'
     VALIDATOR_MESSAGE_REQUIRED: '"{field}" requis'
     Link: "Voir la formation"
+    Programs: "Programme"
   LetsCo\Model\Training\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'
@@ -243,3 +244,17 @@ fr:
     LastName: "Nom"
     Function: "Fonction"
     Image: "Image"
+  LetsCo\Model\Training\TrainingQualification:
+    SINGULARNAME: 'niveau'
+    PLURALNAME: 'niveaux'
+    PLURALS:
+      one: 'Un niveau'
+      other: '{count} niveaux'
+    Title: 'Niveau'
+  LetsCo\Model\Training\TrainingMode:
+    SINGULARNAME: 'modalité'
+    PLURALNAME: 'modalités'
+    PLURALS:
+      one: 'Une modalité'
+      other: '{count} modalités'
+    Title: 'Modalité'
