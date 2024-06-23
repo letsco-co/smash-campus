@@ -32,7 +32,7 @@ fr:
     Duration: 'Durée'
     Category: 'Domaine'
     Qualification: 'Niveau'
-    Mode: 'Mode'
+    Mode: 'Modalités'
     Prerequisites: 'Pré-requis'
     Publics: 'Publics concernés'
     EducationalMeans: 'Moyens pédagogiques'
@@ -156,11 +156,11 @@ fr:
     PLURALS:
       one: "Un programme"
       other: "{count} programmes"
-    Title: 'Nom du programme'
+    Title: 'Partie/Sous-partie'
     Event: 'Évènement'
-    Parent: 'Programme parent'
-    Parent_Title: 'Programme parent'
-    Parent_title: 'Programme parent'
+    Parent: 'Partie/Sous-partie parente'
+    Parent_Title: 'Partie/Sous-partie parente'
+    Parent_title: 'Partie/Sous-partie parente'
   LetsCo\PageType\TrainingHolder:
     SINGULARNAME: "Page formations"
     PLURALNAME: "Pages formations"
@@ -209,3 +209,17 @@ fr:
     Cancelled: 'Annulé'
   LetsCo\Form\MeetingRegistrationForm:
     doSave: 'S’inscrire à la conférence'
+  LetsCo\Model\OfferTrainingIdea:
+    SINGULARNAME: "demande de formation"
+    PLURALNAME: "demandes de formation"
+    PLURALS:
+      one: "Une demande de formation"
+      other: "{count} demandes de formation"
+    LastName: 'Nom'
+    FirstName: 'Prénom'
+    Email: 'Email'
+    PhoneNumber: 'Téléphone'
+    Description: 'Description de la formation souhaitée'
+    AcceptRGPD: "J'accepte que les données saisies dans ce formulaire soient utilisées dans le cadre du traitement de ma demande"
+  LetsCo\Admin\OfferTrainingIdeaAdmin:
+    MENUTITLE: 'Demandes de nouvelles formations'
