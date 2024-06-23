@@ -8,6 +8,7 @@ use SilverStripe\Assets\Image;
 
 class DomainPage extends \Page
 {
+    private static $description = "Domain page displaying trainings";
     private static $can_be_root = false;
     private static $table_name = 'Letsco_DomainPage';
     private static $has_one = [
