@@ -22,7 +22,6 @@ class TrainingRegistration extends DataObject
     use LocalizationDataObject;
     private static $table_name = 'Letsco_TrainingRegistration';
     private static $db = [
-        'PersonTitle' => 'Enum("Mr,Ms","Mr")',
         'LastName' => 'Varchar(255)',
         'FirstName' => 'Varchar(255)',
         'Fonction' => 'Varchar(255)',
@@ -67,7 +66,6 @@ class TrainingRegistration extends DataObject
     {
         $fields = FieldList::create([
             ToggleCompositeField::create('PersonalInfos',_t(self::class.'.PersonalInfos', 'Personal infos'), new FieldList(
-                DropdownField::create('PersonTitle', _t(self::class.'.PersonTitle', 'PersonTitle'), self::getTranslatableEnumValues($this->dbObject('PersonTitle')->enumValues())),
                 TextField::create('LastName', _t(self::class.'.LastName', 'LastName')),
                 TextField::create('FirstName', _t(self::class.'.FirstName', 'FirstName')),
                 TextField::create('Fonction', _t(self::class.'.Fonction', 'Fonction')),
@@ -111,7 +109,6 @@ class TrainingRegistration extends DataObject
     {
         $validator = parent::getCMSCompositeValidator();
         $validator->addValidator(RequiredFields::create([
-            'PersonTitle',
             'LastName',
             'FirstName',
             'Fonction',

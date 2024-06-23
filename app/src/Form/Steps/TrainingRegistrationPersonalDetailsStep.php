@@ -23,11 +23,6 @@ class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
         $trainingRegistration = singleton(TrainingRegistration::class);
         $fields = FieldList::create(
             HeaderField::create('PersonalDetails', _t(TrainingRegistration::class.".PersonalInfos", "Personal Details"), 3),
-            OptionsetField::create(
-                'PersonTitle',
-                _t(TrainingRegistration::class.'.PersonTitle', 'PersonTitle'),
-                TrainingRegistration::getTranslatableEnumValues($trainingRegistration->dbObject("PersonTitle")->enumValues()),
-                "Mr"),
             TextField::create('LastName', _t(TrainingRegistration::class.'.LastName', 'LastName'))->addExtraClass("form-control"),
             TextField::create('FirstName', _t(TrainingRegistration::class.'.FirstName', 'FirstName'))->addExtraClass("form-control"),
             TextField::create('Fonction', _t(TrainingRegistration::class.'.Fonction', 'Fonction'))->addExtraClass("form-control"),
@@ -53,7 +48,6 @@ class TrainingRegistrationPersonalDetailsStep extends MultiFormStep
     public function getValidator()
     {
         return RequiredFields::create(array(
-            'PersonTitle',
             'LastName',
             'FirstName',
             'Fonction',
