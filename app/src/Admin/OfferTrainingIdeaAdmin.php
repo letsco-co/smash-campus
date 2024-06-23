@@ -17,7 +17,7 @@ class OfferTrainingIdeaAdmin extends ModelAdmin
 
     private static $menu_title = 'My Offer Admin';
 
-    private static $menu_icon_class = 'font-icon-monitor';
+    private static $menu_icon_class = 'font-icon-plus';
     public function getManagedModels()
     {
         $models = parent::getManagedModels();
