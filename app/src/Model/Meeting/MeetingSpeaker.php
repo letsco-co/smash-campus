@@ -9,6 +9,7 @@ use SilverStripe\ORM\DataObject;
 
 class MeetingSpeaker extends DataObject
 {
+    use LocalizationDataObject;
     private static $table_name = 'Letsco_Speaker';
     use LocalizationDataObject;
     private static $db = [

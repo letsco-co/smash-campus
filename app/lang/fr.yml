@@ -187,6 +187,8 @@ fr:
     Images: 'Images'
     Documents: 'Documents'
     Programs: 'Programme'
+    MANAGE_SPEAKERS: 'Gérer les intervenants'
+    Speakers: 'Intervenants'
   LetsCo\Admin\Meeting\MeetingAdmin:
     MENUTITLE: 'Conférences'
   LetsCo\Model\Meeting\MeetingRegistration:
@@ -230,3 +232,14 @@ fr:
   LetsCo\Form\Steps\MeetingGuestNumberStep:
     Guests: 'Inviter des personnes'
     NumberGuests: 'Nombre de personnes à inviter'
+  LetsCo\Meeting\MeetingSpeaker:
+    SINGULARNAME: "intervenant"
+    PLURALNAME: "intervenants"
+    PLURALS:
+      one: "Un intervenant"
+      other: "{count} intervenants"
+    Title: "Nom prénom"
+    FirstName: "Prénom"
+    LastName: "Nom"
+    Function: "Fonction"
+    Image: "Image"
