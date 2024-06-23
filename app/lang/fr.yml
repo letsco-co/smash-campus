@@ -259,3 +259,11 @@ fr:
       one: 'Une modalité'
       other: '{count} modalités'
     Title: 'Modalité'
+  LetsCo\PageType\DomainHolder:
+    SINGULARNAME: 'Page des domaines'
+    PLURALNAME: 'Pages des domaines'
+    PLURALS:
+      one: 'Une page des domaines'
+      other: '{count} pages des domaines'
+    Title: 'Page des domaines'
+    DESCRIPTION: 'Page parente pour afficher les domaines'
