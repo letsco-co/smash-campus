@@ -227,3 +227,6 @@ fr:
   LetsCo\Controller\SearchController:
     doSaveOffer: 'Soumettre votre proposition'
     Form_Validate: 'Votre demande de formation a bien été prise en compte'
+  LetsCo\Form\Steps\MeetingGuestNumberStep:
+    Guests: 'Inviter des personnes'
+    NumberGuests: 'Nombre de personnes à inviter'
