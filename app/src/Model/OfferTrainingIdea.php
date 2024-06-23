@@ -15,6 +15,6 @@ class OfferTrainingIdea extends DataObject
         'Email' => 'Varchar',
         'PhoneNumber' => 'Varchar',
         'Description' => 'Text',
-        'RGPD' => 'Boolean',
+        'AcceptRGPD' => 'Boolean',
     ];
 }
