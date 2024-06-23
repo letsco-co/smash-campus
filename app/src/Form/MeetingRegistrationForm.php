@@ -32,7 +32,7 @@ class MeetingRegistrationForm extends Form
         $trainingID = $training->ID ?? 0;
         return FieldList::create(
             HiddenField::create('MeetingID', null, $trainingID),
-            HiddenField::create('IsGuest', null, false),
+            HiddenField::create('IsGuest', null, $this->getRequest()->getVar('IsGuest')),
             TextField::create('LastName', _t(MeetingRegistration::class.'.LastName', 'LastName'))->addExtraClass("form-control"),
             TextField::create('FirstName', _t(MeetingRegistration::class.'.FirstName', 'FirstName'))->addExtraClass("form-control"),
             EmailField::create('Email', _t(MeetingRegistration::class.'.Email', 'Email'))->addExtraClass("form-control"),
@@ -77,7 +77,9 @@ class MeetingRegistrationForm extends Form
             $registration->Status = MeetingRegistration::STATUS_ACCEPTED;
         }
         $registration->write();
-        $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().'?completed=1&isGuest=1' : $this->getController()->Link();
+        $URLgetVar = '?completed=1';
+        $URLgetVar .= $data['IsGuest'] ? '&isGuest=1' : '';
+        $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().$URLgetVar : $this->getController()->Link();
         return $this->getController()->redirect($link);
     }
 }

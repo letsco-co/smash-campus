@@ -122,8 +122,4 @@ class MeetingController extends ContentController
         $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
         return $form;
     }
-
-    public function doSave() {
-
-    }
 }
