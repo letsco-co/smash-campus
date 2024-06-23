@@ -89,7 +89,7 @@ class SearchController extends ContentController
             'FirstName',
             'Email',
             'Description',
-            'RGPD',
+            'AcceptRGPD',
         ]);
         $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
         $form->setTemplate('OfferTrainingForm');
