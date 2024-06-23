@@ -74,15 +74,15 @@ class SearchController extends ContentController
 
     public function TrainingOfferForm() {
         $fields = FieldList::create(
-            TextField::create('LastName', 'Nom')->addExtraClass("form-control"),
-            TextField::create('FirstName', 'Prénom')->addExtraClass("form-control"),
-            EmailField::create('Email', 'Email')->addExtraClass("form-control"),
-            TextField::create('PhoneNumber', 'Tel')->addExtraClass("form-control"),
-            TextareaField::create('Description', 'Description de la formation voulue')->addExtraClass("form-control"),
-            CheckboxField::create('RGPD', 'En soumettant ce formulaire vous acceptez qu’on utilise les données recueillis afin d’améliorer notre offre de formation et de vous recontacter sur votre demande.'),
+            TextField::create('LastName', _t(OfferTrainingIdea::class.'.LastName', 'LastName'))->addExtraClass("form-control"),
+            TextField::create('FirstName', _t(OfferTrainingIdea::class.'.FirstName', 'FirstName'))->addExtraClass("form-control"),
+            EmailField::create('Email', _t(OfferTrainingIdea::class.'.Email', 'Email'))->addExtraClass("form-control"),
+            TextField::create('PhoneNumber', _t(OfferTrainingIdea::class.'.PhoneNumber', 'PhoneNumber'))->addExtraClass("form-control"),
+            TextareaField::create('Description', _t(OfferTrainingIdea::class.'.Description', 'Description'))->addExtraClass("form-control"),
+            CheckboxField::create('AcceptRGPD', _t(OfferTrainingIdea::class.'.AcceptRGPD', 'AcceptRGPD')),
         );
         $actions = FieldList::create(
-            FormAction::create('doSaveOffer', 'Soumettre votre proposition')->addExtraClass('btn btn-primary bg-secondary-hover border-0 flex-grow-1')
+            FormAction::create('doSaveOffer', _t(self::class.'.doSaveOffer', 'doSaveOffer'))->addExtraClass('btn btn-primary bg-secondary-hover border-0 flex-grow-1')
         );
         $validator = RequiredFields::create([
             'LastName',

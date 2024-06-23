@@ -221,6 +221,8 @@ fr:
     Email: 'Email'
     PhoneNumber: 'Téléphone'
     Description: 'Description de la formation souhaitée'
-    AcceptRGPD: "J'accepte que les données saisies dans ce formulaire soient utilisées dans le cadre du traitement de ma demande"
+    AcceptRGPD: "J'accepte que les données saisies dans ce formulaire soient utilisées dans le cadre du traitement de ma demande."
   LetsCo\Admin\OfferTrainingIdeaAdmin:
     MENUTITLE: 'Demandes de nouvelles formations'
+  LetsCo\Controller\SearchController:
+    doSaveOffer: 'Soumettre votre proposition'
