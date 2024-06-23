@@ -21,6 +21,8 @@ use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\SearchableMultiDropdownField;
 use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 
 class Meeting extends Event
@@ -129,5 +131,59 @@ class Meeting extends Event
     public function isTodayOrFuture()
     {
         return strtotime($this->Date) > mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+    }
+
+    public function getLinkTitle()
+    {
+        if ($this->isTodayOrFuture()) {
+            return _t(self::class.'.LinkFutureMeeting', 'See the meeting');
+        }
+        return _t(self::class.'.LinkPastMeeting', '(Re)experience the meeting');
+    }
+
+    public function getAvailableSeats()
+    {
+        $remainingSeats = $this->remainingSeats();
+        if (!$remainingSeats) {
+            return _t(self::class . '.Full', 'Full');
+        }
+        if ($this->isTodayOrFuture()) {
+            return  $remainingSeats . ' ' . _t(self::class.'.Remaining_Seats', 'remaining seat(s)');
+        }
+        return $this->Limit . ' ' . _t(self::class.'.Seats', 'seat(s)');
+    }
+
+    public function getAsideTitle()
+    {
+        $remainingSeats = $this->remainingSeats();
+        if (!$remainingSeats) {
+            return _t(self::class . '.RegisterOnWaitingList', 'Register on the waiting list');
+        }
+        if ($this->isTodayOrFuture()) {
+            return _t(self::class . '.Register', 'Register to the meeting');
+        }
+        return _t(self::class.'.LinkPastMeeting', '(Re)experience the meeting');
+    }
+
+    public function getAsideText($step)
+    {
+        if (!$this->isTodayOrFuture()) {
+            return new ArrayList([
+                ArrayData::create([
+                    'Title' => _t(self::class.'.PastMeetingAsideText', 'The conference was successfully held. Thank you to all the participants for being present and for participating enthusiastically. You can now find the documents and photos from the conference.'),
+                ]),
+                ArrayData::create([
+                    'Title' => _t(self::class.'.PastMeetingAsideNewsletter', 'Sign up for the Newsletter to be notified of upcoming conferences'),
+                ]),
+            ]);
+        }
+        if ($step) {
+            return new ArrayList([
+                ArrayData::create([
+                    'Title' => _t(self::class.'.'. $step, $step),
+                ]),
+            ]);
+        }
+        return '';
     }
 }

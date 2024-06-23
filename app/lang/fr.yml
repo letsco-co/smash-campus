@@ -60,6 +60,7 @@ fr:
     Title: 'Nom du domaine'
     Image: 'Image de fond'
     Training: 'formations'
+    OtherDomains: 'Découvrez nos autres domaines de formations'
   LetsCo\Model\Training\TrainingDuration:
     SINGULARNAME: 'durée'
     PLURALNAME: 'durées'
@@ -191,6 +192,19 @@ fr:
     MANAGE_SPEAKERS: 'Gérer les intervenants'
     Speakers: 'Intervenants'
     Registrations: 'Inscriptions'
+    LinkPastMeeting: '(Re)vivez la conférence'
+    LinkFutureMeeting: 'Voir la conférence'
+    Full: 'Complet'
+    Seats: 'place(s)'
+    Remaining_Seats: 'place(s) restante(s)'
+    Guest: 'Invité'
+    Register: 'S’inscrire à la conférence'
+    RegisterOnWaitingList: 'S’inscrire sur la liste d’attente'
+    PastMeetingAsideText: 'La conférence s’est déroulée avec succès. Merci à tous les participants d’avoir été présents et d’avoir participé avec enthousiasme. Vous pouvez dorénavant retrouver les documents et photos de la conférence.'
+    PastMeetingAsideNewsletter: 'Inscrivez-vous à la Newsletter afin d’être notifié des prochaines conférences'
+    Completed: 'Votre demande d’inscription a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre inscription.'
+    WaitingList: 'Votre demande d’inscription à la liste d''attente a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre demande d''inscription.'
+    GuestsInvited: 'Vos invitations ont bien été prises en compte. Chacune de ces personnes recevront un mail d’invitation avec un lien personnalisé afin de finaliser le formulaire d’inscription. Nous ne gardons dans nos bases de données aucune donnée renseignée pour ces personnes tant qu’elles n’ont pas finalisé leur inscription. Les informations renseignées permettent de générer le lien personnalisé.'
   LetsCo\Admin\Meeting\MeetingAdmin:
     MENUTITLE: 'Conférences'
   LetsCo\Model\Meeting\MeetingRegistration:
@@ -291,3 +305,9 @@ fr:
       other: '{count} pages de contenu statique'
     Title: 'Page de contenu statique'
     DESCRIPTION: 'Page de contenu statique'
+  Page:
+    Infos: 'Informations pratiques'
+    Newsletter: 'Inscrivez-vous à la newsletter'
+    Contact: 'Restons en contact'
+    RS: 'Rejoignez-nous'
+    Creator: 'Conçu et réalisé par'

@@ -49,33 +49,30 @@ class MeetingController extends ContentController
         if(!$meeting) {
             return $this->httpError(404,'That meeting could not be found');
         }
-        $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
-        $form->setFormAction($meeting->Link().'/'.$form->getName());
-        $form->loadDataFrom($request->getVars());
+
         $data = [
             'Meeting' => $meeting,
             'Title' => $meeting->Title,
-            'Form' => $form,
+            'CompletionStep' => $request->getVar('CompletionStep'),
         ];
-        if ($request->getVar('completed')) {
-            $data['Completed'] = true;
+        if (!$data['CompletionStep']) {
+            $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
+            $form->setFormAction($meeting->Link().'/'.$form->getName());
+            $form->loadDataFrom($request->getVars());
+            $data['Form'] = $form;
         }
-        if ($request->getVar('isGuest')) {
-            $data['IsGuest'] = true;
-        }
-        if ($request->getVar('invitationCompleted')) {
-            $data['InvitationCompleted'] = true;
-        }
-        if ($request->getVar('completed') || $request->param('ID')) {
+        if ($meeting->remainingSeats() && ($data['CompletionStep'] == 'Completed' || $request->param('ID'))) {
             $guestForm = MeetingInvitationForm::create($this, 'GuestInvitationForm');
             $guestForm->setFormAction($meeting->Link().'/'.$guestForm->getName());
             $data['Form'] = $guestForm;
         }
+        if (!$meeting->isTodayOrFuture()) {
+            $data['Form'] = $this->Newsletter();
+        }
         if ($request->param('ID')) {
-
             $data['HideAsideHeader'] = true;
         }
-        if (!$request->getVar('completed') && !$request->getVar('invitationCompleted') &&  get_class($data['Form']) != MeetingRegistrationForm::class) {
+        if (!$data['CompletionStep'] &&  get_class($data['Form']) == MeetingInvitationForm::class) {
             $data['ShowFormIndicators'] = true;
         }
         return $this->customise($data)->renderWith(['MeetingPage', 'Page']);
