@@ -8,6 +8,7 @@ use SilverStripe\Assets\Image;
 
 class MeetingHolder extends \Page
 {
+    private static $description = "Meetings page";
     private static $table_name = 'Letsco_MeetingHolder';
     private static $has_one = [
         'Image' => Image::class,

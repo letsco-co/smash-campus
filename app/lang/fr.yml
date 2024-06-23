@@ -275,3 +275,11 @@ fr:
       other: '{count} domaines'
     Title: 'Domaine'
     DESCRIPTION: 'Page de domain permettant d''afficher les formations'
+  LetsCo\PageType\MeetingHolder:
+    SINGULARNAME: 'Page des conférences'
+    PLURALNAME: 'Pages des conférences'
+    PLURALS:
+      one: 'Une page des conférences'
+      other: '{count} ages des conférences'
+    Title: 'Page des conférences'
+    DESCRIPTION: 'Page affichant les conférences'
