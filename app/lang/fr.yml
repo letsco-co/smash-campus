@@ -250,6 +250,10 @@ fr:
   LetsCo\Controller\SearchController:
     doSaveOffer: 'Soumettre votre proposition'
     Form_Validate: 'Votre demande de formation a bien été prise en compte'
+    OtherTrainings: 'Ces formations peuvent peut-être vous intéresser :'
+    FilterByDomains: 'Filtrer par domaines'
+    NoResult: 'Aucun Résultat trouvé'
+    RequestTraining: 'La formation que vous cherchez n’est pas proposée ?'
   LetsCo\Form\Steps\MeetingGuestNumberStep:
     Guests: 'Inviter des personnes'
     NumberGuests: 'Nombre de personnes à inviter'

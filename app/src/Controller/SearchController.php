@@ -50,7 +50,7 @@ class SearchController extends ContentController
         ];
         if (!$trainings->exists()) {
             $data['NoTraining'] = true;
-            $data['Heading'] = 'Ces formations peuvent peut-être vous intéresser :';
+            $data['Heading'] = _t(self::class.'.OtherTrainings', 'This trainings can be of interest');
             $data['Trainings'] = Training::get();
         }
         return $this->customise($data)->renderWith(['SearchPage', 'Page']);
