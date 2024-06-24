@@ -159,6 +159,8 @@ fr:
     RGPD: "Traitement des données"
   LetsCo\FormField\FrenchPhoneNumberField:
     INVALID: 'Merci de renseigner un numéro de téléphone valide'
+  LetsCo\FormField\FrenchPostCodeField:
+    INVALID: 'Merci de renseigner un code postal valide'
   LetsCo\Model\Program:
     SINGULARNAME: "programme"
     PLURALNAME: "programmes"
