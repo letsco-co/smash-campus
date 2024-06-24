@@ -346,3 +346,93 @@ fr:
     Image: 'Image'
     BlockType: 'Contenu avec image et liens'
     Summary: 'Contenu avec image à droite et liens'
+  SilverStripe\LinkField\Controllers\LinkFieldController:
+    CREATE_LINK: 'Créer un lien'
+    MENUTITLE: 'Champs liens'
+    UPDATE_LINK: 'Mettre à jour le lien'
+  SilverStripe\LinkField\Form\AbstractLinkField:
+    INVALID_TYPECLASS_EMPTY: '"{class}": Les types autorisés ne peuvent pas être vides'
+  SilverStripe\LinkField\Form\Traits\AllowedLinkClassesTrait:
+    INVALID_TYPECLASS: '"{class}": {typeclass} n''est pas un type de lien valide'
+    INVALID_TYPECLASS_EMPTY: '"{class}": Les types autorisés ne peuvent pas être vides'
+  SilverStripe\LinkField\Models\EmailLink:
+    EMAIL_FIELD: 'Adresse mail'
+    LINKLABEL: 'Lien vers une adresse email'
+    PLURALNAME: 'Liens email'
+    PLURALS:
+      one: 'Un lien email'
+      other: '{count} liens email'
+    SINGULARNAME: 'Lien email'
+    db_Email: Email
+  SilverStripe\LinkField\Models\ExternalLink:
+    EXTERNAL_URL_FIELD: 'URL externe'
+    EXTERNAL_URL_FIELD_DESCRIPTION: 'L''URL doit commencer par http:// ou https://'
+    LINKLABEL: 'Lien vers une URL externe'
+    PLURALNAME: 'Liens externes'
+    PLURALS:
+      one: 'Un lien externes'
+      other: '{count} liens externes'
+    SINGULARNAME: 'Lien externe'
+    db_ExternalUrl: 'URL externe'
+  SilverStripe\LinkField\Models\FileLink:
+    CANNOT_VIEW_FILE: 'Impossible de voir le fichier'
+    FILE_DOES_NOT_EXIST: 'Le fichier n''existe pas'
+    FILE_FIELD: Fichier
+    LINKLABEL: 'Lien vers un fichier'
+    MISSING_DEFAULT_TITLE: '(Fichier manquant)'
+    PLURALNAME: 'Liens de fichiers'
+    PLURALS:
+      one: 'Un lien de fichier'
+      other: '{count} liens de fichiers'
+    SINGULARNAME: 'Lien de fichier'
+    has_one_File: Fichier
+  SilverStripe\LinkField\Models\Link:
+    LINK_TEXT_TEXT_DESCRIPTION: 'S''il est laissé vide, une valeur par défaut appropriée sera utilisée sur le front-end'
+    LINK_TEXT_TITLE: 'Texte du lien'
+    LINK_TYPE_TITLE: 'Type de lien'
+    MISSING_DEFAULT_TITLE: '(Aucune valeur fournie)'
+    OPEN_IN_NEW_TITLE: 'Ouvrir dans une nouvelle fenêtre ?'
+    PLURALNAME: 'Liens'
+    PLURALS:
+      one: 'Un lien'
+      other: '{count} liens'
+    SINGULARNAME: 'Lien'
+    db_LinkText: 'Texte du lien'
+    db_OpenInNew: 'Ouvrir dans une nouvelle fenêtre'
+    db_Sort: 'Tri'
+    db_Version: 'Version'
+    has_one_Owner: 'Propriétaire'
+  SilverStripe\LinkField\Models\MultiLinkField:
+    AddLink: 'Ajouter un lien'
+    EditLink: 'Modifier le lien'
+  SilverStripe\LinkField\Models\PhoneLink:
+    LINKLABEL: 'Numéro de téléphone'
+    PHONE_FIELD: Téléphone
+    PLURALNAME: 'Liens téléphoniques'
+    PLURALS:
+      one: 'Un lien téléphonique'
+      other: '{count} liens téléphoniques'
+    SINGULARNAME: 'Lien téléphonique'
+    db_Phone: Téléphone
+  SilverStripe\LinkField\Models\SiteTreeLink:
+    ANCHOR_DESCRIPTION: 'Ne pas ajouter "#". Des suggestions d''ancre seront affichées une fois que la page liée est attachée.'
+    ANCHOR_FIELD_TITLE: 'Ancre'
+    CANNOT_VIEW_PAGE: 'Impossible de voir la page'
+    LINKLABEL: 'Page sur ce site'
+    MISSING_DEFAULT_TITLE: '(Page manquante)'
+    PAGE_DOES_NOT_EXIST: 'La page n''existe pas'
+    PAGE_FIELD_TITLE: 'Page'
+    PLURALNAME: 'Liens d''arborescence du site'
+    PLURALS:
+      one: 'Un lien d''arborescence du site'
+      other: '{count} liens d''arborescence du site'
+    QUERY_FIELD_TITLE: 'Chaîne de requête'
+    QUERY_STRING_DESCRIPTION: 'Ne pas ajouter "?". Par exemple : "option1=valeur&option2=valeur2"'
+    SINGULARNAME: 'Lien d''arborescence du site'
+    TITLE_DESCRIPTION: 'Généré automatiquement à partir du titre de la page si laissé vide'
+    db_Anchor: 'Ancre'
+    db_QueryString: 'Chaîne de requête'
+    has_one_Page: 'Page'
+  SilverStripe\LinkField\Tasks\LinkableMigrationTask:
+    VERSIONED_STATUS_MISMATCH: 'Linkable et LinkField n''ont pas d''applications Versioned correspondantes. Assurez-vous que les deux sont soit non-Versioned, soit Versioned'
+
