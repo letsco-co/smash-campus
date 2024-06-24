@@ -355,6 +355,10 @@ fr:
     Content: 'Contenu'
     BlockType: 'Première section'
     Summary: 'Block a ajouter en premier sur la page pour avoir l''image de fond avec le dégradé'
+  LetsCo\Elements\ImageBlock:
+    Image: 'Image'
+    BlockType: 'Image seule'
+    Summary: 'Image prenant toute la largeur'
   SilverStripe\LinkField\Controllers\LinkFieldController:
     CREATE_LINK: 'Créer un lien'
     MENUTITLE: 'Champs liens'
