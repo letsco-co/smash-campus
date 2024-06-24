@@ -306,6 +306,7 @@ fr:
       other: '{count} domaines'
     Title: 'Domaine'
     DESCRIPTION: 'Page de domain permettant d''afficher les formations'
+    TrainingsTitle: 'Nos formations'
   LetsCo\PageType\MeetingHolder:
     SINGULARNAME: 'Page des conférences'
     PLURALNAME: 'Pages des conférences'

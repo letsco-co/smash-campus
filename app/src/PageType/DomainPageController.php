@@ -20,4 +20,8 @@ class DomainPageController extends \PageController
         return $controller;
     }
 
+    public function getTrainingsTitle()
+    {
+        return _t(DomainPage::class . '.TrainingsTitle', 'Trainings');
+    }
 }
