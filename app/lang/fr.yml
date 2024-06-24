@@ -328,3 +328,6 @@ fr:
     Contact: 'Restons en contact'
     RS: 'Rejoignez-nous'
     Creator: 'Conçu et réalisé par'
+  LetsCo\Elements\HomeHeroSection:
+    SearchKeywords: 'Rechercher par mots-clés'
+    SearchDomain: 'Rechercher par domaine'
