@@ -16,6 +16,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Permission;
 
 class TrainingRegistration extends DataObject
 {
@@ -120,5 +121,19 @@ class TrainingRegistration extends DataObject
             'AcceptOtherInfos',
         ]));
         return $validator;
+    }
+    public function canView($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member);
+    }
+
+    public function canEdit($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member);
+    }
+
+    public function canCreate($member = null, $context = [])
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member);
     }
 }

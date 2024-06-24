@@ -24,6 +24,7 @@ use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\Security\Permission;
 use SilverStripe\View\Requirements;
 
 class Training extends Event
@@ -192,5 +193,25 @@ class Training extends Event
         if ($categoryID) $trainings = $trainings->filter('CategoryID', $categoryID);
         if ($limit) $trainings = $trainings->limit($limit);
         return $trainings;
+    }
+
+    public function canView($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member);
+    }
+
+    public function canEdit($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member);
+    }
+
+    public function canDelete($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member);
+    }
+
+    public function canCreate($member = null, $context = [])
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member);
     }
 }

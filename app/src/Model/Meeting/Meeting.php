@@ -22,6 +22,7 @@ use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\SearchableMultiDropdownField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\Security\Permission;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 
@@ -190,5 +191,25 @@ class Meeting extends Event
             ]);
         }
         return '';
+    }
+
+    public function canView($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
+    }
+
+    public function canEdit($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
+    }
+
+    public function canDelete($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
+    }
+
+    public function canCreate($member = null, $context = [])
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
     }
 }

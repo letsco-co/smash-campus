@@ -6,6 +6,7 @@ use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Permission;
 
 class MeetingRegistration extends DataObject
 {
@@ -58,4 +59,19 @@ class MeetingRegistration extends DataObject
         ]));
         return $validator;
     }
+    public function canView($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
+    }
+
+    public function canEdit($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
+    }
+
+    public function canCreate($member = null, $context = [])
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\MeetingAdmin', 'any', $member);
+    }
+
 }

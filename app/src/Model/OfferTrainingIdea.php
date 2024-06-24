@@ -4,6 +4,7 @@ namespace LetsCo\Model;
 
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Permission;
 
 class OfferTrainingIdea extends DataObject
 {
@@ -26,5 +27,20 @@ class OfferTrainingIdea extends DataObject
     public function getTitle()
     {
         return $this->LastName . " ". $this->FirstName;
+    }
+
+    public function canView($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\OfferTrainingIdeaAdmin', 'any', $member);
+    }
+
+    public function canEdit($member = null)
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\OfferTrainingIdeaAdmin', 'any', $member);
+    }
+
+    public function canCreate($member = null, $context = [])
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\OfferTrainingIdeaAdmin', 'any', $member);
     }
 }
