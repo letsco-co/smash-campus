@@ -43,22 +43,26 @@ class InfosBlock extends BaseElement
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+        $contentField = $fields->dataFieldByName('Content');
+        $contentField->setTitle(_t(self::class.'.Content', 'Content'));
+        $onRightField = $fields->dataFieldByName('OnRight');
+        $onRightField->setTitle(_t(self::class.'.OnRight', 'OnRight'));
         $fields->removeByName(['BlockTitle1','BlockTitle2','BlockTitle3','BlockTitle4','BlockContent1','BlockContent2','BlockContent3','BlockContent4', 'BlockLink1ID','BlockLink3ID','BlockLink2ID','BlockLink4ID']);
         $fields->addFieldsToTab(
             'Root.Main',
             [
                 TextField::create('BlockTitle1', _t(self::class.'.BlockTitle1', 'Title Block 1')),
                 TextField::create('BlockContent1', _t(self::class.'.BlockContent1', 'Content Block 1')),
-                LinkField::create('BlockLink1'),
+                LinkField::create('BlockLink1', _t(self::class.'.BlockLink1', 'Content Link 1')),
                 TextField::create('BlockTitle2', _t(self::class.'.BlockTitle2', 'Title Block 2')),
                 TextField::create('BlockContent2', _t(self::class.'.BlockContent2', 'Content Block 2')),
-                LinkField::create('BlockLink2'),
+                LinkField::create('BlockLink2', _t(self::class.'.BlockLink2', 'Content Link 2')),
                 TextField::create('BlockTitle3', _t(self::class.'.BlockTitle3', 'Title Block 3')),
                 TextField::create('BlockContent3', _t(self::class.'.BlockContent3', 'Content Block 3')),
-                LinkField::create('BlockLink3'),
+                LinkField::create('BlockLink3', _t(self::class.'.BlockLink3', 'Content Link 3')),
                 TextField::create('BlockTitle4', _t(self::class.'.BlockTitle4', 'Title Block 4')),
                 TextField::create('BlockContent4', _t(self::class.'.BlockContent4', 'Content Block 4')),
-                LinkField::create('BlockLink4'),
+                LinkField::create('BlockLink4', _t(self::class.'.BlockLink3', 'Content Link 3')),
             ]
         );
         return $fields;
@@ -66,12 +70,7 @@ class InfosBlock extends BaseElement
 
     public function getSummary(): string
     {
-        return 'String that represents element';
-    }
-
-    public function getType()
-    {
-        return 'InfosBlock';
+        return _t(self::class.'.Summary', 'Summary');
     }
 
     public function getBlocks() {
