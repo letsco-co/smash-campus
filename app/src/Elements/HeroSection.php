@@ -24,8 +24,10 @@ class HeroSection extends BaseElement
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-
+        $contentField = $fields->dataFieldByName('Content');
+        $contentField->setTitle(_t(self::class.'.Content', 'Content'));
         $imageField = $fields->dataFieldByName('Image');
+        $imageField->setTitle(_t(self::class.'.Image', 'Image'));
         $imageField->setFolderName('pages');
 
         return $fields;
@@ -33,11 +35,6 @@ class HeroSection extends BaseElement
 
     public function getSummary(): string
     {
-        return 'String that represents element';
-    }
-
-    public function getType()
-    {
-        return 'HeroSection';
+        return _t(self::class.'.Summary', 'Summary');
     }
 }

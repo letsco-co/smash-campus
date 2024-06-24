@@ -347,6 +347,11 @@ fr:
     Content: 'Contenu'
     BlockType: 'Contenu avec image et liens'
     Summary: 'Contenu avec image à droite et liens'
+  LetsCo\Elements\HeroSection:
+    Image: 'Image'
+    Content: 'Contenu'
+    BlockType: 'Première section'
+    Summary: 'Block a ajouter en premier sur la page pour avoir l''image de fond avec le dégradé'
   SilverStripe\LinkField\Controllers\LinkFieldController:
     CREATE_LINK: 'Créer un lien'
     MENUTITLE: 'Champs liens'
