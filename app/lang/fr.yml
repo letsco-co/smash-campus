@@ -344,6 +344,7 @@ fr:
     MainLink: 'Lien principal'
     SecondaryLink: 'Lien secondaire'
     Image: 'Image'
+    Content: 'Contenu'
     BlockType: 'Contenu avec image et liens'
     Summary: 'Contenu avec image à droite et liens'
   SilverStripe\LinkField\Controllers\LinkFieldController:

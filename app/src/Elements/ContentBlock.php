@@ -33,6 +33,8 @@ class ContentBlock extends BaseElement
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+        $contentField = $fields->dataFieldByName('Content');
+        $contentField->setTitle(_t(self::class.'.Content', 'Content'));
         $fields->removeByName(['MainLinkID', 'SecondaryLinkID']);
         $fields->addFieldsToTab(
             'Root.Main',
