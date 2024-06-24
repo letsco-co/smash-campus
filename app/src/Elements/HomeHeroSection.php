@@ -30,6 +30,7 @@ class HomeHeroSection extends BaseElement
         $fields = parent::getCMSFields();
 
         $imageField = $fields->dataFieldByName('Image');
+        $imageField->setTitle(_t(self::class.'.Image', 'Image'));
         $imageField->setFolderName('pages');
 
         return $fields;
@@ -37,12 +38,7 @@ class HomeHeroSection extends BaseElement
 
     public function getSummary(): string
     {
-        return 'String that represents element';
-    }
-
-    public function getType()
-    {
-        return 'HomeHeroSection';
+        return _t(self::class.'.Summary', 'Summary');
     }
 
     public function TrainingSearchForm() {

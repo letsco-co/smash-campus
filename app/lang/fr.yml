@@ -335,6 +335,9 @@ fr:
   LetsCo\Elements\HomeHeroSection:
     SearchKeywords: 'Rechercher par mots-clés'
     SearchDomain: 'Rechercher par domaine'
+    Image: 'Image'
+    BlockType: 'Première section Accueil'
+    Summary: 'Block a ajouter en premier sur la page d''Accueil pour avoir l''image de fond avec le dégradé'
   LetsCo\Elements\ContentBlock:
     SINGULARNAME: 'Contenu avec image et liens'
     PLURALNAME: 'Contenus avec image et liens'
