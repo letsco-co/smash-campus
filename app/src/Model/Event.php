@@ -44,4 +44,9 @@ class Event extends DataObject
     {
         return $this->Programs()->filter('ParentID', 0);
     }
+
+    public function translatedTitle($className, $entity)
+    {
+        return _t($className.'.'. $entity, $entity);
+    }
 }
