@@ -335,3 +335,14 @@ fr:
   LetsCo\Elements\HomeHeroSection:
     SearchKeywords: 'Rechercher par mots-clés'
     SearchDomain: 'Rechercher par domaine'
+  LetsCo\Elements\ContentBlock:
+    SINGULARNAME: 'Contenu avec image et liens'
+    PLURALNAME: 'Contenus avec image et liens'
+    PLURALS:
+      one: 'Un contenu avec image et liens'
+      other: '{count} contenus avec image et liens'
+    MainLink: 'Lien principal'
+    SecondaryLink: 'Lien secondaire'
+    Image: 'Image'
+    BlockType: 'Contenu avec image et liens'
+    Summary: 'Contenu avec image à droite et liens'

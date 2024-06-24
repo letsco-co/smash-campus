@@ -3,12 +3,14 @@
 namespace LetsCo\Elements;
 
 use DNADesign\Elemental\Models\BaseElement;
+use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Assets\Image;
 use SilverStripe\LinkField\Form\LinkField;
 use SilverStripe\LinkField\Models\Link;
 
 class ContentBlock extends BaseElement
 {
+    use LocalizationDataObject;
     private static $table_name = 'ContentBlock';
     private static $db = [
         'Content' => 'HTMLText'
@@ -35,22 +37,18 @@ class ContentBlock extends BaseElement
         $fields->addFieldsToTab(
             'Root.Main',
             [
-                LinkField::create('MainLink'),
-                LinkField::create('SecondaryLink'),
+                LinkField::create('MainLink', _t(self::class.'.MainLink', 'Main Link')),
+                LinkField::create('SecondaryLink', _t(self::class.'.SecondaryLink', 'Secondary Link')),
             ]
         );
         $imageField = $fields->dataFieldByName('Image');
+        $imageField->setTitle(_t(self::class.'.Image', 'Image'));
         $imageField->setFolderName('pages');
         return $fields;
     }
 
     public function getSummary(): string
     {
-        return 'String that represents element';
-    }
-
-    public function getType()
-    {
-        return 'ContentBlock';
+        return _t(self::class.'.Summary', 'Summary');
     }
 }
