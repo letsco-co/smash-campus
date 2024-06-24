@@ -20,4 +20,9 @@ class MeetingHolderController extends \PageController
         $controller->setUrlSegment($this->Link());
         return $controller;
     }
+
+    public function getMeetingsTitle()
+    {
+        return _t(MeetingHolder::class . '.MeetingsTitle', 'Meetings');
+    }
 }
