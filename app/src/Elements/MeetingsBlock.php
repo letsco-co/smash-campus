@@ -40,16 +40,17 @@ class MeetingsBlock extends BaseElement
     {
         $this->beforeUpdateCMSFields(function (FieldList $fields) {
             $fields->dataFieldByName('Content')
+                ->setTitle(_t(__CLASS__ . '.Content', 'Content'))
                 ->setRows(8);
 
             $fields->dataFieldByName('Limit')
-                ->setTitle(_t(__CLASS__ . 'LimitLabel', 'Posts to show'));
+                ->setTitle(_t(__CLASS__ . '.LimitLabel', 'Posts to show'));
 
             if (class_exists(MeetingHolder::class)) {
                 $fields->insertBefore(
                     'Limit',
                     $fields->dataFieldByName('MeetingHolderID')
-                        ->setTitle(_t(__CLASS__ . 'MeetingHolder', 'Featured Blog'))
+                        ->setTitle(_t(__CLASS__ . '.MeetingHolder', 'Featured Blog'))
                         ->setEmptyString('')
                 );
 
@@ -74,11 +75,8 @@ class MeetingsBlock extends BaseElement
         return $posts->limit($this->Limit);
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getSummary(): string
     {
-        return _t(__CLASS__ . '.BlockType', 'Meetings');
+        return _t(self::class.'.Summary', 'Summary');
     }
 }

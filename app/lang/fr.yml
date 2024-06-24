@@ -376,6 +376,12 @@ fr:
     Summary: 'Affiche 4 blocs blancs'
     OnRight: 'Afficher les blocs sur la droite'
     Content: 'Contenu'
+  LetsCo\Elements\MeetingsBlock:
+    Content: 'Contenu'
+    BlockType: 'Conférences'
+    Summary: 'Affichage des conférences'
+    LimitLabel: 'Nombre de conférences à afficher'
+    MeetingHolder: 'Page des conférences'
   SilverStripe\LinkField\Controllers\LinkFieldController:
     CREATE_LINK: 'Créer un lien'
     MENUTITLE: 'Champs liens'
