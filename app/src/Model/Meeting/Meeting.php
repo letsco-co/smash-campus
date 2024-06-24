@@ -153,8 +153,12 @@ class Meeting extends Event
         return $this->Limit . ' ' . _t(self::class.'.Seats', 'seat(s)');
     }
 
-    public function getAsideTitle()
+    public function getAsideTitle($step)
     {
+        if ($step) {
+            $namespace = $step."_Title";
+            return _t(self::class .".$namespace", $step);
+        }
         $remainingSeats = $this->remainingSeats();
         if (!$remainingSeats) {
             return _t(self::class . '.RegisterOnWaitingList', 'Register on the waiting list');
@@ -178,9 +182,10 @@ class Meeting extends Event
             ]);
         }
         if ($step) {
+            $namespace = $step."_Text";
             return new ArrayList([
                 ArrayData::create([
-                    'Title' => _t(self::class.'.'. $step, $step),
+                    'Title' => _t(self::class.".$namespace", $step),
                 ]),
             ]);
         }

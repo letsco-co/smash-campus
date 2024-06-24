@@ -202,9 +202,12 @@ fr:
     RegisterOnWaitingList: 'S’inscrire sur la liste d’attente'
     PastMeetingAsideText: 'La conférence s’est déroulée avec succès. Merci à tous les participants d’avoir été présents et d’avoir participé avec enthousiasme. Vous pouvez dorénavant retrouver les documents et photos de la conférence.'
     PastMeetingAsideNewsletter: 'Inscrivez-vous à la Newsletter afin d’être notifié des prochaines conférences'
-    Completed: 'Votre demande d’inscription a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre inscription.'
-    WaitingList: 'Votre demande d’inscription à la liste d''attente a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre demande d''inscription.'
-    GuestsInvited: 'Vos invitations ont bien été prises en compte. Chacune de ces personnes recevront un mail d’invitation avec un lien personnalisé afin de finaliser le formulaire d’inscription. Nous ne gardons dans nos bases de données aucune donnée renseignée pour ces personnes tant qu’elles n’ont pas finalisé leur inscription. Les informations renseignées permettent de générer le lien personnalisé.'
+    Completed_Title: 'S’inscrire à la conférence'
+    Completed_Text: 'Votre demande d’inscription a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre inscription.'
+    WaitingList_Title: 'S’inscrire sur la liste d’attente'
+    WaitingList_Text: 'Votre demande d’inscription à la liste d''attente a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre demande d''inscription.'
+    GuestsInvited_Title: 'S’inscrire à la conférence'
+    GuestsInvited_Text: 'Vos invitations ont bien été prises en compte. Chacune de ces personnes recevront un mail d’invitation avec un lien personnalisé afin de finaliser le formulaire d’inscription. Nous ne gardons dans nos bases de données aucune donnée renseignée pour ces personnes tant qu’elles n’ont pas finalisé leur inscription. Les informations renseignées permettent de générer le lien personnalisé.'
   LetsCo\Admin\Meeting\MeetingAdmin:
     MENUTITLE: 'Conférences'
   LetsCo\Model\Meeting\MeetingRegistration:
