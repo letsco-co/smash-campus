@@ -51,6 +51,14 @@ fr:
     VALIDATOR_MESSAGE_REQUIRED: '"{field}" requis'
     Link: "Voir la formation"
     Programs: "Programme"
+    Registration: 'Pré-inscription'
+    Registration_Title: 'Votre demande de pré-inscription a bien été prise en compte'
+    Registration_Text: 'Merci de l’intérêt que vous portez à notre formation. Vous allez recevoir un mail confirmant votre demande. Nous vous recontacterons prochainement pour plus de détails.'
+    Registration_Financing: 'Je souhaite me former avec une prise en charge :'
+    Financing_Structure: 'De mon entreprise'
+    Financing_Individual: 'Individuelle'
+    OtherTrainings: 'Voir d''autres formations'
+    DiscoverOtherTrainings: 'Découvrir d''autres formations'
   LetsCo\Model\Training\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'
