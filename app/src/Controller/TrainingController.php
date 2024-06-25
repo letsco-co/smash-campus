@@ -49,6 +49,7 @@ class TrainingController extends ContentController
             $form = TrainingRegistrationIndividualForm::create($this, 'RegistrationForm');
             $form->setDisplayLink($training->Link());
             $form->setFormAction($training->Link().'/'.$form->getName());
+            $form->enableSpamProtection();
             $data['Form'] = $form;
         }
         if ($request->getVar('completed')) {
@@ -63,6 +64,7 @@ class TrainingController extends ContentController
         $training = Training::get()->byID($this->getRequest()->postVar("TrainingID"));
         $form->setDisplayLink($training->Link());
         $form->setFormAction($training->Link().'/'.$form->getName());
+        $form->enableSpamProtection();
         return $form;
     }
 

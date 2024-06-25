@@ -28,6 +28,7 @@ trait ControllerMethods
         ]);
         $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
         $form->setTemplate('SearchForm');
+        $form->enableSpamProtection();
         return $form;
     }
 }

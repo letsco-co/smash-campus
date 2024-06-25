@@ -19,7 +19,8 @@
         "dnadesign/silverstripe-elemental": "^5.2",
         "silverstripe/linkfield": "^4.0",
         "letsco-themes/smash-campus": "dev-main",
-        "lekoala/silverstripe-debugbar": "^3.0"
+        "lekoala/silverstripe-debugbar": "^3.0",
+        "innoweb/silverstripe-spamprotection-honeypot": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6"

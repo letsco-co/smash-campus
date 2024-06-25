@@ -93,6 +93,7 @@ class SearchController extends ContentController
         ]);
         $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
         $form->setTemplate('OfferTrainingForm');
+        $form->enableSpamProtection();
         return $form;
     }
 

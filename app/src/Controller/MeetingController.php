@@ -59,11 +59,13 @@ class MeetingController extends ContentController
             $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
             $form->setFormAction($meeting->Link().'/'.$form->getName());
             $form->loadDataFrom($request->getVars());
+            $form->enableSpamProtection();
             $data['Form'] = $form;
         }
         if ($meeting->remainingSeats() && ($data['CompletionStep'] == 'Completed' || $request->param('ID'))) {
             $guestForm = MeetingInvitationForm::create($this, 'GuestInvitationForm');
             $guestForm->setFormAction($meeting->Link().'/'.$guestForm->getName());
+            $guestForm->enableSpamProtection();
             $data['Form'] = $guestForm;
         }
         if (!$meeting->isTodayOrFuture()) {
@@ -94,6 +96,7 @@ class MeetingController extends ContentController
         $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
         $meeting = Meeting::get()->byID($this->getRequest()->postVar("MeetingID"));
         $form->setFormAction($meeting->Link().'/'.$form->getName());
+        $form->enableSpamProtection();
         return $form;
     }
 
@@ -103,6 +106,7 @@ class MeetingController extends ContentController
         $meeting = Meeting::get()->byID($this->getRequest()->postVar("MeetingID"));
         $form->setDisplayLink($meeting->Link().'/guests');
         $form->setFormAction($meeting->Link().'/'.$form->getName());
+        $form->enableSpamProtection();
         return $form;
     }
     public function Newsletter()
@@ -117,6 +121,7 @@ class MeetingController extends ContentController
             'Email',
         ]);
         $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
+        $form->enableSpamProtection();
         return $form;
     }
 }
