@@ -473,4 +473,6 @@ fr:
     has_one_Page: 'Page'
   SilverStripe\LinkField\Tasks\LinkableMigrationTask:
     VERSIONED_STATUS_MISMATCH: 'Linkable et LinkField n''ont pas d''applications Versioned correspondantes. Assurez-vous que les deux sont soit non-Versioned, soit Versioned'
-
+  SilverStripe\UserForms\Model\UserDefinedForm:
+    DESCRIPTION: 'Ajouter un formulaire personnalisé.'
+    SINGULARNAME: 'Formulaire Défini par l''Utilisateur'
