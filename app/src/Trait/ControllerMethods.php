@@ -36,4 +36,8 @@ trait ControllerMethods
     {
         return \Page::get()->filter('ShowInFooterMenu', 1);
     }
+
+    public function ContactPage() {
+        return \Page::get()->filter('IsContactPage', 1)->first();
+    }
 }

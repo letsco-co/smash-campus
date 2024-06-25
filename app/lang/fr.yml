@@ -333,6 +333,7 @@ fr:
     RS: 'Rejoignez-nous'
     Creator: 'Conçu et réalisé par'
     ShowInFooterMenu: 'Afficher dans le menu du pied de page'
+    IsContactPage: 'Est-ce la page de contact ?'
   LetsCo\Elements\HomeHeroSection:
     SearchKeywords: 'Rechercher par mots-clés'
     SearchDomain: 'Rechercher par domaine'
