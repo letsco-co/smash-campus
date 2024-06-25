@@ -31,4 +31,9 @@ trait ControllerMethods
         $form->enableSpamProtection();
         return $form;
     }
+
+    public function FooterMenu()
+    {
+        return \Page::get()->filter('ShowInFooterMenu', 1);
+    }
 }
