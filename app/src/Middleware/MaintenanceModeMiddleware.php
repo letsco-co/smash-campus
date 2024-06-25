@@ -2,10 +2,10 @@
 
 namespace LetsCo\Middleware;
 
+use LetsCo\PageType\MaintenancePage;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\Middleware\HTTPMiddleware;
-use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\Security;
 use SilverStripe\SiteConfig\SiteConfig;
@@ -32,12 +32,12 @@ class MaintenanceModeMiddleware implements HTTPMiddleware
         }
 
         $currentPage = \Page::get()->filter('URLSegment', $url)->first();
-        if ($currentPage instanceof ErrorPage && $currentPage->ErrorCode == 503) {
+        if ($currentPage instanceof MaintenancePage) {
             return $response;
         }
 
 
-        $utilityPage = ErrorPage::get()->filter("ErrorCode", 503)->first();
+        $utilityPage = MaintenancePage::get()->first();
         if (!$utilityPage) {
             return $response;
         }
