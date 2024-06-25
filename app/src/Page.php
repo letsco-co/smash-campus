@@ -24,12 +24,12 @@ namespace {
             return $fields;
         }
 
-        protected function onBeforeWrite()
+        protected function onAfterWrite()
         {
-            parent::onBeforeWrite();
+            parent::onAfterWrite();
 
             if ($this->IsContactPage) {
-                $contactPages = Page::get()->filter("IsContactPage", 1);
+                $contactPages = Page::get()->filter("IsContactPage", 1)->exclude('ID', $this->ID);
                 foreach ($contactPages as $contactPage) {
                     $contactPage->IsContactPage = false;
                     $contactPage->write();
