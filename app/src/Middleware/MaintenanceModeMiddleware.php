@@ -21,7 +21,7 @@ class MaintenanceModeMiddleware implements HTTPMiddleware
 
         // If Maintenance Mode is Off, skip processing
         if (!$config->IsInMaintenanceMode) {
-            return $delegate($request);
+            return $response;
         }
         if (Security::getCurrentUser() && Permission::check('CMS_ACCESS', 'any', Security::getCurrentUser())) {
             return $response;
