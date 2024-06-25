@@ -384,6 +384,9 @@ fr:
     Summary: 'Affichage des conférences'
     LimitLabel: 'Nombre de conférences à afficher'
     MeetingHolder: 'Page des conférences'
+  LetsCo\Extension\MaintenanceModeSiteConfig:
+    SETTINGSACTIVATE: 'Activer la maintenance du site'
+    SETTINGSHEADING: 'Mode maintenance'
   SilverStripe\LinkField\Controllers\LinkFieldController:
     CREATE_LINK: 'Créer un lien'
     MENUTITLE: 'Champs liens'

@@ -1,0 +1,16 @@
+---
+Name: MaintenanceMode
+After:
+  - requestprocessors
+---
+SilverStripe\Core\Injector\Injector:
+  MaintenanceModeMiddleware:
+    class: LetsCo\Middleware\MaintenanceModeMiddleware
+    after:
+      - SilverStripe\Security\AuthenticationMiddleware
+      - SilverStripe\Security\BasicAuthMiddleware
+      - SilverStripe\SessionManager\Middleware\LoginSessionMiddleware
+  SilverStripe\Control\Director:
+    properties:
+      Middlewares:
+        MaintenanceModeMiddleware: '%$MaintenanceModeMiddleware'

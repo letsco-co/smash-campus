@@ -1,6 +1,7 @@
 Silverstripe\SiteConfig\SiteConfig:
   extensions:
     - LetsCo\Extension\ThemeSiteConfig
+    - LetsCo\Extension\MaintenanceModeSiteConfig
 LetsCo\PageType\StaticPage:
   extensions:
     - DNADesign\Elemental\Extensions\ElementalPageExtension
