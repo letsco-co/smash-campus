@@ -21,7 +21,10 @@
         "letsco-themes/smash-campus": "dev-main",
         "lekoala/silverstripe-debugbar": "^3.0",
         "innoweb/silverstripe-spamprotection-honeypot": "^2.1",
-        "silverstripe/userforms": "^6.2"
+        "silverstripe/userforms": "^6.2",
+        "getbrevo/brevo-php": "^2.0",
+        "symfony/brevo-mailer": "^7.1",
+        "symfony/http-client": "^7.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6"

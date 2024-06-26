@@ -2,9 +2,14 @@
 
 namespace LetsCo\Form;
 
+use LetsCo\Interface\EmailProvider;
 use LetsCo\Model\Meeting\Meeting;
 use LetsCo\Model\Meeting\MeetingRegistration;
+use Psr\Log\LoggerInterface;
+use SilverStripe\Control\Director;
 use SilverStripe\Control\RequestHandler;
+use SilverStripe\Core\Environment;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
@@ -17,6 +22,7 @@ use SilverStripe\Forms\TextField;
 
 class MeetingRegistrationForm extends Form
 {
+    private EmailProvider $emailProvider;
     public function __construct(RequestHandler $controller = null, $name = self::DEFAULT_NAME)
     {
         $fields = $this->getFields();
@@ -86,8 +92,36 @@ class MeetingRegistrationForm extends Form
         if ($data['IsGuest']) {
             $completionStep = "GuestCompleted";
         }
+        $this->sendValidationEmail($completionStep, $data, $meeting);
         $URLgetVar = "?CompletionStep=$completionStep";
         $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().$URLgetVar : $this->getController()->Link();
         return $this->getController()->redirect($link);
+
+    }
+
+    public function setEmailProvider(EmailProvider $emailProvider) {
+        $this->emailProvider =  $emailProvider;
+    }
+
+    private function sendValidationEmail(string $completionStep, $data, Meeting $meeting)
+    {
+        $name = $data['FirstName'] . ' '. $data['LastName'];
+        $to = [['name' => $name, 'email' => $data['Email']]];
+        $templateId = Environment::getEnv('BREVO_MEETING_TEMPLATE_ID');
+        $params = [
+            "Name" => $name,
+            "Conference" => [
+                'Nom' => $meeting->Title,
+                'Date' => $meeting->Date,
+                'Heure' => $meeting->Time,
+                'Lien' => Director::absoluteURL((string) $meeting->Link()),
+            ],
+            "IsInWaitingList" => $completionStep == "WaitingList",
+        ];
+        try {
+            $this->emailProvider->send($to, $templateId, $params);
+        } catch (\Exception $e) {
+            Injector::inst()->get(LoggerInterface::class)->error($e);
+        }
     }
 }
