@@ -5,8 +5,7 @@ namespace LetsCo\Controller;
 use LetsCo\Model\OfferTrainingIdea;
 use LetsCo\Model\Training\Training;
 use LetsCo\PageType\DomainPage;
-use LetsCo\Trait\ControllerMethods;
-use SilverStripe\CMS\Controllers\ContentController;
+use PageController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Forms\CheckboxField;
@@ -18,9 +17,8 @@ use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 
-class SearchController extends ContentController
+class SearchController extends PageController
 {
-    use ControllerMethods;
     private static $url_segment = 'search';
     private static $allowed_actions = [
         'TrainingSearch',

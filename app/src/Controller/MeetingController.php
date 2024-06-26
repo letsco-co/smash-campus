@@ -5,8 +5,7 @@ namespace LetsCo\Controller;
 use LetsCo\Form\MeetingInvitationForm;
 use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Model\Meeting\Meeting;
-use LetsCo\Trait\ControllerMethods;
-use SilverStripe\CMS\Controllers\ContentController;
+use PageController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Forms\EmailField;
@@ -16,9 +15,8 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\View\Requirements;
 
-class MeetingController extends ContentController
+class MeetingController extends PageController
 {
-    use ControllerMethods;
     private static $allowed_actions = [
         'RegistrationForm',
         'GuestInvitationForm',
@@ -111,17 +109,9 @@ class MeetingController extends ContentController
     }
     public function Newsletter()
     {
-        $fields = FieldList::create(
-            EmailField::create('Email', 'Email')->addExtraClass("form-control"),
-        );
-        $actions = FieldList::create(
-            FormAction::create('doSave', 'Valider')->addExtraClass('btn btn-primary bg-secondary-hover border-0 flex-grow-1')
-        );
-        $validator = RequiredFields::create([
-            'Email',
-        ]);
-        $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
-        $form->enableSpamProtection();
+        $form = $this->NewsletterForm();
+        $form->Fields()->dataFieldByName('Email')->setTitle('Email');
+        $form->setTemplate('Form');
         return $form;
     }
 }

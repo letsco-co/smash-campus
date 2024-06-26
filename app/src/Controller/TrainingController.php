@@ -4,14 +4,12 @@ namespace LetsCo\Controller;
 
 use LetsCo\Form\TrainingRegistrationIndividualForm;
 use LetsCo\Model\Training\Training;
-use LetsCo\Trait\ControllerMethods;
-use SilverStripe\CMS\Controllers\ContentController;
+use PageController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 
-class TrainingController extends ContentController
+class TrainingController extends PageController
 {
-    use ControllerMethods;
     private static $allowed_actions = [
         'getTraining',
         'RegistrationForm',
