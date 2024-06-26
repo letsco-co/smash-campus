@@ -6,6 +6,7 @@ use Brevo\Client\Api\ContactsApi;
 use Brevo\Client\Api\TransactionalEmailsApi;
 use Brevo\Client\Configuration;
 use Brevo\Client\Model\CreateContact;
+use Brevo\Client\Model\CreateList;
 use Brevo\Client\Model\SendSmtpEmail;
 use Exception;
 use GuzzleHttp\Client;
@@ -56,5 +57,25 @@ class BrevoEmailProvider implements EmailProvider
         $createContact['listIds'] = [8];
 
         return $apiInstance->createContact($createContact);
+    }
+
+    public function createList($listName, $folderId)
+    {
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', Environment::getEnv('BREVO_API_KEY'));
+
+        $apiInstance = new ContactsApi(
+            new Client(),
+            $config
+        );
+        $createList = new CreateList();
+        $createList['name'] = $listName;
+        $createList['folderId'] = $folderId;
+
+        try {
+            return $apiInstance->createList($createList);
+        } catch (Exception $e) {
+            echo 'Exception when calling ContactsApi->createFolder: ', $e->getMessage(), PHP_EOL;
+            return false;
+        }
     }
 }
