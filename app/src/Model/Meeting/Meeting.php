@@ -2,6 +2,7 @@
 
 namespace LetsCo\Model\Meeting;
 
+use DateTime;
 use LetsCo\Admin\Meeting\MeetingAdmin;
 use LetsCo\Meeting\MeetingSpeaker;
 use LetsCo\PageType\MeetingHolder;
@@ -131,7 +132,11 @@ class Meeting extends Event
 
     public function isTodayOrFuture()
     {
-        return strtotime($this->Date) > mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        $date = $this->Date . ' ' . $this->Time;
+        $givenDate = new DateTime($date);
+        $today = new DateTime();
+        $today->setTime(0, 0, 0); // Set time to start of today
+        return $givenDate >= $today;
     }
 
     public function getLinkTitle()
