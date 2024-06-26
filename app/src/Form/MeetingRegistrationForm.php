@@ -83,7 +83,10 @@ class MeetingRegistrationForm extends Form
         if ($registration->Status == MeetingRegistration::STATUS_WAITING) {
             $completionStep = 'WaitingList';
         }
-        $URLgetVar = "?CompletionStep=$completionStep&". $data['IsGuest'];
+        if ($data['IsGuest']) {
+            $completionStep = "GuestCompleted";
+        }
+        $URLgetVar = "?CompletionStep=$completionStep";
         $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().$URLgetVar : $this->getController()->Link();
         return $this->getController()->redirect($link);
     }
