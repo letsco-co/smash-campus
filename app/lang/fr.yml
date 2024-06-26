@@ -214,6 +214,8 @@ fr:
     PastMeetingAsideNewsletter: 'Inscrivez-vous à la Newsletter afin d’être notifié des prochaines conférences'
     Completed_Title: 'S’inscrire à la conférence'
     Completed_Text: 'Votre demande d’inscription a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre inscription.'
+    GuestCompleted_Title: 'S’inscrire à la conférence'
+    GuestCompleted_Text: 'Votre demande d’inscription a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre inscription.'
     WaitingList_Title: 'S’inscrire sur la liste d’attente'
     WaitingList_Text: 'Votre demande d’inscription à la liste d''attente a bien été prise en compte. Vous allez recevoir un mail récapitulatif de votre demande d''inscription.'
     GuestsInvited_Title: 'S’inscrire à la conférence'
