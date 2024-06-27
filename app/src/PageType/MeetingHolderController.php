@@ -12,6 +12,7 @@ class MeetingHolderController extends \PageController
         'getMeeting',
     ];
     private static $url_handlers = [
+        'NewsletterForm' => 'NewsletterForm',
         '$Action!//$ID/$OtherID' => 'getMeeting',
     ];
     public function getMeeting(HTTPRequest $request)

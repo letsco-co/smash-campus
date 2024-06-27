@@ -11,6 +11,7 @@ class DomainPageController extends \PageController
         'getTraining',
     ];
     private static $url_handlers = [
+        'NewsletterForm' => 'NewsletterForm',
         '$Action!//$ID/$OtherID' => 'getTraining',
     ];
     public function getTraining(HTTPRequest $request)
