@@ -3,7 +3,9 @@
 use LetsCo\Extension\EventNotification;
 use LetsCo\Extension\EventFormNotification;
 use LetsCo\Form\MeetingRegistrationForm;
+use LetsCo\Form\TrainingRegistrationIndividualForm;
 use LetsCo\Model\Meeting\Meeting;
+use LetsCo\Model\Training\Training;
 use SilverStripe\Core\Environment;
 use SilverStripe\i18n\i18n;
 
@@ -13,4 +15,5 @@ if (Environment::getEnv('BREVO_API_KEY')) {
     Meeting::add_extension(EventNotification::class);
     Training::add_extension(EventNotification::class);
     MeetingRegistrationForm::add_extension(EventFormNotification::class);
+    TrainingRegistrationIndividualForm::add_extension(EventFormNotification::class);
 }

@@ -17,7 +17,12 @@ use SilverStripe\MultiForm\Models\MultiFormStep;
 class TrainingRegistrationIndividualForm extends MultiForm
 {
     private static $start_step = TrainingRegistrationPersonalDetailsStep::class;
-    private EmailProvider $emailProvider;
+
+    public function __construct($controller, $name)
+    {
+        $this->extend('notificationConstructor');
+        parent::__construct($controller, $name);
+    }
 
     public function actionsFor($step)
     {
@@ -67,8 +72,15 @@ class TrainingRegistrationIndividualForm extends MultiForm
             }
             $registration->write();
         }
-        $this->sendValidationEmail($emailData, Training::get()->byID($trainingID));
-        $link = $trainingID ? Training::get()->byID($trainingID)->Link().'?completed=1' : $this->controller->Link();
+        $training = Training::get()->byID($trainingID);
+        $link = $trainingID ? $training->Link().'?completed=1' : $this->controller->Link();
+        $emailParams = [
+            "Formation" => [
+                'Nom' => $training->Title,
+                'Lien' => Director::absoluteURL((string) $training->Link()),
+            ],
+        ];
+        $this->extend('sendValidationEmail',  $emailData, $training, $emailParams);
         $this->session->delete();
         $this->controller->redirect($link);
     }
@@ -82,31 +94,5 @@ class TrainingRegistrationIndividualForm extends MultiForm
             }
         }
         return $steps;
-    }
-
-    public function setEmailProvider(EmailProvider $emailProvider) {
-        $this->emailProvider =  $emailProvider;
-    }
-
-    private function sendValidationEmail($data, Training $training)
-    {
-        $contact = $this->emailProvider->getOrCreateContact($data['Email']);
-        $this->emailProvider->addContactToList($training->ListId, $contact['email']);
-        $this->emailProvider->addContactToList(Environment::getEnv('BREVO_NEWSLETTER_LIST_ID'), $contact['email']);
-        $name = $data['FirstName'] . ' '. $data['LastName'];
-        $to = [['name' => $name, 'email' => $data['Email']]];
-        $templateId = Environment::getEnv('BREVO_TRAINING_TEMPLATE_ID');
-        $params = [
-            "Name" => $name,
-            "Formation" => [
-                'Nom' => $training->Title,
-                'Lien' => Director::absoluteURL((string) $training->Link()),
-            ],
-        ];
-        try {
-            $this->emailProvider->send($to, $templateId, $params);
-        } catch (\Exception $e) {
-            Injector::inst()->get(LoggerInterface::class)->error($e);
-        }
     }
 }
