@@ -2,6 +2,7 @@
 
 namespace LetsCo\Model;
 
+use SilverStripe\Admin\CMSEditLinkExtension;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\Parsers\URLSegmentFilter;
@@ -21,6 +22,7 @@ class Event extends DataObject
     ];
     private static $extensions = [
         Versioned::class,
+        CMSEditLinkExtension::class,
     ];
     protected function onBeforeWrite()
     {

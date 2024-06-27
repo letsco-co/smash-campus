@@ -14,6 +14,7 @@ use Exception;
 use GuzzleHttp\Client;
 use InvalidArgumentException;
 use LetsCo\Interface\EmailProvider;
+use LetsCo\Model\Event;
 use phpDocumentor\Reflection\Types\False_;
 use Psr\Log\LoggerInterface;
 use SilverStripe\Core\Environment;
@@ -33,7 +34,7 @@ class BrevoEmailProvider implements EmailProvider
             $config
         );
         $siteConfig = SiteConfig::current_site_config();
-        $email = $siteConfig->Email ?? 'support@letsco.co';
+        $email = $siteConfig->Email ?? 'support@letsco.ovh';
         $sender = ['name' => $email, 'email' => $email];
         if ($siteConfig->Title) {
             $sender['name'] = $siteConfig->Title;

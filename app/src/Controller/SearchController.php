@@ -22,11 +22,15 @@ class SearchController extends PageController
     private static $url_segment = 'search';
     private static $allowed_actions = [
         'TrainingSearch',
-        'doSave',
         'doSaveOffer',
-        'NewsletterForm',
         'TrainingOfferForm',
     ];
+
+    public function __construct($dataRecord = null)
+    {
+        $this->extend('notificationConstructor');
+        parent::__construct($dataRecord);
+    }
 
     public function TrainingSearch(HTTPRequest $request)
     {
@@ -99,6 +103,9 @@ class SearchController extends PageController
         $offer = new OfferTrainingIdea();
         $offer->update($data);
         $offer->write();
+        $emailParams["Lien"] = $offer->CMSEditLink();
+        $emailParams["Nom"] = "{$data['FirstName']} {$data['LastName']}";
+        $this->extend("notifyAdmin", $emailParams);
         $form->sessionMessage(_t(self::class.'.Form_Validate', 'Your request has been sent to us'), 'good');
         return $this->redirectBack();
     }

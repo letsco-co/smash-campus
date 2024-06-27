@@ -1,8 +1,10 @@
 <?php
 
+use LetsCo\Controller\SearchController;
 use LetsCo\Extension\EventNotification;
 use LetsCo\Extension\EventFormNotification;
 use LetsCo\Extension\NewsletterEmailList;
+use LetsCo\Extension\NotifyAdminExtension;
 use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Form\TrainingRegistrationIndividualForm;
 use LetsCo\Model\Meeting\Meeting;
@@ -18,4 +20,5 @@ if (Environment::getEnv('BREVO_API_KEY')) {
     PageController::add_extension(NewsletterEmailList::class);
     MeetingRegistrationForm::add_extension(EventFormNotification::class);
     TrainingRegistrationIndividualForm::add_extension(EventFormNotification::class);
+    SearchController::add_extension(NotifyAdminExtension::class);
 }
