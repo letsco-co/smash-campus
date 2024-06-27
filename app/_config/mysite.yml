@@ -10,6 +10,9 @@ LeKoala\DebugBar\DebugBar:
   enabled_in_admin: true
   query_limit: 500
   check_local_ip: false
+SilverStripe\Core\Injector\Injector:
+  LetsCo\Email\DefaultEmailProvider:
+    class: LetsCo\Email\BrevoEmailProvider
 # UTF8MB4 has limited support in older MySQL versions.
 # Remove this configuration if you experience issues.
 ---

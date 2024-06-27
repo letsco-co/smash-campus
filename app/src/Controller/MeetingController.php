@@ -2,18 +2,12 @@
 
 namespace LetsCo\Controller;
 
-use LetsCo\Email\BrevoEmailProvider;
 use LetsCo\Form\MeetingInvitationForm;
 use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Model\Meeting\Meeting;
 use PageController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Forms\EmailField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\Form;
-use SilverStripe\Forms\FormAction;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\View\Requirements;
 
 class MeetingController extends PageController
@@ -57,7 +51,6 @@ class MeetingController extends PageController
             $form->setFormAction($meeting->Link().'/'.$form->getName());
             $form->loadDataFrom($request->getVars());
             $form->enableSpamProtection();
-            $form->setEmailProvider(new BrevoEmailProvider());
             $data['Form'] = $form;
         }
         if ($meeting->remainingSeats() && ($data['CompletionStep'] == 'Completed' || $request->param('ID'))) {
@@ -94,7 +87,6 @@ class MeetingController extends PageController
         $form = MeetingRegistrationForm::create($this, 'RegistrationForm');
         $meeting = Meeting::get()->byID($this->getRequest()->postVar("MeetingID"));
         $form->setFormAction($meeting->Link().'/'.$form->getName());
-        $form->setEmailProvider(new BrevoEmailProvider());
         $form->enableSpamProtection();
         return $form;
     }

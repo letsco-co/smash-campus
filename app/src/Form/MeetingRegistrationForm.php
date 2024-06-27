@@ -5,11 +5,7 @@ namespace LetsCo\Form;
 use LetsCo\Interface\EmailProvider;
 use LetsCo\Model\Meeting\Meeting;
 use LetsCo\Model\Meeting\MeetingRegistration;
-use Psr\Log\LoggerInterface;
-use SilverStripe\Control\Director;
 use SilverStripe\Control\RequestHandler;
-use SilverStripe\Core\Environment;
-use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
@@ -28,6 +24,7 @@ class MeetingRegistrationForm extends Form
         $fields = $this->getFields();
         $actions = $this->getActions();
         $validator = $this->defineValidator();
+        $this->extend('notificationConstructor');
         parent::__construct($controller, $name, $fields, $actions, $validator);
     }
 
@@ -92,39 +89,10 @@ class MeetingRegistrationForm extends Form
         if ($data['IsGuest']) {
             $completionStep = "GuestCompleted";
         }
-        $this->sendValidationEmail($completionStep, $data, $meeting);
         $URLgetVar = "?CompletionStep=$completionStep";
         $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().$URLgetVar : $this->getController()->Link();
+        $this->extend('updateDoSaveMeetingNotification', $completionStep, $data, $meeting);
         return $this->getController()->redirect($link);
 
-    }
-
-    public function setEmailProvider(EmailProvider $emailProvider) {
-        $this->emailProvider =  $emailProvider;
-    }
-
-    private function sendValidationEmail(string $completionStep, $data, Meeting $meeting)
-    {
-        $contact = $this->emailProvider->getOrCreateContact($data['Email']);
-        $this->emailProvider->addContactToList($meeting->ListId, $contact['email']);
-        $this->emailProvider->addContactToList(Environment::getEnv('BREVO_NEWSLETTER_LIST_ID'), $contact['email']);
-        $name = $data['FirstName'] . ' '. $data['LastName'];
-        $to = [['name' => $name, 'email' => $data['Email']]];
-        $templateId = Environment::getEnv('BREVO_MEETING_TEMPLATE_ID');
-        $params = [
-            "Name" => $name,
-            "Conference" => [
-                'Nom' => $meeting->Title,
-                'Date' => $meeting->Date,
-                'Heure' => $meeting->Time,
-                'Lien' => Director::absoluteURL((string) $meeting->Link()),
-            ],
-            "IsInWaitingList" => $completionStep == "WaitingList",
-        ];
-        try {
-            $this->emailProvider->send($to, $templateId, $params);
-        } catch (\Exception $e) {
-            Injector::inst()->get(LoggerInterface::class)->error($e);
-        }
     }
 }
