@@ -58,7 +58,7 @@ class MeetingRegistrationForm extends Form
     public function getActions()
     {
         return FieldList::create(
-            FormAction::create('doSave', _t(self::class.'.doSave', 'save'))
+            FormAction::create('doSaveMeeting', _t(self::class.'.doSave', 'save'))
             ->addExtraClass('btn btn-primary bg-secondary-hover border-0 flex-grow-1'),
         );
     }
@@ -74,7 +74,7 @@ class MeetingRegistrationForm extends Form
         ));
     }
 
-    public function doSave($data) {
+    public function doSaveMeeting($data) {
         $meetingID = $data['MeetingID'];
         $meeting = Meeting::get()->byID($meetingID);
         $registration = new MeetingRegistration();

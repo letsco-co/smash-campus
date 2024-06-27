@@ -22,8 +22,6 @@ class MeetingController extends PageController
         'RegistrationForm',
         'GuestInvitationForm',
         'Newsletter',
-        'NewsletterForm',
-        'DoSave',
     ];
 
     private static $url_handlers = [
