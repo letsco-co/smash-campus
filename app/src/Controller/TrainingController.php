@@ -2,6 +2,7 @@
 
 namespace LetsCo\Controller;
 
+use LetsCo\Email\BrevoEmailProvider;
 use LetsCo\Form\TrainingRegistrationIndividualForm;
 use LetsCo\Model\Training\Training;
 use PageController;
@@ -47,6 +48,7 @@ class TrainingController extends PageController
             $form = TrainingRegistrationIndividualForm::create($this, 'RegistrationForm');
             $form->setDisplayLink($training->Link());
             $form->setFormAction($training->Link().'/'.$form->getName());
+            $form->setEmailProvider(new BrevoEmailProvider());
             $form->enableSpamProtection();
             $data['Form'] = $form;
         }
@@ -62,6 +64,7 @@ class TrainingController extends PageController
         $training = Training::get()->byID($this->getRequest()->postVar("TrainingID"));
         $form->setDisplayLink($training->Link());
         $form->setFormAction($training->Link().'/'.$form->getName());
+        $form->setEmailProvider(new BrevoEmailProvider());
         $form->enableSpamProtection();
         return $form;
     }
