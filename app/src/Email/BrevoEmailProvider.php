@@ -15,7 +15,9 @@ use GuzzleHttp\Client;
 use InvalidArgumentException;
 use LetsCo\Interface\EmailProvider;
 use phpDocumentor\Reflection\Types\False_;
+use Psr\Log\LoggerInterface;
 use SilverStripe\Core\Environment;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\SiteConfig\SiteConfig;
 
 class BrevoEmailProvider implements EmailProvider
@@ -83,7 +85,7 @@ class BrevoEmailProvider implements EmailProvider
         try {
             return $apiInstance->createList($createList);
         } catch (Exception $e) {
-            echo 'Exception when calling ContactsApi->createFolder: ', $e->getMessage(), PHP_EOL;
+            Injector::inst()->get(LoggerInterface::class)->error($e);
             return false;
         }
     }
@@ -102,7 +104,7 @@ class BrevoEmailProvider implements EmailProvider
         try {
             return $apiInstance->addContactToList($listId, $contactIdentifiers);
         } catch (Exception $e) {
-            echo 'Exception when calling ContactsApi->addContactToList: ', $e->getMessage(), PHP_EOL;
+            Injector::inst()->get(LoggerInterface::class)->error($e);
             return false;
         }
     }
