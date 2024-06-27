@@ -2,9 +2,9 @@
 
 namespace LetsCo\Form;
 
-use LetsCo\Interface\EmailProvider;
 use LetsCo\Model\Meeting\Meeting;
 use LetsCo\Model\Meeting\MeetingRegistration;
+use SilverStripe\Control\Director;
 use SilverStripe\Control\RequestHandler;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\EmailField;
@@ -18,7 +18,6 @@ use SilverStripe\Forms\TextField;
 
 class MeetingRegistrationForm extends Form
 {
-    private EmailProvider $emailProvider;
     public function __construct(RequestHandler $controller = null, $name = self::DEFAULT_NAME)
     {
         $fields = $this->getFields();
@@ -91,7 +90,16 @@ class MeetingRegistrationForm extends Form
         }
         $URLgetVar = "?CompletionStep=$completionStep";
         $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().$URLgetVar : $this->getController()->Link();
-        $this->extend('updateDoSaveMeetingNotification', $completionStep, $data, $meeting);
+        $emailParams = [
+            "Conference" => [
+                'Nom' => $meeting->Title,
+                'Date' => $meeting->Date,
+                'Heure' => $meeting->Time,
+                'Lien' => Director::absoluteURL((string) $meeting->Link()),
+            ],
+            "IsInWaitingList" => $completionStep == "WaitingList",
+        ];
+        $this->extend('sendValidationEmail',  $data, $meeting, $emailParams);
         return $this->getController()->redirect($link);
 
     }

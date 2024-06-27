@@ -4,14 +4,13 @@ namespace LetsCo\Extension;
 
 use LetsCo\Email\DefaultEmailProvider;
 use LetsCo\Interface\EmailProvider;
-use LetsCo\Model\Meeting\Meeting;
+use LetsCo\Model\Event;
 use Psr\Log\LoggerInterface;
-use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
 
-class MeetingRegistrationFormNotification extends Extension
+class EventFormNotification extends Extension
 {
     private EmailProvider $emailProvider;
     public function notificationConstructor()
@@ -19,33 +18,18 @@ class MeetingRegistrationFormNotification extends Extension
         $this->emailProvider =  Injector::inst()->create(DefaultEmailProvider::class);
     }
 
-    private function sendValidationEmail(string $completionStep, $data, Meeting $meeting)
+    public function sendValidationEmail(&$data, Event &$event, array $emailParams)
     {
         $this->emailProvider->getOrCreateContact($data['Email']);
-        $this->emailProvider->addContactToList($meeting->ListId, $data['Email']);
+        $this->emailProvider->addContactToList($event->ListId, $data['Email']);
         $this->emailProvider->addContactToList(Environment::getEnv('BREVO_NEWSLETTER_LIST_ID'), $data['Email']);
         $name = $data['FirstName'] . ' '. $data['LastName'];
         $to = [['name' => $name, 'email' => $data['Email']]];
         $templateId = Environment::getEnv('BREVO_MEETING_TEMPLATE_ID');
-        $params = [
-            "Name" => $name,
-            "Conference" => [
-                'Nom' => $meeting->Title,
-                'Date' => $meeting->Date,
-                'Heure' => $meeting->Time,
-                'Lien' => Director::absoluteURL((string) $meeting->Link()),
-            ],
-            "IsInWaitingList" => $completionStep == "WaitingList",
-        ];
         try {
-            $this->emailProvider->send($to, $templateId, $params);
+            $this->emailProvider->send($to, $templateId, $emailParams);
         } catch (\Exception $e) {
             Injector::inst()->get(LoggerInterface::class)->error($e);
         }
-    }
-
-    public function updateDoSaveMeetingNotification(&$completionStep, &$data, &$meeting)
-    {
-        $this->sendValidationEmail($completionStep, $data, $meeting);
     }
 }

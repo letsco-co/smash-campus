@@ -5,9 +5,3 @@ Silverstripe\SiteConfig\SiteConfig:
 LetsCo\PageType\StaticPage:
   extensions:
     - DNADesign\Elemental\Extensions\ElementalPageExtension
-LetsCo\Model\Training\Training:
-  extensions:
-    - LetsCo\Extension\EventNotification
-LetsCo\Model\Meeting\Meeting:
-  extensions:
-    - LetsCo\Extension\EventNotification
