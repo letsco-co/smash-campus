@@ -269,6 +269,7 @@ fr:
   LetsCo\Form\Steps\MeetingGuestNumberStep:
     Guests: 'Inviter des personnes'
     NumberGuests: 'Nombre de personnes à inviter'
+    ChooseOption: 'Choisissez le nombre de personnes à inviter'
   LetsCo\Meeting\MeetingSpeaker:
     SINGULARNAME: "intervenant"
     PLURALNAME: "intervenants"

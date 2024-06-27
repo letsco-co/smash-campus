@@ -4,3 +4,5 @@ Name: app-spamprotection
 SilverStripe\SpamProtection\Extension\FormSpamProtectionExtension:
   default_spam_protector: Innoweb\SpamProtectionHoneypot\SpamProtector\HoneypotSpamProtector
   field_name: 'AdditionalInformation'
+Innoweb\SpamProtectionHoneypot\FormField\HoneypotField:
+  time_limit: 5

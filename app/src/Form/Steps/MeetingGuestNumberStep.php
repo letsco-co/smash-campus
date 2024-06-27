@@ -20,7 +20,7 @@ class MeetingGuestNumberStep extends MultiFormStep
         return FieldList::create(
             HiddenField::create('MeetingID', null, $trainingID),
             HeaderField::create('Guests', _t(self::class.'.Guests', 'Invite guests') ,3),
-            DropdownField::create('NumberGuests', _t(self::class.'.NumberGuests', 'Number of guests'), [1=>1,2=>2,3=>3])->addExtraClass('form-select')
+            DropdownField::create('NumberGuests', _t(self::class.'.NumberGuests', 'Number of guests'), [1=>1,2=>2,3=>3])->addExtraClass('form-select')->setEmptyString(_t(self::class.".ChooseOption", "Choose an option"))
         );
     }
     public function getNextStep()
