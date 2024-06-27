@@ -4,6 +4,7 @@ namespace LetsCo\Form;
 
 use LetsCo\Form\Steps\MeetingGuestNumberStep;
 use LetsCo\Model\Meeting\Meeting;
+use SilverStripe\Control\Director;
 use SilverStripe\MultiForm\Forms\MultiForm;
 use SilverStripe\MultiForm\Models\MultiFormStep;
 use SilverStripe\ORM\ArrayList;
@@ -11,6 +12,11 @@ use SilverStripe\ORM\ArrayList;
 class MeetingInvitationForm extends MultiForm
 {
     private static $start_step = MeetingGuestNumberStep::class;
+    public function __construct($controller, $name)
+    {
+        $this->extend('notificationConstructor');
+        parent::__construct($controller, $name);
+    }
 
     public function actionsFor($step)
     {
@@ -40,14 +46,31 @@ class MeetingInvitationForm extends MultiForm
             $meetingID = $firstStepData['MeetingID'];
             $meetingLink = Meeting::get()->byID($meetingID)->Link();
             $steps = $steps->exclude('ClassName',MeetingGuestNumberStep::class);
+            $dataToLink = [
+                'FirstName',
+                'LastName',
+                'Email',
+                'StructureName',
+                'Fonction'
+            ];
             foreach ($steps as $step) {
                 $data = $step->loadData();
                 unset($data['MeetingID'], $data['Class'], $data['Guest']);
                 $invitationLink = $meetingLink . "?";
                 foreach ($data as $key => $datum) {
+                    if (!in_array($key, $dataToLink)) continue;
                     $invitationLink .= $key.'='.$datum.'&';
                 }
+                $meeting = Meeting::get()->byID($meetingID);
                 $invitationLink .= 'IsGuest=true';
+                $emailParams = [
+                    'Conference' => [
+                        'Lien' => Director::absoluteURL($invitationLink),
+                        'Nom' => $meeting->Title,
+                    ]
+                ];
+                $this->extend('sendValidationEmail', $data, $emailParams);
+
             }
         }
         $link = $meetingLink.'?CompletionStep=GuestsInvited';
