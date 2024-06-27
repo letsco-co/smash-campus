@@ -32,6 +32,7 @@ class MeetingRegistrationForm extends Form
         $trainingURLSegment = $this->getRequest()->param("Action");
         $training = Meeting::get()->filter("URLSegment", $trainingURLSegment)->first();
         $trainingID = $training->ID ?? 0;
+        $RGPDPage = \Page::get()->filter("IsRGPDPage", 1)->first();
         return FieldList::create(
             HiddenField::create('MeetingID', null, $trainingID),
             HiddenField::create('IsGuest', null, $this->getRequest()->getVar('IsGuest')),
@@ -41,7 +42,7 @@ class MeetingRegistrationForm extends Form
             TextField::create('StructureName', _t(MeetingRegistration::class.'.StructureName', 'StructureName'))->addExtraClass("form-control"),
             TextField::create('Fonction', _t(MeetingRegistration::class.'.Fonction', 'Fonction'))->addExtraClass("form-control"),
             CheckboxField::create('AcceptRGPD', _t(MeetingRegistration::class.'.AcceptRGPD', 'AcceptRGPD')),
-            LiteralField::create('RGPDLink', '<a class="link-underline link-underline-opacity-0" href="#">
+            LiteralField::create('RGPDLink', '<a class="link-underline link-underline-opacity-0" href="'.$RGPDPage->Link().'">
                                                       Politique de confidentialité
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
