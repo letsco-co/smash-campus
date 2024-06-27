@@ -105,6 +105,9 @@ class MeetingRegistrationForm extends Form
 
     private function sendValidationEmail(string $completionStep, $data, Meeting $meeting)
     {
+        $contact = $this->emailProvider->getOrCreateContact($data['Email']);
+        $this->emailProvider->addContactToList($meeting->ListId, $contact['email']);
+        $this->emailProvider->addContactToList(Environment::getEnv('BREVO_NEWSLETTER_LIST_ID'), $contact['email']);
         $name = $data['FirstName'] . ' '. $data['LastName'];
         $to = [['name' => $name, 'email' => $data['Email']]];
         $templateId = Environment::getEnv('BREVO_MEETING_TEMPLATE_ID');
