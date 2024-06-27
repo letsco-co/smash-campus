@@ -2,9 +2,7 @@
 
 namespace {
 
-    use LetsCo\Email\BrevoEmailProvider;
     use SilverStripe\CMS\Controllers\ContentController;
-    use SilverStripe\Core\Environment;
     use SilverStripe\Forms\EmailField;
     use SilverStripe\Forms\FieldList;
     use SilverStripe\Forms\Form;
@@ -68,9 +66,7 @@ namespace {
 
         public function doSave($data, $form)
         {
-            $email = new BrevoEmailProvider();
-            $contact = $email->getOrCreateContact($data['Email']);
-            $email->addContactToList(Environment::getEnv('BREVO_NEWSLETTER_LIST_ID'), $contact['email']);
+            $this->extend('saveToList', $data);
             $form->sessionMessage(_t(self::class.'.Form_Validate', 'Your request has been sent to us'), 'good');
             return $this->redirectBack();
         }

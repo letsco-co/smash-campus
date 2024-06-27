@@ -2,6 +2,7 @@
 
 use LetsCo\Extension\EventNotification;
 use LetsCo\Extension\EventFormNotification;
+use LetsCo\Extension\NewsletterEmailList;
 use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Form\TrainingRegistrationIndividualForm;
 use LetsCo\Model\Meeting\Meeting;
@@ -14,6 +15,7 @@ i18n::set_locale('fr_FR');
 if (Environment::getEnv('BREVO_API_KEY')) {
     Meeting::add_extension(EventNotification::class);
     Training::add_extension(EventNotification::class);
+    PageController::add_extension(NewsletterEmailList::class);
     MeetingRegistrationForm::add_extension(EventFormNotification::class);
     TrainingRegistrationIndividualForm::add_extension(EventFormNotification::class);
 }
