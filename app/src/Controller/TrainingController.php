@@ -14,8 +14,6 @@ class TrainingController extends PageController
     private static $allowed_actions = [
         'getTraining',
         'RegistrationForm',
-        'NewsletterForm',
-        'doSave',
     ];
 
     private static $url_handlers = [
