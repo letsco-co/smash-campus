@@ -389,6 +389,8 @@ fr:
   LetsCo\Extension\MaintenanceModeSiteConfig:
     SETTINGSACTIVATE: 'Activer la maintenance du site'
     SETTINGSHEADING: 'Mode maintenance'
+  PageController:
+    Form_Validate: 'Votre inscription a bien été prise en compte'
   SilverStripe\LinkField\Controllers\LinkFieldController:
     CREATE_LINK: 'Créer un lien'
     MENUTITLE: 'Champs liens'

@@ -4,13 +4,17 @@ namespace LetsCo\Email;
 
 use Brevo\Client\Api\ContactsApi;
 use Brevo\Client\Api\TransactionalEmailsApi;
+use Brevo\Client\ApiException;
 use Brevo\Client\Configuration;
+use Brevo\Client\Model\AddContactToList;
 use Brevo\Client\Model\CreateContact;
 use Brevo\Client\Model\CreateList;
 use Brevo\Client\Model\SendSmtpEmail;
 use Exception;
 use GuzzleHttp\Client;
+use InvalidArgumentException;
 use LetsCo\Interface\EmailProvider;
+use phpDocumentor\Reflection\Types\False_;
 use SilverStripe\Core\Environment;
 use SilverStripe\SiteConfig\SiteConfig;
 
@@ -44,7 +48,7 @@ class BrevoEmailProvider implements EmailProvider
 
 
 
-    public function createContact()
+    public function createContact($email, $list= null)
     {
         $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', Environment::getEnv('BREVO_API_KEY'));
 
@@ -53,8 +57,13 @@ class BrevoEmailProvider implements EmailProvider
             $config
         );
         $createContact = new CreateContact(); // Values to create a contact
-        $createContact['email'] = 'auriane.chay@letsco.co';
-        $createContact['listIds'] = [8];
+        $createContact['email'] = $email;
+        if (is_int($list)) {
+            $list = [$list];
+        }
+        if ($list) {
+            $createContact['listIds'] = $list;
+        }
 
         return $apiInstance->createContact($createContact);
     }
@@ -75,6 +84,49 @@ class BrevoEmailProvider implements EmailProvider
             return $apiInstance->createList($createList);
         } catch (Exception $e) {
             echo 'Exception when calling ContactsApi->createFolder: ', $e->getMessage(), PHP_EOL;
+            return false;
+        }
+    }
+
+    public function addContactToList($listId, $contactEmail)
+    {
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', Environment::getEnv('BREVO_API_KEY'));
+
+        $apiInstance = new ContactsApi(
+            new Client(),
+            $config
+        );
+        $contactIdentifiers = new AddContactToList();
+        $contactIdentifiers['emails'] = [$contactEmail];
+
+        try {
+            return $apiInstance->addContactToList($listId, $contactIdentifiers);
+        } catch (Exception $e) {
+            echo 'Exception when calling ContactsApi->addContactToList: ', $e->getMessage(), PHP_EOL;
+            return false;
+        }
+    }
+
+    public function getContact($email)
+    {
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', Environment::getEnv('BREVO_API_KEY'));
+
+        $apiInstance = new ContactsApi(
+            new Client(),
+            $config
+        );
+
+        return $apiInstance->getContactInfo($email);
+    }
+
+    public function getOrCreateContact(string $email, $listId = null)
+    {
+        try {
+            return $this->getContact($email);
+        } catch (ApiException $e) {
+            if ($e->getCode() == 404) {
+                return $this->createContact($email, $listId);
+            }
             return false;
         }
     }
