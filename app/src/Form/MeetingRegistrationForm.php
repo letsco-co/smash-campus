@@ -2,6 +2,8 @@
 
 namespace LetsCo\Form;
 
+use ICS;
+use LetsCo\Extension\EventFormNotification;
 use LetsCo\Model\Meeting\Meeting;
 use LetsCo\Model\Meeting\MeetingRegistration;
 use SilverStripe\Control\Director;
@@ -15,6 +17,7 @@ use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextField;
+use SilverStripe\SiteConfig\SiteConfig;
 
 class MeetingRegistrationForm extends Form
 {
@@ -91,17 +94,48 @@ class MeetingRegistrationForm extends Form
         }
         $URLgetVar = "?CompletionStep=$completionStep";
         $link = $meetingID ? Meeting::get()->byID($meetingID)->Link().$URLgetVar : $this->getController()->Link();
+        $this->sendEmail($meeting, $completionStep, $data);
+        return $this->getController()->redirect($link);
+
+    }
+
+    /**
+     * @param $meeting
+     * @param string $completionStep
+     * @param $data
+     */
+    public function sendEmail($meeting, string $completionStep, $data)
+    {
+        if (!$this->hasExtension(EventFormNotification::class)) return;
+        date_default_timezone_set('Europe/Paris');
+        $date = new \DateTime($meeting->Date . ' '. $meeting->Time);
+        $start = clone $date;
+        $end = $date->modify("+{$meeting->Duration} hours");
+//        user_error(json_encode([$date->format("Y-m-d H:i:s"), $start->format("Y-m-d H:i:s"),  $end->format("Y-m-d H:i:s")]), E_USER_ERROR);
+        $location = $meeting->Address;
+
+        //Generate ICS file
+        $ics = new ICS([
+            'location' => $location,
+            'dtstart' => $start->format("Y-m-d H:i:s e"),
+            'dtend' => $end->format("Y-m-d H:i:s e"),
+            'summary' => $meeting->Title,
+            'ORGANIZER' => 'CN='.SiteConfig::current_site_config()->Title.':mailto:'.SiteConfig::current_site_config()->Email,
+        ]);
+//        user_error(json_encode([$start->format("Y-m-d H:i:s e"), $end->format("Y-m-d H:i:s e")]), E_USER_ERROR);
         $emailParams = [
             "Conference" => [
                 'Nom' => $meeting->Title,
                 'Date' => $meeting->Date,
                 'Heure' => $meeting->Time,
-                'Lien' => Director::absoluteURL((string) $meeting->Link()),
+                'Lien' => Director::absoluteURL((string)$meeting->Link()),
             ],
             "IsInWaitingList" => $completionStep == "WaitingList",
         ];
-        $this->extend('sendValidationEmail',  $data, $meeting, $emailParams);
-        return $this->getController()->redirect($link);
-
+        $icsParam = [[
+            'content' => base64_encode($ics->to_string()),
+            'name' => "invitation.ics"
+        ]];
+        $this->extend('sendValidationEmail', $data, $meeting, $emailParams, $icsParam);
     }
 }

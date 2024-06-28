@@ -19,7 +19,7 @@ class EventFormNotification extends Extension
         $this->emailProvider =  Injector::inst()->create(DefaultEmailProvider::class);
     }
 
-    public function sendValidationEmail(&$data, Event &$event, array &$emailParams)
+    public function sendValidationEmail(&$data, Event &$event, array &$emailParams, $ics)
     {
         $this->emailProvider->getOrCreateContact($data['Email']);
         $this->emailProvider->addContactToList($event->ListId, $data['Email']);
@@ -35,8 +35,9 @@ class EventFormNotification extends Extension
         ];
         $params = array_merge($params, $emailParams);
         try {
-            $this->emailProvider->send($to, $templateId, $params);
+            $this->emailProvider->send($to, $templateId, $params, $ics);
         } catch (\Exception $e) {
+            user_error(json_encode([$e->getMessage()]), E_USER_ERROR);
             Injector::inst()->get(LoggerInterface::class)->error($e);
         }
     }

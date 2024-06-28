@@ -24,7 +24,7 @@ use SilverStripe\SiteConfig\SiteConfig;
 class BrevoEmailProvider implements EmailProvider
 {
 
-    public function send($to, $templateID, $params)
+    public function send($to, $templateID, $params, $attachment= null)
     {
         $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', Environment::getEnv('BREVO_API_KEY'));
         $config = Configuration::getDefaultConfiguration()->setApiKey('partner-key', Environment::getEnv('BREVO_API_KEY'));
@@ -39,13 +39,17 @@ class BrevoEmailProvider implements EmailProvider
         if ($siteConfig->Title) {
             $sender['name'] = $siteConfig->Title;
         }
-        $sendSmtpEmail = new SendSmtpEmail([
+        $sendParams = [
             'sender' => $sender,
             'replyTo' => $sender,
             'to' => $to,
             'params' => $params,
             'templateId' => $templateID,
-        ]);
+        ];
+        if ($attachment) {
+            $sendParams['attachment'] = $attachment;
+        }
+        $sendSmtpEmail = new SendSmtpEmail($sendParams);
         return $apiInstance->sendTransacEmail($sendSmtpEmail);
     }
 

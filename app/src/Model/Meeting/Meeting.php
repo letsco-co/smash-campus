@@ -35,6 +35,7 @@ class Meeting extends Event
     private static $db = [
         'Date' => 'Date',
         'Time' => 'Time',
+        'Duration' => 'Int',
         'Limit' => 'Int',
     ];
     private static $has_one = [
