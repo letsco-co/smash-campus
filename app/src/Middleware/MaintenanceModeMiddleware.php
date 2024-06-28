@@ -27,7 +27,7 @@ class MaintenanceModeMiddleware implements HTTPMiddleware
             return $response;
         }
         //Is visitor trying to hit the admin URL?  Give them a chance to log in.
-        if("Security/login" == $url) {
+        if(preg_match('/^Security\/.+/', $url)) {
             return $response;
         }
 
