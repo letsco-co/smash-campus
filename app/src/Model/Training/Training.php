@@ -78,6 +78,12 @@ class Training extends Event
 
     public function getCMSFields()
     {
+        if (!$this->ID)
+        {
+            return FieldList::create(
+                TextField::create('Title', _t(self::class . '.Title', 'Title')),
+            );
+        }
         $TabSet = TabSet::create('Root');
         $this->setMainTab($TabSet);
 

@@ -21,6 +21,7 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\SearchableMultiDropdownField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\Security\Permission;
@@ -61,6 +62,12 @@ class Meeting extends Event
 
     public function getCMSFields()
     {
+        if (!$this->ID)
+        {
+            return FieldList::create(
+                TextField::create('Title', _t(self::class . '.Title', 'Title')),
+            );
+        }
         $fields = parent::getCMSFields();
         $fields->removeByName('URLSegment');
         $fields->removeByName('Images');
