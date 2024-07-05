@@ -59,6 +59,14 @@ fr:
     Financing_Individual: 'Individuelle'
     OtherTrainings: 'Voir d''autres formations'
     DiscoverOtherTrainings: 'Découvrir d''autres formations'
+    DEFAULT_MODALITIES: "La formation est ouverte à l’inscription tout au long de l’année. Les sessions sont entre 10 et
+                        15 personnes.
+                        Les délais moyens pour débuter la formation dépendent de la période à laquelle vous
+                        souhaitez vous former. Néanmoins, nous pourrions débuter votre formation au plus tard sous
+                        2 mois suite au premier contact. Nous vous invitons à nous contacter pour en savoir plus."
+    DEFAULT_ACCESSIBILITY: "Pour tout besoin spécifique en matière de handicap, nous vous invitons à
+                            nous contacter directement à l’adresse campus.smash@smash.fr, afin d&#39;étudier ensemble
+                            les possibilités de suivre la formation."
   LetsCo\Model\Training\TrainingCategory:
     SINGULARNAME: 'domaine'
     PLURALNAME: 'domaines'

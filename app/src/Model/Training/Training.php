@@ -62,6 +62,13 @@ class Training extends Event
         'Title'
     ];
 
+    public function populateDefaults()
+    {
+        $this->Modalities = _t(self::class.'.DEFAULT_MODALITIES', '');
+        $this->Accessibility = _t(self::class.'.DEFAULT_ACCESSIBILITY', '');
+        parent::populateDefaults();
+    }
+
     public function Link($action = null)
     {
         $link = $this->Category()->Link($this->URLSegment.'/'.$action);
