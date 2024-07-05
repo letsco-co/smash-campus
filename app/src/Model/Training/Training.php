@@ -64,8 +64,8 @@ class Training extends Event
 
     public function populateDefaults()
     {
-        $this->Modalities = _t(self::class.'.DEFAULT_MODALITIES', '');
-        $this->Accessibility = _t(self::class.'.DEFAULT_ACCESSIBILITY', '');
+        $this->Modalities = _t(self::class.'.DEFAULT_MODALITIES', 'Modalities');
+        $this->Accessibility = _t(self::class.'.DEFAULT_ACCESSIBILITY', 'Accessibility');
         parent::populateDefaults();
     }
 
