@@ -170,16 +170,19 @@ fr:
   LetsCo\FormField\FrenchPostCodeField:
     INVALID: 'Merci de renseigner un code postal valide'
   LetsCo\Model\Program:
-    SINGULARNAME: "programme"
-    PLURALNAME: "programmes"
+    SINGULARNAME: "module"
+    PLURALNAME: "modules"
     PLURALS:
-      one: "Un programme"
-      other: "{count} programmes"
-    Title: 'Partie/Sous-partie'
+      one: "Un module"
+      other: "{count} modules"
+    Title: 'Titre du module'
     Event: 'Évènement'
-    Parent: 'Partie/Sous-partie parente'
-    Parent_Title: 'Partie/Sous-partie parente'
-    Parent_title: 'Partie/Sous-partie parente'
+    Parent: 'Module parent'
+    Parent_Title: 'Module parente'
+    Parent_title: 'Module parente'
+    ChildrenList: 'Parties'
+    Parts: 'Sous-parties'
+    SubTitle: 'Titre de la sous-partie'
   LetsCo\PageType\TrainingHolder:
     SINGULARNAME: "Page formations"
     PLURALNAME: "Pages formations"
@@ -494,3 +497,5 @@ fr:
   SilverStripe\UserForms\Model\UserDefinedForm:
     DESCRIPTION: 'Ajouter un formulaire personnalisé.'
     SINGULARNAME: 'Formulaire Défini par l''Utilisateur'
+  GridFieldExtensions:
+    ADD: 'Ajouter une nouvelle ligne'
