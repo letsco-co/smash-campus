@@ -59,7 +59,7 @@ namespace {
                 'Email',
             ]);
             $form = new Form($this, __FUNCTION__,$fields,$actions, $validator);
-            $form->setTemplate('SearchForm');
+            $form->setTemplate('NewsletterForm');
             $form->enableSpamProtection();
             return $form;
         }
