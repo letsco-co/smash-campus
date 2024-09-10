@@ -2,8 +2,11 @@
 
 namespace tests;
 
+use LetsCo\Interface\EmailProvider;
+use LetsCo\Model\Meeting\MeetingRegistration;
 use LetsCo\Task\SendMeetingReminderTask;
 use SilverStripe\Dev\SapphireTest;
+use tests\Stubs\TestEmailProvider;
 
 class SendMeetingReminderTaskTest extends SapphireTest
 {
@@ -45,5 +48,12 @@ class SendMeetingReminderTaskTest extends SapphireTest
     {
         $date = $this->reminderTask->getDateInXDays(7, new \DateTime("2024-06-21"));
         $this->assertEquals("2024-06-28", $date);
+    }
+
+    public function testCorrectNameForEmailParams()
+    {
+        $registration = $this->objFromFixture(MeetingRegistration::class, 'meeting4registration');
+        $params = $this->reminderTask->getParams($registration, '2');
+        $this->assertEquals('TestName Test', $params['Nom']);
     }
 }

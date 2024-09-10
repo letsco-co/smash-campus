@@ -31,8 +31,8 @@ class SendMeetingReminderTask extends BuildTask implements CronTask
     {
         if (Environment::getEnv('BREVO_API_KEY')) {
             $email = Injector::inst()->create(DefaultEmailProvider::class);
-            $this->sendReminder(7, $email);
-            $this->sendReminder(3, $email);
+            $this->sendReminders(7, $email);
+            $this->sendReminders(3, $email);
         }
     }
 
@@ -52,22 +52,17 @@ class SendMeetingReminderTask extends BuildTask implements CronTask
      * @param EmailProvider $email
      * @return void
      */
-    public function sendReminder(int $daysAhead, EmailProvider $email): void
+    public function sendReminders(int $daysAhead, EmailProvider $email): void
     {
         $date = $this->getDateInXDays($daysAhead, new DateTime());
         $meetingRegistrations = $this->getMeetingRegistrationsForMeetingHappeningThatDay($date)->filter('Status', MeetingRegistration::STATUS_ACCEPTED);
         foreach ($meetingRegistrations as $meetingRegistration) {
             try {
-                $meeting = $meetingRegistration->Meeting();
-                $meetingDate = new DateTime($meeting->Date);
-                $email->send([["email" => $meetingRegistration->Email]], Environment::getEnv('BREVO_MEETING_REMINDER_TEMPLATE_ID'), [
-                    'Nom' => $meetingRegistration->FirstName . ' ' . $meetingRegistration->LastName,
-                    'Conference' => [
-                        "Nom" => $meetingRegistration->Meeting()->Title,
-                        "Date" => $meetingDate->format("d/m/Y"),
-                    ],
-                    "Jours" => $daysAhead,
-                ]);
+                $email->send(
+                    [["email" => $meetingRegistration->Email]],
+                    Environment::getEnv('BREVO_MEETING_REMINDER_TEMPLATE_ID'),
+                    $this->getParams($meetingRegistration, $daysAhead)
+                );
             } catch (ApiException $exception) {
                 user_error(json_encode([$exception->getMessage()]), E_USER_ERROR);
             }
@@ -79,5 +74,25 @@ class SendMeetingReminderTask extends BuildTask implements CronTask
         if (Environment::getEnv('BREVO_API_KEY')) {
             $this->process();
         }
+    }
+
+    /**
+     * @param $meetingRegistration
+     * @param int $daysAhead
+     * @return array
+     * @throws \Exception
+     */
+    public function getParams($meetingRegistration, int $daysAhead): array
+    {
+        $meeting = $meetingRegistration->Meeting();
+        $meetingDate = new DateTime($meeting->Date);
+        return [
+            'Nom' => $meetingRegistration->FirstName . ' ' . $meetingRegistration->LastName,
+            'Conference' => [
+                "Nom" => $meeting->Title,
+                "Date" => $meetingDate->format("d/m/Y"),
+            ],
+            "Jours" => $daysAhead,
+        ];
     }
 }
