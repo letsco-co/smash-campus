@@ -59,6 +59,11 @@
             "silverstripe/vendor-plugin": true
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "app/tests/"
+        }
+    },
     "prefer-stable": true,
     "minimum-stability": "dev"
 }
