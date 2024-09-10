@@ -17,9 +17,9 @@ class SendMeetingReminderTaskTest extends SapphireTest
         $this->reminderTask = new SendMeetingReminderTask();
     }
 
-    public function testGetNoMeetingWhenNoneThatDay()
+    public function testGetNoMeetingRegistrationWhenNoneThatDay()
     {
         $meetings = $this->reminderTask->getMeetingRegistrationsForMeetingHappeningThatDay('2024-06-30');
-        $this->assertCount(0,$meetings);
+        $this->assertCount(0,a);
     }
 }
