@@ -41,7 +41,7 @@ class SendMeetingReminderTaskTest extends SapphireTest
         $this->assertEquals("2024-06-24", $date);
     }
 
-    public function testGet20240628WhenIn2DaysAndBaseDateIs20240621()
+    public function testGet20240628WhenIn7DaysAndBaseDateIs20240621()
     {
         $date = $this->reminderTask->getDateInXDays(7, new \DateTime("2024-06-21"));
         $this->assertEquals("2024-06-28", $date);
