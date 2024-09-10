@@ -7,3 +7,11 @@ LetsCo\Model\Meeting\Meeting:
     Title: 'Nouveau Meeting'
     Date: '2024-06-30'
     Time: '14:00'
+LetsCo\Model\Meeting\MeetingRegistration:
+  meeting1registration:
+    LastName: 'test'
+    FirstName: 'test'
+    Email: 'email@letsco.co'
+    AcceptRGPD: true
+    AcceptOtherInfos: true
+    Meeting: =>LetsCo\Model\Meeting\Meeting.meeting1

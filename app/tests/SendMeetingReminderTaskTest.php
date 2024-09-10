@@ -22,4 +22,10 @@ class SendMeetingReminderTaskTest extends SapphireTest
         $meetings = $this->reminderTask->getMeetingRegistrationsForMeetingHappeningThatDay('2024-06-30');
         $this->assertCount(0,$meetings);
     }
+
+    public function testGet1MeetingRegistrationWhen1ThatDay()
+    {
+        $meetings = $this->reminderTask->getMeetingRegistrationsForMeetingHappeningThatDay('2024-06-28');
+        $this->assertCount(1,$meetings);
+    }
 }
