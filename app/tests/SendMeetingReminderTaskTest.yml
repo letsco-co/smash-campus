@@ -7,6 +7,10 @@ LetsCo\Model\Meeting\Meeting:
     Title: 'Nouveau Meeting'
     Date: '2024-06-30'
     Time: '14:00'
+  meeting3:
+    Title: 'Nouveau Meeting'
+    Date: '2024-06-05'
+    Time: '14:00'
 LetsCo\Model\Meeting\MeetingRegistration:
   meeting1registration:
     LastName: 'test'
@@ -15,3 +19,17 @@ LetsCo\Model\Meeting\MeetingRegistration:
     AcceptRGPD: true
     AcceptOtherInfos: true
     Meeting: =>LetsCo\Model\Meeting\Meeting.meeting1
+  meeting3registration1:
+    LastName: 'test'
+    FirstName: 'test'
+    Email: 'email@letsco.co'
+    AcceptRGPD: true
+    AcceptOtherInfos: true
+    Meeting: =>LetsCo\Model\Meeting\Meeting.meeting3
+  meeting3registration2:
+    LastName: 'test'
+    FirstName: 'test'
+    Email: 'email@letsco.co'
+    AcceptRGPD: true
+    AcceptOtherInfos: true
+    Meeting: =>LetsCo\Model\Meeting\Meeting.meeting3
