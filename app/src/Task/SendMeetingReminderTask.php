@@ -41,9 +41,8 @@ class SendMeetingReminderTask extends BuildTask implements CronTask
         return MeetingRegistration::get()->filter("Meeting.Date", $date);
     }
 
-    public function getDateInXDays(int $daysAhead) : string
+    public function getDateInXDays(int $daysAhead, DateTime $dateTime) : string
     {
-        $dateTime = new DateTime();
         $dateTime->modify("+$daysAhead days ");
         return $dateTime->format("Y-m-d");
     }
@@ -55,7 +54,7 @@ class SendMeetingReminderTask extends BuildTask implements CronTask
      */
     public function sendReminder(int $daysAhead, EmailProvider $email): void
     {
-        $date = $this->getDateInXDays($daysAhead);
+        $date = $this->getDateInXDays($daysAhead, new DateTime());
         $meetingRegistrations = $this->getMeetingRegistrationsForMeetingHappeningThatDay($date)->filter('Status', MeetingRegistration::STATUS_ACCEPTED);
         foreach ($meetingRegistrations as $meetingRegistration) {
             try {
