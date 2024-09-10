@@ -1,0 +1,9 @@
+LetsCo\Model\Meeting\Meeting:
+  meeting1:
+    Title: 'Nouveau Meeting'
+    Date: '2024-06-28'
+    Time: '14:00'
+  meeting2:
+    Title: 'Nouveau Meeting'
+    Date: '2024-06-30'
+    Time: '14:00'
