@@ -57,7 +57,7 @@ class SendMeetingReminderTaskTest extends SapphireTest
     public function testCorrectNameForEmailParams()
     {
         $registration = $this->objFromFixture(MeetingRegistration::class, 'meeting4registration');
-        $params = $this->reminderTask->getParams($registration, '2');
+        $params = $this->reminderTask->getParams($registration, 2);
         $this->assertEquals($registration->FirstName . ' ' . $registration->LastName, $params['Nom']);
     }
 
