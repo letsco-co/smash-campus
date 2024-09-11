@@ -11,13 +11,17 @@ use tests\Stubs\TestEmailProvider;
 class SendMeetingReminderTaskTest extends SapphireTest
 {
     protected static $fixture_file = 'SendMeetingReminderTaskTest.yml';
-
+    protected static $extra_dataobjects = [
+        TestEmailProvider::class,
+    ];
     protected SendMeetingReminderTask $reminderTask;
+    protected EmailProvider $emailProvider;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->reminderTask = new SendMeetingReminderTask();
+        $this->emailProvider = new TestEmailProvider();
     }
 
     public function testGetNoMeetingRegistrationWhenNoneThatDay()
@@ -55,5 +59,13 @@ class SendMeetingReminderTaskTest extends SapphireTest
         $registration = $this->objFromFixture(MeetingRegistration::class, 'meeting4registration');
         $params = $this->reminderTask->getParams($registration, '2');
         $this->assertEquals($registration->FirstName . ' ' . $registration->LastName, $params['Nom']);
+    }
+
+    public function testCorrectDaysForEmailParams()
+    {
+        $registration = $this->objFromFixture(MeetingRegistration::class, 'meeting4registration');
+        $days = 2;
+        $params = $this->reminderTask->getParams($registration, $days);
+        $this->assertEquals($days, $params['Jours']);
     }
 }
