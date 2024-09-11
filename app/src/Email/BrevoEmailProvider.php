@@ -84,7 +84,7 @@ class BrevoEmailProvider implements EmailProvider
             $config
         );
         $createList = new CreateList();
-        $createList['name'] = $listName;
+        $createList['name'] = strlen($listName) > 50 ? ($listName) : substr($listName, 0, 47) . '...';
         $createList['folderId'] = $folderId;
 
         try {
