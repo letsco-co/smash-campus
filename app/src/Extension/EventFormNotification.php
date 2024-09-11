@@ -22,7 +22,6 @@ class EventFormNotification extends Extension
     public function sendValidationEmail(&$data, Event &$event, array &$emailParams, $ics)
     {
         $this->emailProvider->getOrCreateContact($data['Email']);
-        $this->emailProvider->addContactToList($event->ListId, $data['Email']);
         $this->emailProvider->addContactToList(Environment::getEnv('BREVO_NEWSLETTER_LIST_ID'), $data['Email']);
         $name = $data['FirstName'] . ' '. $data['LastName'];
         $to = [['name' => $name, 'email' => $data['Email']]];
