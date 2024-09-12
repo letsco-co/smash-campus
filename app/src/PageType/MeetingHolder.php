@@ -24,4 +24,14 @@ class MeetingHolder extends \Page
         $fields->insertBefore('Content', $imageField);
         return $fields;
     }
+
+    public function Meetings()
+    {
+        return Meeting::get()->where('Date >= CURDATE()');
+    }
+
+    public function getAllMeetings()
+    {
+        return Meeting::get();
+    }
 }

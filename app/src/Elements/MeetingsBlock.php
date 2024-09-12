@@ -65,9 +65,9 @@ class MeetingsBlock extends BaseElement
         $posts = ArrayList::create();
 
         if ($this->MeetingHolderID && $blog = MeetingHolder::get()->byID($this->MeetingHolderID)) {
-            $posts = $blog->Meetings()->where('Date >= CURDATE()')->sort('Date ASC');
+            $posts = $blog->Meetings()->where('Date >= CURDATE()');
         } else {
-            $posts = Meeting::get()->sort('Date ASC');
+            $posts = Meeting::get();
         }
 
         $this->extend('updateGetPostsList', $posts);

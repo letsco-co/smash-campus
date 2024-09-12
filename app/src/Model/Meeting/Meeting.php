@@ -33,6 +33,8 @@ class Meeting extends Event
     use LocalizationDataObject;
     private static $table_name = 'Letsco_Meeting';
     private static string $cms_edit_owner = MeetingAdmin::class;
+
+    private static $default_sort = 'Date ASC';
     private static $db = [
         'Date' => 'Date',
         'Time' => 'Time',
