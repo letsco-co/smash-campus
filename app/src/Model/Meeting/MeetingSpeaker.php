@@ -59,6 +59,6 @@ class MeetingSpeaker extends DataObject
 
     public function canCreate($member = null, $context = [])
     {
-        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\MeetingAdmin', 'any', $member);
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
     }
 }
