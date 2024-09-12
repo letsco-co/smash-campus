@@ -12,17 +12,11 @@ use tests\Stubs\TestEmailProvider;
 class SendMeetingReminderTaskTest extends SapphireTest
 {
     protected static $fixture_file = 'SendMeetingReminderTaskTest.yml';
-    protected static $extra_dataobjects = [
-        TestEmailProvider::class,
-    ];
     protected SendMeetingReminderTask $reminderTask;
-    protected EmailProvider $emailProvider;
-
     protected function setUp(): void
     {
         parent::setUp();
         $this->reminderTask = new SendMeetingReminderTask();
-        $this->emailProvider = new TestEmailProvider();
     }
 
     public function testGetNoMeetingRegistrationWhenNoneThatDay()
