@@ -12,7 +12,6 @@ class MeetingSpeaker extends DataObject
 {
     use LocalizationDataObject;
     private static $table_name = 'Letsco_Speaker';
-    use LocalizationDataObject;
     private static $db = [
         'FirstName' => 'Varchar(255)',
         'LastName' => 'Varchar(255)',
