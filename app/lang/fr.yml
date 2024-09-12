@@ -56,7 +56,7 @@ fr:
     Registration_Text: 'Merci de l’intérêt que vous portez à notre formation. Vous allez recevoir un mail confirmant votre demande. Nous vous recontacterons prochainement pour plus de détails.'
     Registration_Financing: 'Je souhaite me former avec une prise en charge :'
     Financing_Structure: 'De mon entreprise'
-    Financing_Individual: 'Individuelle'
+    Financing_Personal: 'Individuelle'
     OtherTrainings: 'Voir d''autres formations'
     DiscoverOtherTrainings: 'Découvrir d''autres formations'
     DEFAULT_MODALITIES: "La formation est ouverte à l’inscription tout au long de l’année. Les sessions sont entre 10 et
