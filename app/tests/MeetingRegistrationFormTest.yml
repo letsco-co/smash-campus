@@ -2,6 +2,16 @@ LetsCo\Model\Meeting\Meeting:
   testMeeting:
     Title: "test meeting"
     Limit: 20
+  testMeeting2:
+    Title: "test meeting"
+    Limit: 20
+LetsCo\Model\Meeting\MeetingRegistration:
+  meetingRegistration:
+    Meeting: =>LetsCo\Model\Meeting\Meeting.testMeeting2
+    Email: "john@example.com"
+    FirstName: "John"
+    AcceptRGPD: true
+    AcceptOtherInfos: true
 \Page:
   rgpdPage:
     Title: "rgpd"

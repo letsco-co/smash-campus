@@ -93,4 +93,28 @@ class MeetingRegistrationFormTest extends SapphireTest
         $this->assertEquals(MeetingRegistration::STATUS_ACCEPTED, $registration->Status);
         $this->assertEquals($data['Email'], $registration->Email);
     }
+
+    public function testDoSaveMeetingRegistrationWhenMultipleRegistrationsButWithPlacesLeft()
+    {
+        $meeting = $this->objFromFixture(Meeting::class, 'testMeeting2');
+        $data = [
+            'MeetingID' => $meeting->ID,
+            'LastName' => 'Doe',
+            'FirstName' => 'Jeane',
+            'Email' => 'jeanne@example.com',
+            'AcceptRGPD' => true,
+            'AcceptOtherInfos' => true,
+            'IsGuest' => false,
+        ];
+
+
+        $this->assertNotEmpty($meeting->Registrations()); // No registrations yet
+
+        $this->form->doSaveMeeting($data);
+
+        $this->assertEquals(2, $meeting->Registrations()->count());
+        $registration = $meeting->Registrations()->last();
+        $this->assertEquals(MeetingRegistration::STATUS_ACCEPTED, $registration->Status);
+        $this->assertEquals($data['Email'], $registration->Email);
+    }
 }
