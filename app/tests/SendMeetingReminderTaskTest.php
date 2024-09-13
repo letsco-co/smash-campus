@@ -2,12 +2,9 @@
 
 namespace tests;
 
-use DateTime;
-use LetsCo\Interface\EmailProvider;
 use LetsCo\Model\Meeting\MeetingRegistration;
 use LetsCo\Task\SendMeetingReminderTask;
 use SilverStripe\Dev\SapphireTest;
-use tests\Stubs\TestEmailProvider;
 
 class SendMeetingReminderTaskTest extends SapphireTest
 {
