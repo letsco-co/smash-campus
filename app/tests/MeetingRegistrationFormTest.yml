@@ -5,6 +5,9 @@ LetsCo\Model\Meeting\Meeting:
   testMeeting2:
     Title: "test meeting"
     Limit: 20
+  testMeetingNoPlace:
+    Title: "test meeting"
+    Limit: 2
 LetsCo\Model\Meeting\MeetingRegistration:
   meetingRegistration:
     Meeting: =>LetsCo\Model\Meeting\Meeting.testMeeting2
@@ -12,6 +15,20 @@ LetsCo\Model\Meeting\MeetingRegistration:
     FirstName: "John"
     AcceptRGPD: true
     AcceptOtherInfos: true
+  meetingRegistrationPlace1:
+    Meeting: =>LetsCo\Model\Meeting\Meeting.testMeetingNoPlace
+    Email: "john@example.com"
+    FirstName: "John"
+    AcceptRGPD: true
+    AcceptOtherInfos: true
+    Status: "Accepted"
+  meetingRegistrationPlace2:
+    Meeting: =>LetsCo\Model\Meeting\Meeting.testMeetingNoPlace
+    Email: "john@example.com"
+    FirstName: "John"
+    AcceptRGPD: true
+    AcceptOtherInfos: true
+    Status: "Accepted"
 \Page:
   rgpdPage:
     Title: "rgpd"
