@@ -70,7 +70,7 @@ class MeetingRegistrationFormTest extends SapphireTest
         $this->assertTrue($validator->fieldIsRequired('AcceptOtherInfos'));
     }
 
-    public function testDoSaveMeeting()
+    public function testDoSaveMeetingRegistration()
     {
         $meeting = $this->objFromFixture(Meeting::class, 'testMeeting');
         $data = [
@@ -84,12 +84,12 @@ class MeetingRegistrationFormTest extends SapphireTest
         ];
 
 
-        $this->assertEmpty(MeetingRegistration::get()); // No registrations yet
+        $this->assertEmpty($meeting->Registrations()); // No registrations yet
 
         $this->form->doSaveMeeting($data);
 
-        $this->assertEquals(1, MeetingRegistration::get()->count());
-        $registration = MeetingRegistration::get()->first();
+        $this->assertEquals(1, $meeting->Registrations()->count());
+        $registration = $meeting->Registrations()->first();
         $this->assertEquals(MeetingRegistration::STATUS_ACCEPTED, $registration->Status);
         $this->assertEquals($data['Email'], $registration->Email);
     }
