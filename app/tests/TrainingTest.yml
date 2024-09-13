@@ -1,0 +1,7 @@
+LetsCo\PageType\DomainPage:
+  testCategory:
+    Title: "Domain"
+LetsCo\Model\Training\Training:
+  testTraining:
+    Title: "test"
+    Category: =>LetsCo\PageType\DomainPage.testCategory
