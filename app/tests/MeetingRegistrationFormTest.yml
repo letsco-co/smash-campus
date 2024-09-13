@@ -1,0 +1,8 @@
+LetsCo\Model\Meeting\Meeting:
+  testMeeting:
+    Title: "test meeting"
+    Limit: 20
+\Page:
+  rgpdPage:
+    Title: "rgpd"
+    IsRGPDPage: true
