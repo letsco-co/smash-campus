@@ -5,6 +5,7 @@ namespace LetsCo\PageType;
 use LetsCo\Model\Meeting\Meeting;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\ORM\ArrayList;
 
 class MeetingHolder extends \Page
 {
@@ -30,8 +31,18 @@ class MeetingHolder extends \Page
         return Meeting::get()->where('Date >= CURDATE()');
     }
 
+    public function getPastMeetings()
+    {
+        return Meeting::get()->where('Date < CURDATE()');
+    }
+
     public function getAllMeetings()
     {
-        return Meeting::get();
+        $meetings = new ArrayList();
+        $meetingsToCome = $this->Meetings();
+        $pastMeetings = $this->getPastMeetings();
+        $meetings->merge($meetingsToCome);
+        $meetings->merge($pastMeetings);
+        return $meetings;
     }
 }
