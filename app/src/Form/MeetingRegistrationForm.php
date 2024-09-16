@@ -111,7 +111,7 @@ class MeetingRegistrationForm extends Form
         $date = new \DateTime($meeting->Date . ' '. $meeting->Time);
         $start = clone $date;
         $end = $date->modify("+{$meeting->Duration} hours");
-//        user_error(json_encode([$date->format("Y-m-d H:i:s"), $start->format("Y-m-d H:i:s"),  $end->format("Y-m-d H:i:s")]), E_USER_ERROR);
+
         $location = $meeting->Address;
 
         //Generate ICS file
@@ -122,12 +122,13 @@ class MeetingRegistrationForm extends Form
             'summary' => $meeting->Title,
             'ORGANIZER' => 'CN='.SiteConfig::current_site_config()->Title.':mailto:'.SiteConfig::current_site_config()->Email,
         ]);
-//        user_error(json_encode([$start->format("Y-m-d H:i:s e"), $end->format("Y-m-d H:i:s e")]), E_USER_ERROR);
+
         $emailParams = [
             "Conference" => [
                 'Nom' => $meeting->Title,
                 'Date' => $meeting->Date,
                 'Heure' => $meeting->Time,
+                'Lieu' => $meeting->Address,
                 'Lien' => Director::absoluteURL((string)$meeting->Link()),
             ],
             "IsInWaitingList" => $completionStep == "WaitingList",
