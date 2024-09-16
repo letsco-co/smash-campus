@@ -14,7 +14,7 @@ use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\Hierarchy\Hierarchy;
+use SilverStripe\Security\Permission;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
@@ -98,6 +98,15 @@ class Program extends DataObject
         return $fields;
     }
 
+    /**
+     * @param mixed $member
+     * @return bool
+     */
+    public function checkPermission(mixed $member): bool
+    {
+        return Permission::check('CMS_ACCESS_LetsCo\Admin\Training\TrainingAdmin', 'any', $member) || Permission::check('CMS_ACCESS_LetsCo\Admin\Meeting\MeetingAdmin', 'any', $member);
+    }
+
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
@@ -105,5 +114,25 @@ class Program extends DataObject
         {
             $this->EventID = $this->Parent()->EventID;
         }
+    }
+
+    public function canView($member = null)
+    {
+        return $this->checkPermission($member);
+    }
+
+    public function canEdit($member = null)
+    {
+        return $this->checkPermission($member);
+    }
+
+    public function canDelete($member = null)
+    {
+        return $this->checkPermission($member);
+    }
+
+    public function canCreate($member = null, $context = [])
+    {
+        return $this->checkPermission($member);
     }
 }
