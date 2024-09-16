@@ -67,6 +67,9 @@ class MeetingInvitationForm extends MultiForm
                     'Conference' => [
                         'Lien' => Director::absoluteURL($invitationLink),
                         'Nom' => $meeting->Title,
+                        'Date' => $meeting->Date,
+                        'Heure' => $meeting->Time,
+                        'Lieu' => $meeting->Address,
                     ]
                 ];
                 $this->extend('sendValidationEmail', $data, $emailParams);

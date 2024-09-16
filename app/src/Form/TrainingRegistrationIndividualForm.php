@@ -3,14 +3,9 @@
 namespace LetsCo\Form;
 
 use LetsCo\Form\Steps\TrainingRegistrationPersonalDetailsStep;
-use LetsCo\Interface\EmailProvider;
-use LetsCo\Model\Meeting\Meeting;
 use LetsCo\Model\Training\Training;
 use LetsCo\Model\Training\TrainingRegistration;
-use Psr\Log\LoggerInterface;
 use SilverStripe\Control\Director;
-use SilverStripe\Core\Environment;
-use SilverStripe\Core\Injector\Injector;
 use SilverStripe\MultiForm\Forms\MultiForm;
 use SilverStripe\MultiForm\Models\MultiFormStep;
 
@@ -77,6 +72,8 @@ class TrainingRegistrationIndividualForm extends MultiForm
         $emailParams = [
             "Formation" => [
                 'Nom' => $training->Title,
+                'Lieu' => $training->Address,
+                'Duree' => $training->Duration()->Title,
                 'Lien' => Director::absoluteURL((string) $training->Link()),
             ],
         ];

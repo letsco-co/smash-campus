@@ -7,6 +7,7 @@ use DateTime;
 use LetsCo\Email\DefaultEmailProvider;
 use LetsCo\Interface\EmailProvider;
 use LetsCo\Model\Meeting\MeetingRegistration;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\CronTask\Interfaces\CronTask;
@@ -91,6 +92,9 @@ class SendMeetingReminderTask extends BuildTask implements CronTask
             'Conference' => [
                 "Nom" => $meeting->Title,
                 "Date" => $meetingDate->format("d/m/Y"),
+                'Heure' => $meeting->Time,
+                'Lieu' => $meeting->Address,
+                'Lien' => Director::absoluteURL((string)$meeting->Link()),
             ],
             "Jours" => $daysAhead,
         ];
