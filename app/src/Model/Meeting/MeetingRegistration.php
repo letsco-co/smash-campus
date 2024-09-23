@@ -26,6 +26,7 @@ class MeetingRegistration extends DataObject
         'StructureName' => 'Varchar(255)',
         'AcceptRGPD' => 'Boolean',
         'AcceptOtherInfos' => 'Boolean',
+        'CanSendValidationEmail' => 'Boolean',
     ];
     private static $has_one = [
         'Meeting' => Meeting::class,
@@ -44,6 +45,7 @@ class MeetingRegistration extends DataObject
     public function getCMSFields()
     {
         $fields =  parent::getCMSFields();
+        $fields->removeByName('CanSendValidationEmail');
         $statusField = $fields->dataFieldByName('Status');
         $statusField->setSource(self::getTranslatableEnumValues($this->dbObject('Status')->enumValues()));
         return $fields;
@@ -52,17 +54,30 @@ class MeetingRegistration extends DataObject
     public function getCMSActions()
     {
         $actions = parent::getCMSActions();
-        $sendEmailAction = new CustomAction("doSendRegistrationAcceptedEmail", _t(self::class.".SendRegistrationAcceptedEmail", "Send accepted email"));
-        $sendEmailAction->setDescription(_t(self::class.".SendRegistrationAcceptedEmail_Description", "Send a confirmation's email"));
-        $actions->push($sendEmailAction);
+        if ($this->CanSendValidationEmail) {
+            $sendEmailAction = new CustomAction("doSendRegistrationAcceptedEmail", _t(self::class.".SendRegistrationAcceptedEmail", "Send accepted email"));
+            $sendEmailAction->setDescription(_t(self::class.".SendRegistrationAcceptedEmail_Description", "Send a confirmation's email"));
+            $actions->push($sendEmailAction);
+        }
 
         return $actions;
+    }
+
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        $changedFields = $this->getChangedFields(["Status"]);
+        if ($changedFields && $changedFields["Status"]["after"] === self::STATUS_ACCEPTED) {
+            $this->CanSendValidationEmail = true;
+        }
     }
 
     public function doSendRegistrationAcceptedEmail()
     {
         $registrationForm = new MeetingRegistrationForm();
         $registrationForm->sendEmail($this->Meeting(), "", ["Email" => $this->Email, "FirstName" => $this->FirstName, "LastName" => $this->LastName]);
+        $this->CanSendValidationEmail = false;
+        $this->write();
         return _t(self::class.".EmailSent", "The validation email has been sent");
     }
 
