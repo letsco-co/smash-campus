@@ -15,6 +15,10 @@ fr:
     PREVIOUS: 'Enregistrement précédent'
   SilverStripe\Versioned\VersionedGridFieldItemRequest:
     PUBLISHEDTOASTMESSAGE: '{type} "{title}" publié'
+  LetsCo\Extension\ThemeSiteConfig:
+    LinkedInLink: "Lien LinkedIn"
+    FacebookLink: "Lien Facebook"
+    InstagramLink: "Lien Instagram"
   LetsCo\Admin\Training\TrainingAdmin:
     MENUTITLE: 'Formations'
   LetsCo\Model\Training\Training:
