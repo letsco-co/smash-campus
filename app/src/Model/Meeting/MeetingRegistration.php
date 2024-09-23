@@ -2,6 +2,8 @@
 
 namespace LetsCo\Model\Meeting;
 
+use LeKoala\CmsActions\CustomAction;
+use LetsCo\Form\MeetingRegistrationForm;
 use LetsCo\Trait\LocalizationDataObject;
 use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\RequiredFields;
@@ -45,6 +47,23 @@ class MeetingRegistration extends DataObject
         $statusField = $fields->dataFieldByName('Status');
         $statusField->setSource(self::getTranslatableEnumValues($this->dbObject('Status')->enumValues()));
         return $fields;
+    }
+
+    public function getCMSActions()
+    {
+        $actions = parent::getCMSActions();
+        $sendEmailAction = new CustomAction("doSendRegistrationAcceptedEmail", _t(self::class.".SendRegistrationAcceptedEmail", "Send accepted email"));
+        $sendEmailAction->setDescription(_t(self::class.".SendRegistrationAcceptedEmail_Description", "Send a confirmation's email"));
+        $actions->push($sendEmailAction);
+
+        return $actions;
+    }
+
+    public function doSendRegistrationAcceptedEmail()
+    {
+        $registrationForm = new MeetingRegistrationForm();
+        $registrationForm->sendEmail($this->Meeting(), "", ["Email" => $this->Email, "FirstName" => $this->FirstName, "LastName" => $this->LastName]);
+        return _t(self::class.".EmailSent", "The validation email has been sent");
     }
 
     public function getCMSCompositeValidator(): CompositeValidator

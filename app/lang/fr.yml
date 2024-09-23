@@ -257,6 +257,9 @@ fr:
     Waiting: 'En attente'
     Accepted: 'Accepté'
     Cancelled: 'Annulé'
+    SendRegistrationAcceptedEmail: "Envoyé le mail d'inscription"
+    SendRegistrationAcceptedEmail_Description: "Envoie le mail de validation d'inscription"
+    EmailSent: "Le mail a bien été envoyé"
   LetsCo\Form\MeetingRegistrationForm:
     doSave: 'S’inscrire à la conférence'
   LetsCo\Model\OfferTrainingIdea:
