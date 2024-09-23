@@ -16,6 +16,8 @@ class ThemeSiteConfig extends Extension
         'PhoneNumber' => 'Varchar(255)',
         'Email' => 'Varchar(255)',
         'LinkedInLink' => 'Varchar(255)',
+        'FacebookLink' => 'Varchar(255)',
+        'InstagramLink' => 'Varchar(255)',
     ];
     public function updateCMSFields(FieldList $fields)
     {
@@ -24,5 +26,7 @@ class ThemeSiteConfig extends Extension
         $fields->addFieldToTab('Root.Main', FrenchPhoneNumberField::create('PhoneNumber', _t(self::class.'.PhoneNumber', 'Phone number')));
         $fields->addFieldToTab('Root.Main', EmailField::create('Email', _t(self::class.'.Email', 'Email')));
         $fields->addFieldToTab('Root.Main', UrlField::create('LinkedInLink', _t(self::class.'.LinkedInLink', 'LinkedInLink')));
+        $fields->addFieldToTab('Root.Main', UrlField::create('FacebookLink', _t(self::class.'.FacebookLink', 'FacebookLink')));
+        $fields->addFieldToTab('Root.Main', UrlField::create('InstagramLink', _t(self::class.'.InstagramLink', 'InstagramLink')));
     }
 }
