@@ -63,13 +63,13 @@ class MeetingRegistration extends DataObject
         return $actions;
     }
 
-    protected function onBeforeWrite()
+    public function onBeforeWrite()
     {
-        parent::onBeforeWrite();
         $changedFields = $this->getChangedFields(["Status"]);
         if ($changedFields && $changedFields["Status"]["after"] === self::STATUS_ACCEPTED) {
             $this->CanSendValidationEmail = true;
         }
+        parent::onBeforeWrite();
     }
 
     public function doSendRegistrationAcceptedEmail()
