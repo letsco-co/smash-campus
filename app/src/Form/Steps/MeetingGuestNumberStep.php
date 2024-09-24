@@ -7,6 +7,7 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\RequiredFields;
 use SilverStripe\MultiForm\Models\MultiFormStep;
 
 class MeetingGuestNumberStep extends MultiFormStep
@@ -22,6 +23,12 @@ class MeetingGuestNumberStep extends MultiFormStep
             HeaderField::create('Guests', _t(self::class.'.Guests', 'Invite guests') ,3),
             DropdownField::create('NumberGuests', _t(self::class.'.NumberGuests', 'Number of guests'), [1=>1,2=>2,3=>3])->addExtraClass('form-select')->setEmptyString(_t(self::class.".ChooseOption", "Choose an option"))
         );
+    }
+    public function getValidator()
+    {
+        return RequiredFields::create(array(
+            'NumberGuests',
+        ));
     }
     public function getNextStep()
     {
