@@ -137,7 +137,12 @@ class Meeting extends Event
 
     public function remainingSeats()
     {
-        return $this->Limit - $this->Registrations()->filter('Status', MeetingRegistration::STATUS_ACCEPTED)->count();
+        $registrations = $this->Registrations();
+        $remainingSeats =  $this->Limit - $registrations->filter('Status', MeetingRegistration::STATUS_ACCEPTED)->count();
+        $cancelledRegistrations = $registrations->filter('Status', MeetingRegistration::STATUS_CANCELLED);
+        if ($cancelledRegistrations->exists() && $registrations->filter('Status', MeetingRegistration::STATUS_WAITING)->exists()) $remainingSeats -= $cancelledRegistrations->count();
+        if ($remainingSeats < 0) $remainingSeats = 0;
+        return $remainingSeats;
     }
 
     public function isTodayOrFuture()
