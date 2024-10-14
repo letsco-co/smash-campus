@@ -180,14 +180,14 @@ class Meeting extends Event
             $namespace = $step."_Title";
             return _t(self::class .".$namespace", $step);
         }
+        if (!$this->isTodayOrFuture()) {
+            return _t(self::class.'.LinkPastMeeting', '(Re)experience the meeting');
+        }
         $remainingSeats = $this->remainingSeats();
         if (!$remainingSeats) {
             return _t(self::class . '.RegisterOnWaitingList', 'Register on the waiting list');
         }
-        if ($this->isTodayOrFuture()) {
-            return _t(self::class . '.Register', 'Register to the meeting');
-        }
-        return _t(self::class.'.LinkPastMeeting', '(Re)experience the meeting');
+        return _t(self::class . '.Register', 'Register to the meeting');
     }
 
     public function getAsideText($step)
