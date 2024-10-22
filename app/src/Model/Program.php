@@ -13,6 +13,7 @@ use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Permission;
 use SilverStripe\View\Parsers\URLSegmentFilter;
@@ -25,7 +26,7 @@ class Program extends DataObject
     use LocalizationDataObject;
     private static $table_name = 'Letsco_Program';
     private static $db = [
-        'Title' => 'Varchar(255)',
+        'Title' => 'Text',
     ];
     private static $has_one = [
         'Event' => Event::class,
@@ -78,6 +79,7 @@ class Program extends DataObject
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+        $fields->replaceField('Title', TextField::create('Title', _t(self::class . '.Title', 'Title')));
         $fields->removeByName('ParentID');
         $fields->removeByName('Children');
         $fields->dataFieldByName('EventID')->setDisabled(true);
