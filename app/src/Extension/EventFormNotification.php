@@ -19,7 +19,7 @@ class EventFormNotification extends Extension
         $this->emailProvider =  Injector::inst()->create(DefaultEmailProvider::class);
     }
 
-    public function sendValidationEmail(&$data, Event &$event, array &$emailParams, $ics)
+    public function sendValidationEmail(&$data, Event &$event, array &$emailParams, $ics = NULL)
     {
         $this->emailProvider->getOrCreateContact($data['Email']);
         $this->emailProvider->addContactToList(Environment::getEnv('BREVO_NEWSLETTER_LIST_ID'), $data['Email']);
